@@ -9,15 +9,17 @@ public class HomePageController {
 		user = new NormalUser();
 	}
 
-	public void LogIn(String username, String password) {
-		IDataBase IDataBase1 = new DataBase();
-		if (IDataBase1.RetreiveUser(username, password).getType() == 1) {
-			user = new NormalUser();
-		} else if (IDataBase1.RetreiveUser(username, password).getType() == 2) {
-			StoreOwner userTmb = (StoreOwner) IDataBase1.RetreiveUser(username, password);
-			new StoreUI(userTmb);
-		}
-	}
+	    public void LogIn(String username, String password) {
+        IDataBase  IDataBase1=new DataBase();
+        if(IDataBase1.RetreiveUser(username,password).getType()==1){
+            user=new NormalUser();
+        }
+        else if(IDataBase1.RetreiveUser(username,password).getType()==2){
+            StoreOwner userTmb= (StoreOwner) IDataBase1.RetreiveUser(username,password);
+            new StoreUI(userTmb);
+        }
+    }
+
 
 	public List<Product> DirectSearch(String SearchText) {
 		IDataBase IDataBase1 = new DataBase();
