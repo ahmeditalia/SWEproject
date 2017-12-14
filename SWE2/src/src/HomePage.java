@@ -2,6 +2,7 @@ package src;
 
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
 import java.util.List;
 import java.awt.event.ActionEvent;
@@ -71,9 +72,8 @@ public class HomePage {
 		JButton addtocart = new JButton("Add To Cart");
 		addtocart.setBounds(945, 11, 117, 23);
 		frmHomepage.getContentPane().add(addtocart);
-		tableviewed = new JTable();
-		tableviewed.setBounds(137, 75, 1215, 629);
-		frmHomepage.getContentPane().add(tableviewed);
+		
+		
 		password = new JTextField();
 		password.setBounds(1167, 48, 86, 20);
 		frmHomepage.getContentPane().add(password);
@@ -107,7 +107,13 @@ public class HomePage {
 		JLabel lblNewLabel_2 = new JLabel("Categories");
 		lblNewLabel_2.setBounds(35, 75, 74, 14);
 		frmHomepage.getContentPane().add(lblNewLabel_2);
-
+		
+		DefaultTableModel model = new DefaultTableModel();
+		JPanel panel = new JPanel();
+		panel.setBounds(136, 75, 1216, 629);
+		frmHomepage.getContentPane().add(panel);
+		tableviewed = new JTable(model);
+		panel.add(tableviewed);
 		/// implementation Button Pressed
 
 		// Cart

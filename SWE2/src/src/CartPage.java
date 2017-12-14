@@ -60,7 +60,9 @@ public class CartPage {
 		panel.add(table);
 		Purchase.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				float balance = cartController.EmptyCart();
+				new PaymentUI(balance,homePage);
+				frmCartpage.setVisible(false);
 			}
 		});
 		ReturnHome.addActionListener(new ActionListener() {

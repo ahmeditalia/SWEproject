@@ -132,7 +132,6 @@ public class RegisterPage {
 				int type = (normaluser.isSelected() ? 1 : 2);
 				homePage.getHomepagecontroller().Register(username.getText(), passowrdtext.getText(), email.getText(),
 						phonenumbertext.getText(), gender.getText(), address.getText(), type);
-				//System.out.println("0");
 				homePage.getFrmHomepage().setVisible(true);
 				frmRegister.setVisible(false);
 			}
