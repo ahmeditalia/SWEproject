@@ -10,7 +10,7 @@ public class RegisterPage {
 
 	private JFrame frmRegister;
 	private JTextField usernametext;
-	private JTextField passowrdtext;
+	private JPasswordField passowrdtext;
 	private JTextField mailtext;
 	private JTextField gendertext;
 	private JTextField phonenumbertext;
@@ -55,7 +55,7 @@ public class RegisterPage {
 		panel.add(usernametext);
 		usernametext.setColumns(10);
 
-		passowrdtext = new JTextField();
+		passowrdtext = new JPasswordField();
 		passowrdtext.setBounds(176, 138, 172, 20);
 		panel.add(passowrdtext);
 		passowrdtext.setColumns(10);
@@ -127,12 +127,17 @@ public class RegisterPage {
 
 		submit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (!normaluser.isSelected() && !storeowner.isSelected())
+				if (!normaluser.isSelected() || !storeowner.isSelected() || !username.getText().equals("")
+						|| passowrdtext.getPassword().length > 0 || !email.getText().equals("")
+						|| !phonenumbertext.getText().equals("") || !gender.getText().equals("")
+						|| !address.getText().equals("")) {
+					JOptionPane.showMessageDialog(null, "All Information are require");
 					return;
+				}
+				System.out.println("YES");
 				int type = (normaluser.isSelected() ? 1 : 2);
-				homePage.getHomepagecontroller().Register(username.getText(), passowrdtext.getText(), email.getText(),
-						phonenumbertext.getText(), gender.getText(), address.getText(), type);
-				//System.out.println("0");
+				homePage.getHomepagecontroller().Register(username.getText(), (passowrdtext.getPassword()).toString(),
+						email.getText(), phonenumbertext.getText(), gender.getText(), address.getText(), type);
 				homePage.getFrmHomepage().setVisible(true);
 				frmRegister.setVisible(false);
 			}
