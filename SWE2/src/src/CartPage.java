@@ -10,14 +10,13 @@ public class CartPage {
 
 	private JFrame frmCartpage;
 	private HomePage homePage;
-	private CartController cartController;
 	private JTable table;
+	private Cart cart;
 
 	
 	public CartPage(Cart cart,HomePage homepage) {
 		initialize();
-		cartController = new CartController(homepage.getHomepagecontroller().getUser());
-		cartController.setUserCart(cart);
+		this.cart = cart;
 		this.homePage = homepage;
 	}
 	/**
@@ -60,8 +59,7 @@ public class CartPage {
 		panel.add(table);
 		Purchase.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				float balance = cartController.EmptyCart();
-				new PaymentUI(balance,homePage);
+				new PaymentUI(cart,homePage);
 				frmCartpage.setVisible(false);
 			}
 		});

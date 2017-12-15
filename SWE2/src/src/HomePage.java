@@ -11,7 +11,7 @@ public class HomePage {
 
 	private JFrame frmHomepage;
 	private JTable tableviewed;
-	private JTextField password;
+	private JPasswordField password;
 	private JTextField user_name;
 	private JTextField searchtext;
 	private HomePageController homepagecontroller;
@@ -72,9 +72,8 @@ public class HomePage {
 		JButton addtocart = new JButton("Add To Cart");
 		addtocart.setBounds(945, 11, 117, 23);
 		frmHomepage.getContentPane().add(addtocart);
-		
-		
-		password = new JTextField();
+
+		password = new JPasswordField();
 		password.setBounds(1167, 48, 86, 20);
 		frmHomepage.getContentPane().add(password);
 		password.setColumns(10);
@@ -107,13 +106,16 @@ public class HomePage {
 		JLabel lblNewLabel_2 = new JLabel("Categories");
 		lblNewLabel_2.setBounds(35, 75, 74, 14);
 		frmHomepage.getContentPane().add(lblNewLabel_2);
-		
+
 		DefaultTableModel model = new DefaultTableModel();
 		JPanel panel = new JPanel();
 		panel.setBounds(136, 75, 1216, 629);
 		frmHomepage.getContentPane().add(panel);
 		tableviewed = new JTable(model);
 		panel.add(tableviewed);
+
+		//viewedProducts = homepagecontroller.Explore("");
+
 		/// implementation Button Pressed
 
 		// Cart
@@ -127,8 +129,16 @@ public class HomePage {
 		login.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String username = user_name.getText();
-				String pass = password.getText();
+				String pass = password.getPassword().toString();
 				homepagecontroller.LogIn(username, pass);
+				if (homepagecontroller.getUser() != null) {
+					login.setVisible(false);
+					user_name.setVisible(false);
+					register.setVisible(false);
+					password.setVisible(false);
+					lblNewLabel_1.setVisible(false);
+					lblNewLabel_2.setVisible(false);
+				}
 			}
 		});
 		// addtocart

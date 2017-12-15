@@ -8,15 +8,16 @@ import java.awt.event.ActionEvent;
 public class PaymentUI {
 
 	private JFrame Payment;
-	private float balance;
+	private CartController cartController;
 	protected HomePage homePage;
 
 	/**
 	 * @wbp.parser.constructor
 	 */
-	public PaymentUI(float balance, HomePage homePage) {
+	public PaymentUI(Cart cart, HomePage homePage) {
 		this.homePage = homePage;
-		this.balance = balance;
+		cartController = new CartController(this.homePage.getHomepagecontroller().getUser());
+		cartController.setUserCart(cart);
 		initialize();
 	}
 
@@ -72,6 +73,7 @@ public class PaymentUI {
 						new VoucherCard(homePage);
 						Payment.setVisible(false);
 					} else {
+						cartController.EmptyCart();
 						homePage.getFrmHomepage().setVisible(true);
 						Payment.setVisible(false);
 					}
