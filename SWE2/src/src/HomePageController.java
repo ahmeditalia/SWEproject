@@ -2,13 +2,12 @@ import java.util.*;
 
 public class HomePageController {
 	private User user;
-
 	HomePageController() {
-		user = new User();
-	}
 
+	}
 	public void LogIn(String username, String password) {
 		IDataBase IDataBase1 = new DataBase();
+
 		if (IDataBase1.RetreiveUser(username, password).getType() == 1) {
 			user = new NormalUser();
 			user=IDataBase1.RetreiveUser(username, password);
@@ -16,10 +15,10 @@ public class HomePageController {
 			user = new StoreOwner();
 			user=IDataBase1.RetreiveUser(username, password);
 		}
-	 else if (IDataBase1.RetreiveUser(username, password).getType() == 3) {
+		else if (IDataBase1.RetreiveUser(username, password).getType() == 3) {
 			user = new Administrator();
 			user=IDataBase1.RetreiveUser(username, password);
-	}
+		}
 
 	}
 
@@ -57,17 +56,17 @@ public class HomePageController {
 		user = value;
 	}
 
-	public List<String> GetCategoriesNames() {
+	public List<String> getCategoriesNames() {
 		IDataBase IDataBase1 = new DataBase();
 		return (IDataBase1.RetreiveCategoriesNames());
 	}
 
-	public List<Product>GetAllProducts(){
+	public List<Product>getAllProducts(){
 		IDataBase IDataBase1 = new DataBase();
 		return (IDataBase1.RetreiveAllProducts());
 	}
-	public List<Product>GetProducts(String category,String store){
-		List<Product> products =GetAllProducts();
+	public List<Product>getProducts(String category,String store){
+		List<Product> products =getAllProducts();
 		List<Product> temp=new ArrayList<Product>();
 		for(int i=0;i<products.size();i++){
 			if((products.get(i).getBrand()==category||category=="All")&&(products.get(i).getStore().getStoreName()==store||store=="All")){
