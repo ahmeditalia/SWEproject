@@ -39,7 +39,7 @@ public interface IDataBase {
      * @param CartOwnerName 
      * @param product
      */
-    public void InsertProductToCart(String CartOwnerName, Product product);
+    public void InsertProductToCart(Cart cart);
 
     /**
      * @param NewUser
@@ -49,14 +49,14 @@ public interface IDataBase {
     /**
      * @param CartOwnerName
      */
-    public void EmptyUserCart(String CartOwnerName);
+    public void EmptyUserCart(NormalUser user);
 
     /**
      * @param StoreOwnerName 
      * @param StoreName 
      * @param product
      */
-    public void InsertProductToStore(String StoreOwnerName, String StoreName, Product product);
+    public void InsertProductToStore(Store store, Product product);
 
     /**
      * @return
@@ -77,5 +77,12 @@ public interface IDataBase {
      * @param store
      */
     public void InsertNewStore(Store store);
+    
+    
+    public void provideVoucherCard(String VoucherNo);
+    
+    public boolean CheckVoucherCard(String VoucherNo);
+    
+    public List<Product> RetreiveAllProducts();
 
 }
