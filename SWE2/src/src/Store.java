@@ -20,35 +20,15 @@ public class Store {
      */
     private String StoreName;
 
-    /**
-     * 
-     */
-    private List<Product> StoreProducts;
-
-    /**
-     * 
-     */
-    private StoreOwner Owner;
-
-    /**
-     * 
-     */
-    private Map<Product,User> SoldProducts;
+    private List<Product> StoreProducts= new ArrayList<>();
+    private StoreOwner Owner= new StoreOwner();
+    private Map<Product,User> SoldProducts= new HashMap<>();
 
 
 
-
-    /**
-     * @param product
-     */
     public void AddProduct(Product product) {
-        // TODO implement here
-    }
-
-    /**
-     * @param product 
-     * @param Buyer
-     */
+        StoreProducts.add(product);
+        }
     public void SellProduct(Product product, User Buyer) {
         // TODO implement here
     }
