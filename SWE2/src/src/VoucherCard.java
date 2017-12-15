@@ -5,12 +5,13 @@ import java.awt.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class VoucherCard extends PaymentUI{
+public class VoucherCard extends PaymentUI {
 
 	private JFrame VoucherCard;
 	private JTextField cardnumber;
@@ -21,6 +22,7 @@ public class VoucherCard extends PaymentUI{
 	public VoucherCard() {
 		initialize();
 	}
+
 	/**
 	 * @wbp.parser.constructor
 	 */
@@ -28,6 +30,7 @@ public class VoucherCard extends PaymentUI{
 		this.homePage = homePage;
 		initialize();
 	}
+
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -40,26 +43,24 @@ public class VoucherCard extends PaymentUI{
 		VoucherCard.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		VoucherCard.getContentPane().setLayout(null);
 		VoucherCard.setVisible(true);
-		
 		JPanel panel = new JPanel();
 		panel.setBounds(460, 202, 488, 303);
 		VoucherCard.getContentPane().add(panel);
 		panel.setLayout(null);
-		
 		JLabel lblNewLabel = new JLabel("Voucher Card Number :");
 		lblNewLabel.setBounds(147, 65, 173, 14);
 		panel.add(lblNewLabel);
-		
 		cardnumber = new JTextField();
 		cardnumber.setBounds(147, 106, 173, 20);
 		panel.add(cardnumber);
 		cardnumber.setColumns(10);
-		
 		JButton btnSubmit = new JButton("Submit");
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(cardnumber.getText().equals(""))
-					return;
+				if (cardnumber.getText().equals("")
+						|| homePage.getHomepagecontroller().checkVoucherCards(cardnumber.getText())) {
+					JOptionPane.showMessageDialog(null, "Incrroect VoucherNumber");
+				}
 				homePage.getFrmHomepage().setVisible(true);
 				VoucherCard.setVisible(false);
 			}

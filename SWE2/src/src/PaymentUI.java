@@ -16,7 +16,7 @@ public class PaymentUI {
 	 */
 	public PaymentUI(Cart cart, HomePage homePage) {
 		this.homePage = homePage;
-		cartController = new CartController(this.homePage.getHomepagecontroller().getUser());
+		cartController = new CartController((NormalUser)this.homePage.getHomepagecontroller().getUser());
 		cartController.setUserCart(cart);
 		initialize();
 	}
