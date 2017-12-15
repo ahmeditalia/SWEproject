@@ -6,7 +6,6 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
