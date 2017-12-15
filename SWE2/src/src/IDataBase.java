@@ -27,6 +27,8 @@ public interface IDataBase {
      */
     public List<String> RetreiveCategoriesNames();
 
+    public List<String> RetreiveBrandsNames();
+
     /**
      * @param categoryName 
      * @return
