@@ -102,7 +102,16 @@ public class DataBase implements IDataBase {
 		}
 		return null;
 	}
-
+	
+	public List<String> RetreiveBrandsNames() {
+		Path path = Paths.get("Categories.txt");
+		try {
+			return Files.readAllLines(path);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	public List<String> RetreiveCategoriesNames() {
 		Path path = Paths.get("Categories.txt");
 		try {

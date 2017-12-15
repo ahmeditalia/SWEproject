@@ -35,10 +35,6 @@ public interface IDataBase {
      */
     public List<Product> RetreiveCategoryProducts(String categoryName);
 
-    /**
-     * @param CartOwnerName 
-     * @param product
-     */
     public void InsertProductToCart(Cart cart);
 
     /**
