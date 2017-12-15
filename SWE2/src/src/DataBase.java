@@ -15,12 +15,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
-
-
 public class DataBase implements IDataBase {
 
 	private int ID;
-
 
 	public DataBase() {
 		try {
@@ -32,31 +29,28 @@ public class DataBase implements IDataBase {
 	}
 
 	public List<Product> RetreiveProduct(String ProductName) {
-		List<String> catrgories=new ArrayList<>();
-		List<String> files=new ArrayList<>();
-		List<Product> products= new ArrayList<>();
-		Path path=Paths.get("Categories.txtt");
+		List<String> catrgories = new ArrayList<>();
+		List<String> files = new ArrayList<>();
+		List<Product> products = new ArrayList<>();
+		Path path = Paths.get("Categories.txtt");
 		try {
-			catrgories=Files.readAllLines(path);
+			catrgories = Files.readAllLines(path);
 		} catch (IOException e1) {
 		}
-		
+
 		try {
-			for(String filename:catrgories)
-			{
-				path=Paths.get(filename+".txt");
+			for (String filename : catrgories) {
+				path = Paths.get(filename + ".txt");
 				files.addAll(Files.readAllLines(path));
 			}
 		} catch (IOException e) {
-			
+
 		}
-		for(String filename:files)
-		{
-			if(filename.substring(0, filename.indexOf("_"))==ProductName)
-			{
+		for (String filename : files) {
+			if (filename.substring(0, filename.indexOf("_")) == ProductName) {
 				try {
-					ObjectInputStream object= new ObjectInputStream(new FileInputStream(filename+"txt"));
-					products.add((Product)object.readObject());
+					ObjectInputStream object = new ObjectInputStream(new FileInputStream(filename + "txt"));
+					products.add((Product) object.readObject());
 					object.close();
 				} catch (FileNotFoundException e) {
 				} catch (IOException e) {
@@ -69,37 +63,31 @@ public class DataBase implements IDataBase {
 	}
 
 	public User RetreiveUser(String username, String password) {
-		List<String> users=new ArrayList<>();
-		Path path=Paths.get("Users.txt");
+		List<String> users = new ArrayList<>();
+		Path path = Paths.get("Users.txt");
 		try {
-			users=Files.readAllLines(path);
+			users = Files.readAllLines(path);
 		} catch (IOException e) {
 		}
-		for(String user:users)
-		{
-			String []arr=user.split("_");
-			if(username==arr[0] && password==arr[1])
-			{
+		for (String user : users) {
+			String[] arr = user.split("_");
+			if (username == arr[0] && password == arr[1]) {
 				try {
-					ObjectInputStream object=new ObjectInputStream(new FileInputStream(username+"_"+password+".txt"));
-					if(arr[3]=="1")
-					{
-						NormalUser normalUser=new NormalUser();
-						normalUser=(NormalUser)object.readObject();
+					ObjectInputStream object = new ObjectInputStream(
+							new FileInputStream(username + "_" + password + ".txt"));
+					if (arr[3] == "1") {
+						NormalUser normalUser = new NormalUser();
+						normalUser = (NormalUser) object.readObject();
 						object.close();
 						return normalUser;
-					}					
-					else if(arr[3]=="2")
-					{
-						StoreOwner storeOwner=new StoreOwner();
-						storeOwner=(StoreOwner)object.readObject();
+					} else if (arr[3] == "2") {
+						StoreOwner storeOwner = new StoreOwner();
+						storeOwner = (StoreOwner) object.readObject();
 						object.close();
 						return storeOwner;
-					}					
-					else if(arr[3]=="3")
-					{
-						Administrator administrator=new Administrator();
-						administrator=(Administrator)object.readObject();
+					} else if (arr[3] == "3") {
+						Administrator administrator = new Administrator();
+						administrator = (Administrator) object.readObject();
 						object.close();
 						return administrator;
 					}
@@ -126,20 +114,19 @@ public class DataBase implements IDataBase {
 	}
 
 	public List<Product> RetreiveCategoryProducts(String categoryName) {
-		List<Product> list=new ArrayList<>();
-		List<String> files=new ArrayList<>();
-		Path path=Paths.get(categoryName+".txt");
+		List<Product> list = new ArrayList<>();
+		List<String> files = new ArrayList<>();
+		Path path = Paths.get(categoryName + ".txt");
 		try {
-			files=Files.readAllLines(path);
-			
+			files = Files.readAllLines(path);
+
 		} catch (IOException e) {
 		}
-		for(String filename:files)
-		{
+		for (String filename : files) {
 			try {
-				ObjectInputStream object= new ObjectInputStream(new FileInputStream(filename+".txt"));
+				ObjectInputStream object = new ObjectInputStream(new FileInputStream(filename + ".txt"));
 				try {
-					list.add((Product)object.readObject());
+					list.add((Product) object.readObject());
 				} catch (ClassNotFoundException e) {
 				}
 				object.close();
@@ -169,11 +156,9 @@ public class DataBase implements IDataBase {
 		UpdateUser(user);
 	}
 
-
 	public void EmptyUserCart(NormalUser user) {
 		UpdateUser(user);
 	}
-
 
 	public void InsertProductToStore(Store store, Product product) {
 		try {
@@ -185,7 +170,8 @@ public class DataBase implements IDataBase {
 		}
 
 		try {
-			ObjectOutputStream object = new ObjectOutputStream(new FileOutputStream(product.getName() + "_" + ID + ".txt"));
+			ObjectOutputStream object = new ObjectOutputStream(
+					new FileOutputStream(product.getName() + "_" + ID + ".txt"));
 			object.writeObject(product);
 			object.close();
 		} catch (FileNotFoundException e) {
@@ -196,22 +182,20 @@ public class DataBase implements IDataBase {
 
 	}
 
-
 	public List<Product> RetreiveSysProducts() {
-		List<Product> list=new ArrayList<>();
-		List<String> files=new ArrayList<>();
-		Path path=Paths.get("SystemProducts.txt");
+		List<Product> list = new ArrayList<>();
+		List<String> files = new ArrayList<>();
+		Path path = Paths.get("SystemProducts.txt");
 		try {
-			files=Files.readAllLines(path);
-			
+			files = Files.readAllLines(path);
+
 		} catch (IOException e) {
 		}
-		for(String filename:files)
-		{
+		for (String filename : files) {
 			try {
-				ObjectInputStream object= new ObjectInputStream(new FileInputStream("System_"+filename+".txt"));
+				ObjectInputStream object = new ObjectInputStream(new FileInputStream("System_" + filename + ".txt"));
 				try {
-					list.add((Product)object.readObject());
+					list.add((Product) object.readObject());
 				} catch (ClassNotFoundException e) {
 				}
 				object.close();
@@ -222,7 +206,6 @@ public class DataBase implements IDataBase {
 		}
 		return list;
 	}
-
 
 	public void InsertProductToSystem(Product product) {
 		try {
@@ -252,7 +235,8 @@ public class DataBase implements IDataBase {
 		} catch (IOException e) {
 		}
 		try {
-			ObjectOutputStream object = new ObjectOutputStream(new FileOutputStream("Suggested_"+product.getName() + ".txt"));
+			ObjectOutputStream object = new ObjectOutputStream(
+					new FileOutputStream("Suggested_" + product.getName() + ".txt"));
 			object.writeObject(product);
 			object.close();
 		} catch (FileNotFoundException e) {
@@ -261,7 +245,6 @@ public class DataBase implements IDataBase {
 
 		}
 	}
-
 
 	@Override
 	public void InsertNewStore(Store store) {
@@ -283,11 +266,11 @@ public class DataBase implements IDataBase {
 		}
 		UpdateUser(store.getOwner());
 	}
-	
+
 	@Override
 	public void provideVoucherCard(String VoucherNo) {
 		try {
-			BufferedWriter writer=new BufferedWriter(new FileWriter("VoucherCards.txt",true));
+			BufferedWriter writer = new BufferedWriter(new FileWriter("VoucherCards.txt", true));
 			writer.write(VoucherNo);
 			writer.newLine();
 			writer.close();
@@ -297,7 +280,7 @@ public class DataBase implements IDataBase {
 
 	@Override
 	public boolean CheckVoucherCard(String VoucherNo) {
-		Path path=Paths.get("VoucherCards.txt");
+		Path path = Paths.get("VoucherCards.txt");
 		try {
 			return Files.readAllLines(path).contains(VoucherNo);
 		} catch (IOException e) {
@@ -343,9 +326,8 @@ public class DataBase implements IDataBase {
 
 	}
 
-	protected void deleteSuggestedProduct(Product product)
-	{
-		Path path=Paths.get("Suggested_"+product.getName()+".txt");
+	protected void deleteSuggestedProduct(Product product) {
+		Path path = Paths.get("Suggested_" + product.getName() + ".txt");
 		try {
 			Files.delete(path);
 		} catch (Exception e) {
@@ -353,5 +335,37 @@ public class DataBase implements IDataBase {
 		}
 	}
 
+	@Override
+	public List<Product> RetreiveAllProducts() {
+		List<String> catrgories = new ArrayList<>();
+		List<String> files = new ArrayList<>();
+		List<Product> products = new ArrayList<>();
+		Path path = Paths.get("Categories.txtt");
+		try {
+			catrgories = Files.readAllLines(path);
+		} catch (IOException e1) {
+		}
+
+		try {
+			for (String filename : catrgories) {
+				path = Paths.get(filename + ".txt");
+				files.addAll(Files.readAllLines(path));
+			}
+		} catch (IOException e) {
+
+		}
+		for (String filename : files) {
+			try {
+				ObjectInputStream object = new ObjectInputStream(new FileInputStream(filename + "txt"));
+				products.add((Product) object.readObject());
+				object.close();
+			} catch (FileNotFoundException e) {
+			} catch (IOException e) {
+			} catch (ClassNotFoundException e) {
+			}
+
+		}
+		return products;
+	}
 
 }

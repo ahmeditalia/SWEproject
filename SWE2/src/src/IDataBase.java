@@ -80,5 +80,7 @@ public interface IDataBase {
     public void provideVoucherCard(String VoucherNo);
     
     public boolean CheckVoucherCard(String VoucherNo);
+    
+    public List<Product> RetreiveAllProducts();
 
 }
