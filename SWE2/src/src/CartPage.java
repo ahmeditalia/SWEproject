@@ -5,13 +5,14 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
 
 public class CartPage {
 
 	private JFrame frmCartpage;
 	private HomePage homePage;
-	private JTable table;
 	private Cart cart;
+	private JTable table;
 
 	
 	public CartPage(Cart cart,HomePage homepage) {
@@ -54,9 +55,12 @@ public class CartPage {
 		Purchase.setBounds(474, 34, 101, 23);
 		panel.add(Purchase);
 		
-		table = new JTable();
-		table.setBounds(10, 68, 807, 318);
-		panel.add(table);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 114, 807, 272);
+		panel.add(scrollPane);
+		String[] columnsnames = {"Product Name", "Price","Category", "Brand", "Store" };
+		table = new JTable(new DefaultTableModel(new String[][] {},columnsnames));
+		scrollPane.setViewportView(table);
 		Purchase.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				new PaymentUI(cart,homePage);

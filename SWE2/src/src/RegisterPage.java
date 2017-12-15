@@ -127,14 +127,13 @@ public class RegisterPage {
 
 		submit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (!normaluser.isSelected() || !storeowner.isSelected() || !username.getText().equals("")
-						|| passowrdtext.getPassword().length > 0 || !email.getText().equals("")
-						|| !phonenumbertext.getText().equals("") || !gender.getText().equals("")
-						|| !address.getText().equals("")) {
+				if ((!normaluser.isSelected() && !storeowner.isSelected()) || usernametext.getText().equals("")
+						|| !(passowrdtext.getPassword().length > 0) || mailtext.getText().equals("")
+						|| phonenumbertext.getText().equals("") || gendertext.getText().equals("")
+						|| addresstext.getText().equals("")) {
 					JOptionPane.showMessageDialog(null, "All Information are require");
 					return;
 				}
-				System.out.println("YES");
 				int type = (normaluser.isSelected() ? 1 : 2);
 				homePage.getHomepagecontroller().Register(username.getText(), (passowrdtext.getPassword()).toString(),
 						email.getText(), phonenumbertext.getText(), gender.getText(), address.getText(), type);

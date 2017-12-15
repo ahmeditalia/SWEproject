@@ -4,18 +4,19 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
 
 public class HomePage {
 
 	private JFrame frmHomepage;
-	private JTable tableviewed;
 	private JPasswordField password;
 	private JTextField user_name;
 	private JTextField searchtext;
 	private HomePageController homepagecontroller;
 	private List<Product> viewedProducts;
+	private JTable table;
 
 	public HomePageController getHomepagecontroller() {
 		return homepagecontroller;
@@ -25,6 +26,15 @@ public class HomePage {
 		return frmHomepage;
 	}
 
+	private void updatetable(List<Product> products,DefaultTableModel model) {
+		int i = 1;
+		for (Product product : products) {
+			String[] row = { Integer.toString(i), product.getName(), Float.toString(product.getPrice()),
+					Integer.toString(product.getQuantity()), product.getCategory(), product.getBrand(),
+					product.getStore().getStoreName() };
+			model.addRow(row);
+		}
+	}
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -42,6 +52,7 @@ public class HomePage {
 	 */
 	public HomePage() {
 		homepagecontroller = new HomePageController();
+		viewedProducts = new ArrayList<>();
 		initialize();
 	}
 
@@ -60,6 +71,7 @@ public class HomePage {
 		JButton cart = new JButton("Cart");
 		cart.setBounds(945, 45, 117, 23);
 		frmHomepage.getContentPane().add(cart);
+		cart.setVisible(false);
 		JButton login = new JButton("login");
 		login.setBounds(1263, 11, 89, 23);
 		frmHomepage.getContentPane().add(login);
@@ -67,11 +79,12 @@ public class HomePage {
 		register.setBounds(1263, 45, 89, 23);
 		frmHomepage.getContentPane().add(register);
 		JButton search = new JButton("Search");
-		search.setBounds(781, 26, 117, 23);
+		search.setBounds(782, 27, 117, 23);
 		frmHomepage.getContentPane().add(search);
 		JButton addtocart = new JButton("Add To Cart");
 		addtocart.setBounds(945, 11, 117, 23);
 		frmHomepage.getContentPane().add(addtocart);
+		addtocart.setVisible(false);
 
 		password = new JPasswordField();
 		password.setBounds(1167, 48, 86, 20);
@@ -87,9 +100,9 @@ public class HomePage {
 		JLabel lblNewLabel_1 = new JLabel("Password :");
 		lblNewLabel_1.setBounds(1083, 51, 74, 14);
 		frmHomepage.getContentPane().add(lblNewLabel_1);
-		JComboBox comboBox = new JComboBox();
+		JComboBox<String> comboBox = new JComboBox<>();
 		comboBox.setToolTipText("Categories");
-		comboBox.setBounds(10, 99, 117, 20);
+		comboBox.setBounds(10, 119, 150, 20);
 		frmHomepage.getContentPane().add(comboBox);
 		JSeparator separator = new JSeparator();
 		separator.setOrientation(SwingConstants.VERTICAL);
@@ -100,24 +113,61 @@ public class HomePage {
 		separator_1.setBounds(919, 0, 2, 77);
 		frmHomepage.getContentPane().add(separator_1);
 		searchtext = new JTextField();
-		searchtext.setBounds(183, 27, 565, 20);
+		searchtext.setBounds(243, 28, 529, 20);
 		frmHomepage.getContentPane().add(searchtext);
 		searchtext.setColumns(10);
-		JLabel lblNewLabel_2 = new JLabel("Categories");
-		lblNewLabel_2.setBounds(35, 75, 74, 14);
+		JLabel lblNewLabel_2 = new JLabel("Categories :");
+		lblNewLabel_2.setFont(new Font("Sitka Banner", Font.BOLD, 16));
+		lblNewLabel_2.setBounds(10, 94, 89, 14);
 		frmHomepage.getContentPane().add(lblNewLabel_2);
+		String[] columnsnames = { "#", "Product Name", "Price", "Quantity", "Category", "Brand", "Store" };
 
-		DefaultTableModel model = new DefaultTableModel();
-		JPanel panel = new JPanel();
-		panel.setBounds(136, 75, 1216, 629);
-		frmHomepage.getContentPane().add(panel);
-		tableviewed = new JTable(model);
-		panel.add(tableviewed);
+		JSeparator separator_2 = new JSeparator();
+		separator_2.setOrientation(SwingConstants.VERTICAL);
+		separator_2.setBounds(231, 0, 2, 77);
+		frmHomepage.getContentPane().add(separator_2);
 
-		//viewedProducts = homepagecontroller.Explore("");
+		JLabel userlogin = new JLabel("");
+		userlogin.setHorizontalAlignment(SwingConstants.CENTER);
+		userlogin.setFont(new Font("Goudy Old Style", Font.PLAIN, 18));
+		userlogin.setBounds(1083, 0, 269, 68);
+		frmHomepage.getContentPane().add(userlogin);
+
+		JButton Logout = new JButton("LogOut");
+		Logout.setBounds(1167, 51, 89, 23);
+		frmHomepage.getContentPane().add(Logout);
+
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(231, 88, 1121, 616);
+		frmHomepage.getContentPane().add(scrollPane);
+
+		table = new JTable(new DefaultTableModel(new String[][] {}, columnsnames));
+		scrollPane.setViewportView(table);
+		DefaultTableModel model = (DefaultTableModel) table.getModel();
+		updatetable(viewedProducts, model);
+
+		JSeparator separator_3 = new JSeparator();
+		separator_3.setBounds(10, 75, 1342, 2);
+		frmHomepage.getContentPane().add(separator_3);
+
+		JLabel logolabel = new JLabel("ICON");
+		logolabel.setHorizontalAlignment(SwingConstants.CENTER);
+		logolabel.setFont(new Font("Source Sans Pro", Font.BOLD, 11));
+		logolabel.setBounds(0, 0, 233, 77);
+		frmHomepage.getContentPane().add(logolabel);
+		
+		JLabel brandlabel = new JLabel("Brands :");
+		brandlabel.setFont(new Font("Sitka Banner", Font.BOLD, 16));
+		brandlabel.setBounds(10, 206, 89, 14);
+		frmHomepage.getContentPane().add(brandlabel);
+		
+		JComboBox<String> bosbrand = new JComboBox<String>();
+		bosbrand.setToolTipText("Categories");
+		bosbrand.setBounds(10, 232, 150, 20);
+		frmHomepage.getContentPane().add(bosbrand);
+		Logout.setVisible(false);
 
 		/// implementation Button Pressed
-
 		// Cart
 		cart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -136,9 +186,15 @@ public class HomePage {
 					user_name.setVisible(false);
 					register.setVisible(false);
 					password.setVisible(false);
+					lblNewLabel.setVisible(false);
 					lblNewLabel_1.setVisible(false);
-					lblNewLabel_2.setVisible(false);
+					userlogin.setText("Welcome " + homepagecontroller.getUser().getUsername());
+					addtocart.setVisible(true);
+					cart.setVisible(true);
+					Logout.setVisible(true);
+					return;
 				}
+				JOptionPane.showMessageDialog(null, "UserName OR Password Incorrect");
 			}
 		});
 		// addtocart
@@ -152,7 +208,11 @@ public class HomePage {
 		search.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String textsearch = searchtext.getText();
-				homepagecontroller.DirectSearch(textsearch);
+				List<Product> searchresult = homepagecontroller.DirectSearch(textsearch);
+				if (searchresult == null || searchresult.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "NOT EXCITE !");
+					return;
+				}
 			}
 		});
 		// register
@@ -160,6 +220,22 @@ public class HomePage {
 			public void actionPerformed(ActionEvent arg0) {
 				new RegisterPage(HomePage.this);
 				frmHomepage.setVisible(false);
+			}
+		});
+		// logOut
+		Logout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				homepagecontroller.setUser(null);
+				login.setVisible(true);
+				user_name.setVisible(true);
+				register.setVisible(true);
+				password.setVisible(true);
+				lblNewLabel.setVisible(true);
+				lblNewLabel_1.setVisible(true);
+				userlogin.setText("");
+				addtocart.setVisible(false);
+				cart.setVisible(false);
+				Logout.setVisible(false);
 			}
 		});
 	}
