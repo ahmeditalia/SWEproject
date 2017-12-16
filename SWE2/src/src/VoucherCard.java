@@ -15,25 +15,15 @@ public class VoucherCard extends PaymentUI {
 
 	private JFrame VoucherCard;
 	private JTextField cardnumber;
-
-	/**
-	 * Launch the application.
-	 */
 	public VoucherCard() {
 		initialize();
 	}
-
-	/**
-	 * @wbp.parser.constructor
-	 */
+	
 	public VoucherCard(HomePage homePage) {
 		this.homePage = homePage;
 		initialize();
 	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
+	
 	private void initialize() {
 		VoucherCard = new JFrame();
 		VoucherCard.getContentPane().setBackground(Color.LIGHT_GRAY);

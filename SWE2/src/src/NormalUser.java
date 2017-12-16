@@ -1,3 +1,4 @@
+package src;
 public class NormalUser extends User {
     private Cart cart;
     NormalUser(){

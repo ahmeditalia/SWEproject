@@ -4,14 +4,19 @@ import java.awt.EventQueue;
 import java.awt.Window;
 
 import javax.swing.JFrame;
+import javax.annotation.processing.Messager;
+import javax.sound.midi.ShortMessage;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
+import javax.xml.ws.handler.MessageContext;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import javax.swing.JCheckBox;
 
@@ -72,7 +77,7 @@ public class StoreUI {
 		JButton btnAddProduct = new JButton("Add product to store");
 		btnAddProduct.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//sotreController.setCurrentStore(StoreList.getSelectedItem().toString());
+				sotreController.setCurrentStore(StoreList.getSelectedItem().toString());
 				ProductForm pForm = new  ProductForm(StoreUI.this,true);
 				frame.setVisible(false);
 				}
@@ -83,7 +88,7 @@ public class StoreUI {
 		JButton btnSugestProduct = new JButton("Sugest product");
 		btnSugestProduct.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ProductForm pForm = new  ProductForm(StoreUI.this,false);
+				ProductForm pForm = new  ProductForm(StoreUI.this,true);
 				frame.setVisible(false);
 			}
 		});
@@ -93,14 +98,23 @@ public class StoreUI {
 		JButton btnOExploreNumber = new JButton("Get number of products views");
 		btnOExploreNumber.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				sotreController.setCurrentStore(StoreList.getSelectedItem().toString());
 				ShowPViews pViews= new ShowPViews(StoreUI.this);
-				
+				frame.setVisible(false);
 			}
 		});
 		btnOExploreNumber.setBounds(28, 103, 272, 23);
 		frame.getContentPane().add(btnOExploreNumber);
 		
 		JButton btnOGetThe = new JButton("Get the most viewed product ");
+		btnOGetThe.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				sotreController.setCurrentStore(StoreList.getSelectedItem().toString());
+				
+				JOptionPane.showMessageDialog(null, sotreController.getCurrentStore().getMostViewedP().getName()
+						+" -> " +sotreController.getCurrentStore().getMostViewedP().getViews());
+			}
+		});
 		btnOGetThe.setBounds(28, 154, 272, 23);
 		frame.getContentPane().add(btnOGetThe);
 		

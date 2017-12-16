@@ -62,6 +62,7 @@ public class DataBase implements IDataBase {
 		return products;
 	}
 
+	
 	public User RetreiveUser(String username, String password) {
 		List<String> users = new ArrayList<>();
 		Path path = Paths.get("Users.txt");

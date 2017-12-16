@@ -23,9 +23,19 @@ public class Store {
     private List<Product> StoreProducts= new ArrayList<>();
     private StoreOwner Owner= new StoreOwner();
     private Map<Product,User> SoldProducts= new HashMap<>();
-
-
-
+   
+    
+    public Product getMostViewedP(){
+		Product mostP= new Product();
+    	if (StoreProducts.size()>0){
+    		mostP=StoreProducts.get(0);
+        	for(int i=1;i<StoreProducts.size();i++){
+        		if (StoreProducts.get(i).getViews()>mostP.getViews())
+        			mostP=StoreProducts.get(i);
+        	}
+    	}
+    	return mostP;
+    }
     public void AddProduct(Product product) {
         StoreProducts.add(product);
         }
