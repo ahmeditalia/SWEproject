@@ -1,8 +1,9 @@
 package src;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Store {
+public class Store implements Serializable{
 
 	public Store() {
 	}
@@ -10,6 +11,9 @@ public class Store {
 	public Store(String SName, StoreOwner owner) {
 		this.StoreName = SName;
 		this.Owner = owner;
+	}
+	public Store(String SName) {
+		this.StoreName = SName;
 	}
 
 	/**
@@ -19,7 +23,7 @@ public class Store {
 	private List<Product> StoreProducts = new ArrayList<>();
 	private StoreOwner Owner = new StoreOwner();
 	private Map<Product, User> SoldProducts = new HashMap<>();
-
+    
 	public Product getMostViewedP() {
 		Product mostP = new Product();
 		if (StoreProducts.size() > 0) {
