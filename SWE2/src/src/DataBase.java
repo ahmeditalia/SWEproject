@@ -177,9 +177,10 @@ public class DataBase implements IDataBase {
 	}
 
 	public void InsertProductToStore(Store store, Product product) {
+		product.setID(Integer.toString(ID));
 		try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(product.getCategory() + ".txt", true));
-			writer.write(product.getName() + "_" + Integer.toString(ID));
+			writer.write(product.getName() + "_" + product.getID());
 			writer.newLine();
 			writer.close();
 		} catch (IOException e1) {
@@ -187,7 +188,7 @@ public class DataBase implements IDataBase {
 
 		try {
 			ObjectOutputStream object = new ObjectOutputStream(
-					new FileOutputStream(product.getName() + "_" + Integer.toString(ID) + ".txt"));
+					new FileOutputStream(product.getName() + "_" + product.getID() + ".txt"));
 			object.writeObject(product);
 			object.close();
 		} catch (FileNotFoundException e) {
