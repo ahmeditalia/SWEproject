@@ -38,7 +38,7 @@ public class HomePage extends JFrame {
 	}
 
 	private void updateproducts(String categoryname, String storename) {
-		viewedProducts = homepagecontroller.getproducts(categoryname, storename);
+		viewedProducts = homepagecontroller.getProducts(categoryname, storename);
 	}
 
 	public static void main(String[] args) {
