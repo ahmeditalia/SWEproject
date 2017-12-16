@@ -28,11 +28,10 @@ public class HomePage extends JFrame {
 	}
 
 	private void updatetable(List<Product> products, DefaultTableModel model) {
-		int i = 1;
 		for (Product product : products) {
-			String[] row = { Integer.toString(i), product.getName(), Float.toString(product.getPrice()),
+			Object[] row = { product.getID() , product.getName(), Float.toString(product.getPrice()),
 					Integer.toString(product.getQuantity()), product.getCategory(), product.getBrand(),
-					product.getStore().getStoreName() ,product.getID()};
+					product.getStore().getStoreName(), false };
 			model.addRow(row);
 		}
 	}
@@ -108,30 +107,28 @@ public class HomePage extends JFrame {
 		JComboBox<String> boxcategory = new JComboBox<>();
 		boxcategory.setToolTipText("Categories");
 		boxcategory.setBounds(10, 119, 150, 20);
-		//italia modification
-		List<String> categories=new ArrayList<>();
-		categories=new DataBase().RetreiveCategoriesNames();
+		// italia modification
+		List<String> categories = new ArrayList<>();
+		categories = new DataBase().RetreiveCategoriesNames();
 		boxcategory.addItem("All");
-		for(String a:categories)
-		{
+		for (String a : categories) {
 			boxcategory.addItem(a);
 
 		}
-		//end modification
+		// end modification
 		frmHomepage.getContentPane().add(boxcategory);
 		JComboBox<String> boxstores = new JComboBox<>();
 		boxstores.setToolTipText("stores");
 		boxstores.setBounds(10, 245, 150, 20);
-		//italia modification
+		// italia modification
 		boxstores.addItem("All");
-		List<String> stores=new ArrayList<>();
-		stores=new DataBase().RetreiveStoreNames();
-		for(String a:stores)
-		{
+		List<String> stores = new ArrayList<>();
+		stores = new DataBase().RetreiveStoreNames();
+		for (String a : stores) {
 			boxstores.addItem(a);
 
 		}
-		//end modification
+		// end modification
 		frmHomepage.getContentPane().add(boxstores);
 		JSeparator separator = new JSeparator();
 		separator.setOrientation(SwingConstants.VERTICAL);
@@ -177,7 +174,7 @@ public class HomePage extends JFrame {
 			}
 
 			public boolean isCellEditable(int row, int column) {
-				if(column != 7)
+				if (column != 7)
 					return false;
 				return true;
 			}
@@ -185,7 +182,6 @@ public class HomePage extends JFrame {
 		updatetable(viewedProducts, model);
 		table.setModel(model);
 		model.setColumnIdentifiers(columnsnames);
-		model.addRow(new Object[] { 1, "adsfasdf", 85643, 120, "SADS", "EWREWRw", "sdfer", false});
 		JSeparator separator_3 = new JSeparator();
 		separator_3.setBounds(10, 75, 1342, 2);
 		frmHomepage.getContentPane().add(separator_3);
@@ -237,8 +233,9 @@ public class HomePage extends JFrame {
 		// StoreUI
 		OpenStore.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-	
-				new StoreUI();
+				if (homepagecontroller.getUser() instanceof StoreOwner) {
+					new StoreUI((StoreOwner)homepagecontroller.getUser());
+				}
 			}
 		});
 		// changecategory
@@ -267,7 +264,7 @@ public class HomePage extends JFrame {
 		login.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String username = user_name.getText();
-				String pass=String.valueOf(password.getPassword());
+				String pass = String.valueOf(password.getPassword());
 				homepagecontroller.LogIn(username, pass);
 				if (homepagecontroller.getUser() != null) {
 					login.setVisible(false);
@@ -299,17 +296,9 @@ public class HomePage extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				List<Product> products = new ArrayList<>();
 				for (int i = 0; i < table.getRowCount(); i++) {
-					String name = table.getModel().getValueAt(i, 1).toString();
-					String cat = table.getModel().getValueAt(i, 4).toString();
-					String brand = table.getModel().getValueAt(i, 5).toString();
-					String store = table.getModel().getValueAt(i, 6).toString();
-					float price  = Float.parseFloat(table.getModel().getValueAt(i, 2).toString());
-					int q = Integer.parseInt(table.getModel().getValueAt(i, 1).toString());
-					String id = table.getModel().getValueAt(i, 1).toString();
 					boolean select = Boolean.parseBoolean(table.getModel().getValueAt(i, 1).toString());
-					if(select) {
-						//Product product = new Product(id,name,price,q,cat,brand,store);
-						//products.add(product);
+					if (select) {
+						products.add(viewedProducts.get(i));
 					}
 				}
 			}
