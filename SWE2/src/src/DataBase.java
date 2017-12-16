@@ -20,16 +20,17 @@ import java.util.*;
 
 public class DataBase implements IDataBase {
 
-	private String ID;
+	private int ID;
 
 	public DataBase() {
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader("IDCounter.txt"));
-			reader.readLine();
+			ID=Integer.parseInt(reader.readLine());
 			reader.close();
 
 		} catch (FileNotFoundException e) {
 		} catch (IOException e) {
+
 		}
 	}
 
@@ -178,7 +179,7 @@ public class DataBase implements IDataBase {
 	public void InsertProductToStore(Store store, Product product) {
 		try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(product.getCategory() + ".txt", true));
-			writer.write(product.getName() + "_" + ID);
+			writer.write(product.getName() + "_" + Integer.toString(ID));
 			writer.newLine();
 			writer.close();
 		} catch (IOException e1) {
@@ -186,7 +187,7 @@ public class DataBase implements IDataBase {
 
 		try {
 			ObjectOutputStream object = new ObjectOutputStream(
-					new FileOutputStream(product.getName() + "_" + ID + ".txt"));
+					new FileOutputStream(product.getName() + "_" + Integer.toString(ID) + ".txt"));
 			object.writeObject(product);
 			object.close();
 		} catch (FileNotFoundException e) {
@@ -334,7 +335,7 @@ public class DataBase implements IDataBase {
 		ID++;
 		try {
 			BufferedWriter out = new BufferedWriter(new FileWriter("IDCounter.txt"));
-			out.write(ID);
+			out.write(Integer.toString(ID));
 			out.close();
 		} catch (Exception e) {
 		}

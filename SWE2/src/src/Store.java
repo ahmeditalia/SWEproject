@@ -8,25 +8,19 @@ public class Store implements Serializable{
 	public Store() {
 	}
 
-	public Store(String SName, StoreOwner owner) {
+	public Store(String SName, StoreOwner owner){
 		this.StoreName = SName;
 		this.Owner = owner;
 	}
-<<<<<<< HEAD
-=======
 	public Store(String SName) {
 		this.StoreName = SName;
+		
 	}
-
-	/**
-	 * 
-	 */
->>>>>>> c439e86e104a5a72cba153e7e197d2c9fcf32a38
 	private String StoreName;
 	private List<Product> StoreProducts = new ArrayList<>();
 	private StoreOwner Owner = new StoreOwner();
 	private Map<Product, User> SoldProducts = new HashMap<>();
-    
+  
 	public Product getMostViewedP() {
 		Product mostP = new Product();
 		if (StoreProducts.size() > 0) {
