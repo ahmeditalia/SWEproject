@@ -39,6 +39,10 @@ public class HomePageController {
 
 	public void Register(String username, String password, String email, String phoneNumber, String gender, String address, int accountType) {
 		IDataBase IDataBase1 = new DataBase();
+		if(accountType==1)
+		{
+			NormalUser user=new NormalUser();
+		}
 		User userTemb = new User();
 		userTemb.setUsername(username);
 		userTemb.setPassword(password);

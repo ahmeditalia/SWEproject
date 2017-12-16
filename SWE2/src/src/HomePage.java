@@ -221,6 +221,7 @@ public class HomePage extends JFrame {
 		// adminpage
 		OpenStore.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+	
 				new StoreUI();
 			}
 		});
@@ -291,8 +292,8 @@ public class HomePage extends JFrame {
 					String id = table.getModel().getValueAt(i, 1).toString();
 					boolean select = Boolean.parseBoolean(table.getModel().getValueAt(i, 1).toString());
 					if(select) {
-						Product product = new Product(id,name,price,q,cat,brand,store);
-						products.add(product);
+						//Product product = new Product(id,name,price,q,cat,brand,store);
+						//products.add(product);
 					}
 				}
 			}

@@ -4,6 +4,10 @@ public class NormalUser extends User {
     NormalUser(){
         cart=new Cart(this);
     }
+    NormalUser()
+    {
+    	
+    }
     public void AddToCart(Product product) {
         cart.AddToCart(product);
     }
