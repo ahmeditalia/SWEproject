@@ -108,14 +108,30 @@ public class HomePage extends JFrame {
 		JComboBox<String> boxcategory = new JComboBox<>();
 		boxcategory.setToolTipText("Categories");
 		boxcategory.setBounds(10, 119, 150, 20);
+		//italia modification
+		List<String> categories=new ArrayList<>();
+		categories=new DataBase().RetreiveCategoriesNames();
 		boxcategory.addItem("All");
-		boxcategory.addItem("1");
+		for(String a:categories)
+		{
+			boxcategory.addItem(a);
+
+		}
+		//end modification
 		frmHomepage.getContentPane().add(boxcategory);
 		JComboBox<String> boxstores = new JComboBox<>();
 		boxstores.setToolTipText("stores");
 		boxstores.setBounds(10, 245, 150, 20);
+		//italia modification
 		boxstores.addItem("All");
-		boxstores.addItem("2");
+		List<String> stores=new ArrayList<>();
+		stores=new DataBase().RetreiveStoreNames();
+		for(String a:stores)
+		{
+			boxstores.addItem(a);
+
+		}
+		//end modification
 		frmHomepage.getContentPane().add(boxstores);
 		JSeparator separator = new JSeparator();
 		separator.setOrientation(SwingConstants.VERTICAL);
@@ -215,10 +231,10 @@ public class HomePage extends JFrame {
 		// adminpage
 		ControllPanel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new AdminPage();
+				new Adminform();
 			}
 		});
-		// adminpage
+		// StoreUI
 		OpenStore.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 	

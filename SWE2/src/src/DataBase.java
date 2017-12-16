@@ -1,5 +1,6 @@
 package src;
 
+import java.awt.Desktop.Action;
 import java.io.BufferedWriter;
 import java.io.DataOutputStream;
 import java.io.File;
@@ -376,6 +377,16 @@ public class DataBase implements IDataBase {
 
 		}
 		return products;
+	}
+
+	@Override
+	public List<String> RetreiveStoreNames() {
+		Path path = Paths.get("Stores.txt");		
+		try {
+			return Files.readAllLines(path);
+		} catch (IOException e) {
+		}
+		return new ArrayList<>();
 	}
 
 }

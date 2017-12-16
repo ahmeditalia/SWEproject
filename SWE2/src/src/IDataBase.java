@@ -75,5 +75,7 @@ public interface IDataBase {
     public boolean CheckVoucherCard(String VoucherNo);
     
     public List<Product> RetreiveAllProducts();
+    
+    public List<String> RetreiveStoreNames();
 
 }
