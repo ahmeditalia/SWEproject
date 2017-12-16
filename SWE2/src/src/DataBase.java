@@ -1,12 +1,14 @@
 package src;
 
 import java.awt.Desktop.Action;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -18,14 +20,16 @@ import java.util.*;
 
 public class DataBase implements IDataBase {
 
-	private int ID;
+	private String ID;
 
 	public DataBase() {
 		try {
-			Scanner scanner = new Scanner(new File("IDCounter.txt"));
-			scanner.nextInt();
-			scanner.close();
+			BufferedReader reader = new BufferedReader(new FileReader("IDCounter.txt"));
+			reader.readLine();
+			reader.close();
+
 		} catch (FileNotFoundException e) {
+		} catch (IOException e) {
 		}
 	}
 
@@ -329,8 +333,8 @@ public class DataBase implements IDataBase {
 	protected void IncrementID() {
 		ID++;
 		try {
-			DataOutputStream out = new DataOutputStream(new FileOutputStream("IDCounter.txt"));
-			out.writeInt(ID);
+			BufferedWriter out = new BufferedWriter(new FileWriter("IDCounter.txt"));
+			out.write(ID);
 			out.close();
 		} catch (Exception e) {
 		}
