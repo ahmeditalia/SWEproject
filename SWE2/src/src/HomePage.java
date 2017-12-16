@@ -27,9 +27,9 @@ public class HomePage extends JFrame {
 		return frmHomepage;
 	}
 
-	private void updatetable(List<Product> products, DefaultTableModel model) {
-		for (Product product : products) {
-			Object[] row = { product.getID() , product.getName(), Float.toString(product.getPrice()),
+	private void updatetable(DefaultTableModel model) {
+		for (Product product : viewedProducts) {
+			Object[] row = { product.getID(), product.getName(), Float.toString(product.getPrice()),
 					Integer.toString(product.getQuantity()), product.getCategory(), product.getBrand(),
 					product.getStore().getStoreName(), false };
 			model.addRow(row);
@@ -179,7 +179,7 @@ public class HomePage extends JFrame {
 				return true;
 			}
 		};
-		updatetable(viewedProducts, model);
+		updatetable(model);
 		table.setModel(model);
 		model.setColumnIdentifiers(columnsnames);
 		JSeparator separator_3 = new JSeparator();
@@ -234,7 +234,7 @@ public class HomePage extends JFrame {
 		OpenStore.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (homepagecontroller.getUser() instanceof StoreOwner) {
-					new StoreUI((StoreOwner)homepagecontroller.getUser());
+					new StoreUI((StoreOwner) homepagecontroller.getUser());
 				}
 			}
 		});
@@ -242,14 +242,14 @@ public class HomePage extends JFrame {
 		boxcategory.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				updateproducts(boxcategory.getSelectedItem().toString(), boxstores.getSelectedItem().toString());
-				updatetable(viewedProducts, model);
+				updatetable(model);
 			}
 		});
 		// changestore
 		boxstores.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				updateproducts(boxcategory.getSelectedItem().toString(), boxstores.getSelectedItem().toString());
-				updatetable(viewedProducts, model);
+				updatetable(model);
 			}
 		});
 		// Cart
