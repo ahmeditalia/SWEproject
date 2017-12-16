@@ -2,30 +2,27 @@ package src;
 
 
 
-import java.util.*;
 
-/**
- * 
- */
+
 public class User {
 
 
     public User() {
     }
 
-    private String Username;
+    protected String Username;
 
-    private String Password;
+    protected String Password;
 
-    private String E_mail;
+    protected String E_mail;
 
-    private String PhoneNumber;
+    protected String PhoneNumber;
 
-    private String Gender;
+    protected String Gender;
 
-    private String Address;
+    protected String Address;
 
-    public byte Type;
+    protected byte Type;
 
     public String getUsername() {
         return Username;
