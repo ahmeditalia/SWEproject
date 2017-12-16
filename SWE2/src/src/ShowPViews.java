@@ -10,12 +10,13 @@ import java.util.*;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JScrollPane;
 
 public class ShowPViews {
 
 	private JFrame frame;
-	private JTable table;
 	StoreUI storeGui;
+	private JTable table;
 	/**
 	 * Launch the application.
 	 */
@@ -47,16 +48,23 @@ public class ShowPViews {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame.setVisible(true);
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 355);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		table = new JTable();
-		table.setBounds(135, 125, 50, -28);
-		frame.getContentPane().add(table);
-		DefaultTableModel model= (DefaultTableModel) table.getModel();
-		model.a
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(69, 23, 282, 282);
+		frame.getContentPane().add(scrollPane);
+		Object[] columnsnames = {  "Product Name","#Views"};
+		table = new JTable(new DefaultTableModel(new Object[][] {}, columnsnames));
+		scrollPane.setViewportView(table);
+		scrollPane.setViewportView(table);
+		List<String>s= new ArrayList<>();
+		DefaultTableModel model = new DefaultTableModel() ;
+		table.setModel(model);
+		model.setColumnIdentifiers(columnsnames);
+	
+		
 	}
 }

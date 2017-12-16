@@ -47,11 +47,6 @@ public interface IDataBase {
      */
     public void EmptyUserCart(NormalUser user);
 
-    /**
-     * @param StoreOwnerName 
-     * @param StoreName 
-     * @param product
-     */
     public void InsertProductToStore(Store store, Product product);
 
     /**

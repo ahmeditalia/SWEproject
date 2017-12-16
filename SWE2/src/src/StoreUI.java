@@ -62,6 +62,7 @@ public class StoreUI {
 		btnAddSotre.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				sotreController.addNewStore(txtGetstorename.getText());
+				initialize();
 			}
 		});
 		

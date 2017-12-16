@@ -10,7 +10,11 @@ public class Product {
      */
     public Product() {
     }
-    
+    public Product(String name,String category,String brand) {
+    	Name=name;
+    	Category=category;
+        Brand=brand;
+    }
     public Product(String id,String name,float price,int quantity,String category,String brand,Store store){
     	Name=name;
         ID=id;

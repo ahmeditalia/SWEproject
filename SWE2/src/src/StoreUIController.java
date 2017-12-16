@@ -21,18 +21,14 @@ public class StoreUIController {
 	}
     private StoreOwner CurrentUser= new StoreOwner();
     private Store CurrentStore= new Store();
-
     private IDataBase database= new DataBase();
- 
 
-    /**
-     * @param storeName
-     */
-    
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void addNewStore(String Sname) {
 		// TODO Auto-generated method stub
+    	
     	CurrentUser.AddNewStore(Sname);
+    	database.InsertNewStore(new Store(Sname));
 
 	}
     public List<String> getBrandsNames(){
@@ -63,6 +59,7 @@ public class StoreUIController {
 		newP.setCategory(category);
 		newP.setBrand(brand);
 		CurrentUser.AddProductToStore(newP,CurrentStore.getStoreName());
+		database.InsertProductToStore(CurrentStore, newP);
     }
 
     /**
@@ -83,17 +80,10 @@ public class StoreUIController {
     /**
      * @return
      */
-    
-
-    
-
-    /**
-     * @param productName 
-     * @param Category 
-     * @param Brand
-     */
+     
     public void SuggestProduct(String productName, String Category, String Brand) {
         // TODO implement here
+    	database.InsertSuggestedProduct(new Product( productName, Category, Brand));
     }
 
     /**
@@ -103,10 +93,6 @@ public class StoreUIController {
         // TODO implement here
         return null;
     }
-
-    /**
-     * @return
-     */
    
     public void ChangeStore(String storeName) {
         // TODO implement here
