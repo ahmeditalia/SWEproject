@@ -11,10 +11,6 @@ public class Store {
 		this.StoreName = SName;
 		this.Owner = owner;
 	}
-
-	/**
-	 * 
-	 */
 	private String StoreName;
 	private List<Product> StoreProducts = new ArrayList<>();
 	private StoreOwner Owner = new StoreOwner();
