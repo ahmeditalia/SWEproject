@@ -46,13 +46,14 @@ public class HomePageController {
 		}
 		else if(accountType==2)
 		{
-			
+			StoreOwner user=new StoreOwner(username,password,email,phoneNumber,gender,address,accountType);
+			IDataBase1.InsertUser(user);
 		}
 		else if(accountType==3){
-			
+			Administrator user=new Administrator(username,password,email,phoneNumber,gender,address,accountType);
+			IDataBase1.InsertUser(user);
 		}
 	}
-
 	public User getUser() {
 		return user;
 	}
@@ -74,7 +75,7 @@ public class HomePageController {
 		List<Product> products =getAllProducts();
 		List<Product> temp=new ArrayList<Product>();
 		for(int i=0;i<products.size();i++){
-			if((products.get(i).getBrand()==category||category=="All")&&(products.get(i).getStore().getStoreName()==store||store=="All")){
+			if((products.get(i).getCategory().equals(category)||category.equals("All"))&&(products.get(i).getStore().getStoreName().equals(store)||store.equals("All"))){
 				temp.add(products.get(i));
 			}
 		}
