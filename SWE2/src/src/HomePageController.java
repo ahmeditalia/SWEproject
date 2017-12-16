@@ -8,19 +8,7 @@ public class HomePageController {
 	}
 	public void LogIn(String username, String password) {
 		IDataBase IDataBase1 = new DataBase();
-
-		if (IDataBase1.RetreiveUser(username, password).getType() == 1) {
-			user = new NormalUser();
-			user=IDataBase1.RetreiveUser(username, password);
-		} else if (IDataBase1.RetreiveUser(username, password).getType() == 2) {
-			user = new StoreOwner();
-			user=IDataBase1.RetreiveUser(username, password);
-		}
-		else if (IDataBase1.RetreiveUser(username, password).getType() == 3) {
-			user = new Administrator();
-			user=IDataBase1.RetreiveUser(username, password);
-		}
-
+		user=IDataBase1.RetreiveUser(username, password);
 	}
 
 	public List<Product> DirectSearch(String SearchText) {
@@ -39,20 +27,22 @@ public class HomePageController {
 
 	public void Register(String username, String password, String email, String phoneNumber, String gender, String address, int accountType) {
 		IDataBase IDataBase1 = new DataBase();
+
 		if(accountType==1)
 		{
-			NormalUser user=new NormalUser();
+			NormalUser user=new NormalUser(username,password,email,phoneNumber,gender,address,accountType);
+			IDataBase1.InsertUser(user);
 		}
-		User userTemb = new User();
-		userTemb.setUsername(username);
-		userTemb.setPassword(password);
-		userTemb.setAddress(address);
-		userTemb.setPhoneNumber(phoneNumber);
-		userTemb.setGender(gender);
-		userTemb.setType((byte) accountType);
-		IDataBase1.InsertUser(userTemb);
+		else if(accountType==2)
+		{
+			StoreOwner user=new StoreOwner(username,password,email,phoneNumber,gender,address,accountType);
+			IDataBase1.InsertUser(user);
+		}
+		else if(accountType==3){
+			Administrator user=new Administrator(username,password,email,phoneNumber,gender,address,accountType);
+			IDataBase1.InsertUser(user);
+		}
 	}
-
 	public User getUser() {
 		return user;
 	}
@@ -74,7 +64,7 @@ public class HomePageController {
 		List<Product> products =getAllProducts();
 		List<Product> temp=new ArrayList<Product>();
 		for(int i=0;i<products.size();i++){
-			if((products.get(i).getBrand()==category||category=="All")&&(products.get(i).getStore().getStoreName()==store||store=="All")){
+			if((products.get(i).getCategory().equals(category)||category.equals("All"))&&(products.get(i).getStore().getStoreName().equals(store)||store.equals("All"))){
 				temp.add(products.get(i));
 			}
 		}

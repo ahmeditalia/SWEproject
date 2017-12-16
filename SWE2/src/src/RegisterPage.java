@@ -120,30 +120,29 @@ public class RegisterPage {
 		storeowner.setBounds(188, 547, 109, 23);
 		panel.add(storeowner);
 		frmRegister.setVisible(true);
-		
+
 		JRadioButton Adminitrator = new JRadioButton("Adminitrator");
 		Adminitrator.setBounds(188, 573, 109, 23);
 		panel.add(Adminitrator);
-
 
 		ButtonGroup check = new ButtonGroup();
 		check.add(normaluser);
 		check.add(storeowner);
 		check.add(Adminitrator);
-		
-		
+
 		submit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if ((!normaluser.isSelected() && !storeowner.isSelected() && !Adminitrator.isSelected()) || usernametext.getText().equals("")
-						|| !(passowrdtext.getPassword().length > 0) || mailtext.getText().equals("")
-						|| phonenumbertext.getText().equals("") || gendertext.getText().equals("")
-						|| addresstext.getText().equals("")) {
+				if ((!normaluser.isSelected() && !storeowner.isSelected() && !Adminitrator.isSelected())
+						|| usernametext.getText().equals("") || !(passowrdtext.getPassword().length > 0)
+						|| mailtext.getText().equals("") || phonenumbertext.getText().equals("")
+						|| gendertext.getText().equals("") || addresstext.getText().equals("")) {
 					JOptionPane.showMessageDialog(null, "All information require");
 					return;
 				}
 				int type = (normaluser.isSelected() ? 1 : (storeowner.isSelected() ? 2 : 3));
-				homePage.getHomepagecontroller().Register(username.getText(), (passowrdtext.getPassword()).toString(),
-						email.getText(), phonenumbertext.getText(), gender.getText(), address.getText(), type);
+				String password = String.valueOf(passowrdtext.getPassword());
+				homePage.getHomepagecontroller().Register(usernametext.getText(), password, mailtext.getText(),
+						phonenumbertext.getText(), gendertext.getText(), addresstext.getText(), type);
 				homePage.getFrmHomepage().setVisible(true);
 				frmRegister.setVisible(false);
 			}

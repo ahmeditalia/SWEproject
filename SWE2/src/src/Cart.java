@@ -1,7 +1,12 @@
 package src;
+import java.io.Serializable;
 import java.util.*;
-public class Cart {
-    private NormalUser CartOwner;
+public class Cart implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private NormalUser CartOwner;
     private List<Product> CartProducts;
     public Cart() {
         CartOwner=new NormalUser();

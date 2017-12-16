@@ -2,28 +2,38 @@ package src;
 
 
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
  * 
  */
-public class StoreOwner extends User {
+public class StoreOwner extends User implements Serializable{
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * Default constructor
      */
     public StoreOwner() {
     }
+    
+    StoreOwner(String Username,String Password,String E_mail,String PhoneNumber,String Gender,String Address,int Type){
+    	this.Username=Username;
+        this.Password=Password;
+        this.E_mail=E_mail;
+        this.PhoneNumber=PhoneNumber;
+        this.Gender=Gender;
+        this.Address=Address;
+        this.Type=Type;
+    }
 
-    /**
-     * 
-     */
+    
     private List<Store> OwnedStores= new ArrayList<>();
-
-    /**
-     * @param product 
-     * @param storeName
-     */
+    
     // Sa2aaaaaaaaaaaaaaa added functions 
     public List<String>getStoresName(){
     	List<String> names= new ArrayList<>();
@@ -32,7 +42,6 @@ public class StoreOwner extends User {
     	}
     	return names;
     }
-    
     public Store searchForStore(String sName){
     	for (int i=0;i<OwnedStores.size();i++){
     		if (OwnedStores.get(i).getStoreName()== sName)
@@ -40,19 +49,12 @@ public class StoreOwner extends User {
     	}
     	return null;
     }
-    
-    
-    
-    
-    
-    
-    
-    
     public void AddProductToStore(Product product, String storeName) {
     	Store s= new Store();
     	s= searchForStore(storeName);
     	if (s!=null){
     		s.AddProduct(product);
+    		
     	}
     }
 
@@ -65,18 +67,11 @@ public class StoreOwner extends User {
         return OwnedStores;
     }
 
-    /**
-     * @param value
-     */
-    public void setOwnedStores(List<Store> value) {
-        // TODO implement here
-    }
+    
 
-    /**
-     * @param StoreName
-     */
+    
     public void AddNewStore(String StoreName) {
-        // TODO implement here
+    	OwnedStores.add(new Store(StoreName,this));
     }
 
 }

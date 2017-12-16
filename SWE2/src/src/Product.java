@@ -1,15 +1,73 @@
 package src;
 
+import java.io.Serializable;
+
 /**
  * 
  */
-public class Product {
+public class Product implements Serializable{
 
+<<<<<<< HEAD
 	/**
 	 * Default constructor
 	 */
 	public Product() {
 	}
+=======
+    /**
+     * Default constructor
+     */
+	
+	public Product() {
+    }
+    public Product(String name,String category,String brand) {
+    	Name=name;
+    	Category=category;
+        Brand=brand;
+    }
+    public Product(String id,String name,float price,int quantity,String category,String brand,Store store){
+    	Name=name;
+        ID=id;
+        Price=price;
+        Quantity=quantity;
+        Category=category;
+        Brand=brand;
+        this.store=store;
+    }
+
+    private String Name;
+    private String ID;
+    private float Price;
+    private int Quantity;
+    private String Category;
+    private String Brand;
+    private Store store;
+    private int Views;
+
+
+
+    public String getName() {
+        return Name;
+    }
+
+
+    public void setName(String value) {
+    	this.Name=value;
+    }
+
+
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String value) {
+    	this.ID=value;
+    }
+
+    public float getPrice() {
+        return Price;
+    }
+>>>>>>> c439e86e104a5a72cba153e7e197d2c9fcf32a38
 
 	public Product(String productName, String category, String brand) {
 		Name = productName;

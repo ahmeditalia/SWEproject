@@ -13,6 +13,7 @@ public class AdminController {
 	public void AddProductToSystem(String productName, String category, String brand) {
 		Product newP = new Product(productName, category, brand);
 
+<<<<<<< HEAD
 	}
 
 	/**
@@ -22,5 +23,19 @@ public class AdminController {
 		// TODO implement here
 		return null;
 	}
+=======
+    /**
+     * @param productName 
+     * @param category 
+     * @param brand
+     */
+    public void AddProductToSystem(String productName, String category, String brand) {
+        // TODO implement here
+    }
+    public List<Product> getSuggestedProducts() {
+        // TODO implement here
+        return null;
+    }
+>>>>>>> c439e86e104a5a72cba153e7e197d2c9fcf32a38
 
 }

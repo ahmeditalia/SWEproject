@@ -42,19 +42,16 @@ public class ProductForm {
 	 * Create the application.
 	 */
 	public ProductForm() {
-		initialize(false);
+		initialize(true);
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
+	
 	private void initialize(boolean addOrSuggest) {
 		frame = new JFrame();
-		frame.setVisible(true);
 		frame.setBounds(100, 100, 454, 388);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
+		frame.setVisible(true);
 		JLabel lblProductName = new JLabel("Name :");
 		lblProductName.setBounds(36, 68, 74, 14);
 		frame.getContentPane().add(lblProductName);
@@ -118,6 +115,7 @@ public class ProductForm {
 		JButton btnAddProduct = new JButton("Add product");
 		btnAddProduct.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				storeGUI.getStoreUIController().AddProduct(txtID.getText(),txtEnterName.getText(), Float.parseFloat(txtPrice.getText())
 						, Integer.parseInt(txtQuantity.getText()), Categories.getSelectedItem().toString(), Brands.getSelectedItem().toString());
 			
@@ -130,13 +128,21 @@ public class ProductForm {
 		JButton btnSugestProduct = new JButton("Suggest Product");
 		btnSugestProduct.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				storeGUI.getStoreUIController().SuggestProduct(txtEnterName.getText(), Categories.getSelectedItem().toString(), Brands.getSelectedItem().toString());
-			
-				
+				storeGUI.getStoreUIController().SuggestProduct(txtEnterName.getText(), Categories.getSelectedItem().toString(), Brands.getSelectedItem().toString());		
 			}
 		});
 		btnSugestProduct.setBounds(160, 226, 111, 23);
 		frame.getContentPane().add(btnSugestProduct);
+		
+		JButton btnStorePage = new JButton("Store Page");
+		btnStorePage.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				storeGUI.getFrame().setVisible(true);
+				frame.setVisible(false);
+			}
+		});
+		btnStorePage.setBounds(21, 315, 89, 23);
+		frame.getContentPane().add(btnStorePage);
 		btnAddProduct.setVisible(addOrSuggest);
 		txtPrice.setVisible(addOrSuggest);
 		txtQuantity.setVisible(addOrSuggest);
@@ -144,8 +150,6 @@ public class ProductForm {
 		lblProductId.setVisible(addOrSuggest);
 		lblQuantity.setVisible(addOrSuggest);
 		lblPrice.setVisible(addOrSuggest);
-		btnSugestProduct.setVisible(!addOrSuggest);
-		
-	
+		btnSugestProduct.setVisible(!addOrSuggest);	
 	}
 }
