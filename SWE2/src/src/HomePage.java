@@ -8,8 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
 
-@SuppressWarnings("serial")
-public class HomePage extends JFrame {
+public class HomePage {
 
 	private JFrame frmHomepage;
 	private JPasswordField password;
