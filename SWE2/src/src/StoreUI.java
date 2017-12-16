@@ -118,9 +118,7 @@ public class StoreUI {
 		btnOGetThe.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				sotreController.setCurrentStore(StoreList.getSelectedItem().toString());
-	
-				JOptionPane.showMessageDialog(null, sotreController.getCurrentStore().getMostViewedP().getName()
-						+" -> " +sotreController.getCurrentStore().getMostViewedP().getViews());
+				ProductInfGui pGui= new ProductInfGui(sotreController.getCurrentStore().getMostViewedP(),true);
 			}
 		});
 		btnOGetThe.setBounds(32, 239, 272, 23);
@@ -152,7 +150,7 @@ public class StoreUI {
 				frame.setVisible(false);
 			}
 		});
-		btnHomePage.setBounds(32, 35, 89, 23);
+		btnHomePage.setBounds(32, 35, 122, 23);
 		frame.getContentPane().add(btnHomePage);
 		
 	}

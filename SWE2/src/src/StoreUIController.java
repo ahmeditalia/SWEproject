@@ -86,7 +86,7 @@ public class StoreUIController {
      */
     public List<Product> GetSystemProducts() {
         // TODO implement here
-        return null;
+        return database.RetreiveSysProducts();
     }
    
     public void ChangeStore(String storeName) {
