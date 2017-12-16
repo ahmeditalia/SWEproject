@@ -66,7 +66,6 @@ public class StoreUI {
 		JComboBox<String> StoreList = new JComboBox<String>();
 		for(int i=0;i<sotreController.getCurrentUser().getStoresName().size();i++){
 			StoreList.addItem(sotreController.getCurrentUser().getStoresName().get(i));
-			//StoreList.addItem("sdgds");
 		
 		}
 		StoreList.setBounds(320, 59, 119, 22);
@@ -75,7 +74,7 @@ public class StoreUI {
 		btnAddProduct.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//sotreController.setCurrentStore(StoreList.getSelectedItem().toString());
-				ProductForm pForm = new  ProductForm(StoreUI.this);
+				ProductForm pForm = new  ProductForm(StoreUI.this,true);
 				frame.setVisible(false);
 				}
 		});
@@ -83,6 +82,11 @@ public class StoreUI {
 		frame.getContentPane().add(btnAddProduct);
 		
 		JButton btnSugestProduct = new JButton("Sugest product");
+		btnSugestProduct.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ProductForm pForm = new  ProductForm(StoreUI.this,false);
+			}
+		});
 		btnSugestProduct.setBounds(28, 111, 272, 23);
 		frame.getContentPane().add(btnSugestProduct);
 		
@@ -99,7 +103,6 @@ public class StoreUI {
 		txtGetstorename.setBounds(320, 12, 119, 20);
 		frame.getContentPane().add(txtGetstorename);
 		txtGetstorename.setColumns(10);
-		
 		
 	}
 }
