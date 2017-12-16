@@ -10,6 +10,16 @@ public class Product {
      */
     public Product() {
     }
+    
+    public Product(String id,String name,float price,int quantity,String category,String brand,Store store){
+    	Name=name;
+        ID=id;
+        Price=price;
+        Quantity=quantity;
+        Category=category;
+        Brand=brand;
+        this.store=store;
+    }
 
     private String Name;
     private String ID;
