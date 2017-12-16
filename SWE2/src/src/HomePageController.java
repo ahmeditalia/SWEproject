@@ -9,17 +9,6 @@ public class HomePageController {
 	public void LogIn(String username, String password) {
 		IDataBase IDataBase1 = new DataBase();
 		user=IDataBase1.RetreiveUser(username, password);
-		/*if (IDataBase1.RetreiveUser(username, password).getType() == 1) {
-			user = new NormalUser();
-			user=IDataBase1.RetreiveUser(username, password);
-		} else if (IDataBase1.RetreiveUser(username, password).getType() == 2) {
-			user = new StoreOwner();
-			user=IDataBase1.RetreiveUser(username, password);
-		}
-		else if (IDataBase1.RetreiveUser(username, password).getType() == 3) {
-			user = new Administrator();
-			user=IDataBase1.RetreiveUser(username, password);
-		}*/
 	}
 
 	public List<Product> DirectSearch(String SearchText) {
@@ -38,6 +27,7 @@ public class HomePageController {
 
 	public void Register(String username, String password, String email, String phoneNumber, String gender, String address, int accountType) {
 		IDataBase IDataBase1 = new DataBase();
+
 		if(accountType==1)
 		{
 			NormalUser user=new NormalUser(username,password,email,phoneNumber,gender,address,accountType);
