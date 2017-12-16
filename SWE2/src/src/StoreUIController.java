@@ -29,7 +29,7 @@ public class StoreUIController {
     	
     	CurrentUser.AddNewStore(Sname);
     	database.InsertNewStore(new Store(Sname));
-
+    	
 	}
     public List<String> getBrandsNames(){
     	return database.RetreiveBrandsNames();
@@ -41,7 +41,6 @@ public class StoreUIController {
     public Store searchForStore(String sName){
     	return  CurrentUser.searchForStore(sName);
     }   
-    
     
     public void setCurrentStore(String currS){
     	CurrentStore= searchForStore(currS);
@@ -62,7 +61,6 @@ public class StoreUIController {
 		database.InsertProductToStore(CurrentStore, newP);
     }
 
-   
     public StoreOwner getCurrentUser() {
         // TODO implement here
         return CurrentUser;
