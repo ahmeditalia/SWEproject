@@ -105,36 +105,43 @@ public class RegisterPage {
 		panel.add(address);
 
 		JButton submit = new JButton("Submit");
-		submit.setBounds(207, 603, 89, 30);
+		submit.setBounds(188, 603, 109, 30);
 		panel.add(submit);
 
 		JLabel lblAccontType = new JLabel("Accont Type :");
-		lblAccontType.setBounds(176, 516, 100, 14);
+		lblAccontType.setBounds(80, 525, 100, 14);
 		panel.add(lblAccontType);
 
 		JRadioButton normaluser = new JRadioButton("Normal user");
-		normaluser.setBounds(188, 537, 109, 23);
+		normaluser.setBounds(188, 521, 109, 23);
 		panel.add(normaluser);
 
 		JRadioButton storeowner = new JRadioButton("Store Owner");
-		storeowner.setBounds(188, 563, 109, 23);
+		storeowner.setBounds(188, 547, 109, 23);
 		panel.add(storeowner);
 		frmRegister.setVisible(true);
+		
+		JRadioButton Adminitrator = new JRadioButton("Adminitrator");
+		Adminitrator.setBounds(188, 573, 109, 23);
+		panel.add(Adminitrator);
+
 
 		ButtonGroup check = new ButtonGroup();
 		check.add(normaluser);
 		check.add(storeowner);
-
+		check.add(Adminitrator);
+		
+		
 		submit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if ((!normaluser.isSelected() && !storeowner.isSelected()) || usernametext.getText().equals("")
+				if ((!normaluser.isSelected() && !storeowner.isSelected() && !Adminitrator.isSelected()) || usernametext.getText().equals("")
 						|| !(passowrdtext.getPassword().length > 0) || mailtext.getText().equals("")
 						|| phonenumbertext.getText().equals("") || gendertext.getText().equals("")
 						|| addresstext.getText().equals("")) {
-					JOptionPane.showMessageDialog(null, "All Information are require");
+					JOptionPane.showMessageDialog(null, "All information require");
 					return;
 				}
-				int type = (normaluser.isSelected() ? 1 : 2);
+				int type = (normaluser.isSelected() ? 1 : (storeowner.isSelected() ? 2 : 3));
 				homePage.getHomepagecontroller().Register(username.getText(), (passowrdtext.getPassword()).toString(),
 						email.getText(), phonenumbertext.getText(), gender.getText(), address.getText(), type);
 				homePage.getFrmHomepage().setVisible(true);

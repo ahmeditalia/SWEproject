@@ -15,41 +15,54 @@ public class StoreUIController {
     public StoreUIController() {
     }
 
-    /**
-     * 
-     */
-    private StoreOwner CurrentUser;
+    public StoreUIController(StoreOwner user) {
+		// TODO Auto-generated constructor stub
+    	CurrentUser=user;
+	}
+    private StoreOwner CurrentUser= new StoreOwner();
+    private Store CurrentStore= new Store();
 
-    /**
-     * 
-     */
-    private Store CurrentStore;
-
-
-
-    /**
-     * @param user
-     */
-    public void StoreUIController(StoreOwner user) {
-        // TODO implement here
-    }
+    private IDataBase database= new DataBase();
+ 
 
     /**
      * @param storeName
      */
-    public void ChangeStore(String storeName) {
-        // TODO implement here
-    }
+    
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public void addNewStore(String Sname) {
+		// TODO Auto-generated method stub
+    	CurrentUser.AddNewStore(Sname);
 
-    /**
-     * @param ProductName 
-     * @param price 
-     * @param quantity 
-     * @param category 
-     * @param brand
-     */
-    public void AddProduct(String ProductName, float price, int quantity, String category, String brand) {
+	}
+    public List<String> getBrandsNames(){
+    	return database.RetreiveBrandsNames();
+    }
+    public List<String> getCategoriesNames(){
+    	return database.RetreiveCategoriesNames();
+    }
+    
+    public Store searchForStore(String sName){
+    	return  searchForStore(sName);
+    }   
+    
+    
+    public void setCurrentStore(String currS){
+    	CurrentStore= searchForStore(currS);
+    }
+    public Store getCurrentStore() {
         // TODO implement here
+        return CurrentStore;
+    }
+    public void AddProduct(String ID,String ProductName, float price, int quantity, String category, String brand) {
+    	Product newP= new Product();
+		newP.setID(ID);
+		newP.setName(ProductName);
+		newP.setPrice(price);
+		newP.setQuantity(quantity);
+		newP.setCategory(category);
+		newP.setBrand(brand);
+		CurrentUser.AddProductToStore(newP,CurrentStore.getStoreName());
     }
 
     /**
@@ -57,7 +70,7 @@ public class StoreUIController {
      */
     public StoreOwner getCurrentUser() {
         // TODO implement here
-        return null;
+        return CurrentUser;
     }
 
     /**
@@ -70,17 +83,9 @@ public class StoreUIController {
     /**
      * @return
      */
-    public Store getCurrentStore() {
-        // TODO implement here
-        return null;
-    }
+    
 
-    /**
-     * @param value
-     */
-    public void setCurrentStore(Store value) {
-        // TODO implement here
-    }
+    
 
     /**
      * @param productName 
@@ -102,9 +107,8 @@ public class StoreUIController {
     /**
      * @return
      */
-    public List<String> GetCategoriesNames() {
+   
+    public void ChangeStore(String storeName) {
         // TODO implement here
-        return null;
     }
-
 }

@@ -1,9 +1,8 @@
 package src;
-
 import java.util.*;
 public class Cart {
     private NormalUser CartOwner;
-    private ArrayList<Product> CartProducts;
+    private List<Product> CartProducts;
     public Cart() {
         CartOwner=new NormalUser();
         CartProducts=new ArrayList<>();
@@ -39,7 +38,7 @@ public class Cart {
     public List<Product> getCartProducts() {
         return CartProducts;
     }
-    public void setCartProducts(ArrayList<Product> value) {
+    public void setCartProducts(List<Product> value) {
         CartProducts=value;
     }
 }

@@ -1,22 +1,26 @@
 package src;
-
 import java.util.*;
 
 public class HomePageController {
-	private NormalUser user;
-
+	private User user;
 	HomePageController() {
-		user = new NormalUser();
-	}
 
+	}
 	public void LogIn(String username, String password) {
 		IDataBase IDataBase1 = new DataBase();
-		/*if (IDataBase1.RetreiveUser(username, password).getType() == 1) {
+
+		if (IDataBase1.RetreiveUser(username, password).getType() == 1) {
 			user = new NormalUser();
+			user=IDataBase1.RetreiveUser(username, password);
 		} else if (IDataBase1.RetreiveUser(username, password).getType() == 2) {
-			StoreOwner userTmb = (StoreOwner) IDataBase1.RetreiveUser(username, password);
-			new StoreUI(userTmb);
-		}*/
+			user = new StoreOwner();
+			user=IDataBase1.RetreiveUser(username, password);
+		}
+		else if (IDataBase1.RetreiveUser(username, password).getType() == 3) {
+			user = new Administrator();
+			user=IDataBase1.RetreiveUser(username, password);
+		}
+
 	}
 
 	public List<Product> DirectSearch(String SearchText) {
@@ -33,8 +37,7 @@ public class HomePageController {
 		((NormalUser) user).AddToCart(product);
 	}
 
-	public void Register(String username, String password, String email, String phoneNumber, String gender,
-			String address, int accountType) {
+	public void Register(String username, String password, String email, String phoneNumber, String gender, String address, int accountType) {
 		IDataBase IDataBase1 = new DataBase();
 		User userTemb = new User();
 		userTemb.setUsername(username);
@@ -46,7 +49,7 @@ public class HomePageController {
 		IDataBase1.InsertUser(userTemb);
 	}
 
-	public NormalUser getUser() {
+	public User getUser() {
 		return user;
 	}
 
@@ -54,8 +57,27 @@ public class HomePageController {
 		user = value;
 	}
 
-	public List<String> GetCategoriesNames() {
+	public List<String> getCategoriesNames() {
 		IDataBase IDataBase1 = new DataBase();
 		return (IDataBase1.RetreiveCategoriesNames());
+	}
+
+	public List<Product>getAllProducts(){
+		IDataBase IDataBase1 = new DataBase();
+		return (IDataBase1.RetreiveAllProducts());
+	}
+	public List<Product>getProducts(String category,String store){
+		List<Product> products =getAllProducts();
+		List<Product> temp=new ArrayList<Product>();
+		for(int i=0;i<products.size();i++){
+			if((products.get(i).getBrand()==category||category=="All")&&(products.get(i).getStore().getStoreName()==store||store=="All")){
+				temp.add(products.get(i));
+			}
+		}
+		return temp;
+	}
+	public boolean checkVoucherCards(String card){
+		IDataBase IDataBase1 = new DataBase();
+		return (IDataBase1.CheckVoucherCard(card));
 	}
 }
