@@ -8,7 +8,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class ProductForm {
+public class ProductInfGui {
 
 	private JFrame frame;
 	private JTextField name;
@@ -25,7 +25,7 @@ public class ProductForm {
 	/**
 	 * @wbp.parser.constructor
 	 */
-	public ProductForm(Product product,boolean view) {
+	public ProductInfGui(Product product,boolean view) {
 		this.product = product;
 		this.view = view;
 		initialize();
@@ -33,7 +33,7 @@ public class ProductForm {
 	/**
 	 * Create the application.
 	 */
-	public ProductForm() {
+	public ProductInfGui() {
 		initialize();
 	}
 
@@ -138,7 +138,7 @@ public class ProductForm {
 		quantity.setText(Integer.toString(product.getQuantity()));
 		brand.setText(product.getBrand());
 		category.setText(product.getCategory());
-		viewsnubmer.setText(Integer.toString(product.getView()));
+		viewsnubmer.setText(Integer.toString(1));
 		store.setText(product.getStore().getStoreName());
 		
 		JButton close = new JButton("Close");
