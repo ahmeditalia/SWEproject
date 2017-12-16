@@ -9,6 +9,16 @@ public class User {
 
     public User() {
     }
+    
+    public User(String Username,String Password,String E_mail,String PhoneNumber,String Gender,String Address,int Type){
+    	this.Username=Username;
+        this.Password=Password;
+        this.E_mail=E_mail;
+        this.PhoneNumber=PhoneNumber;
+        this.Gender=Gender;
+        this.Address=Address;
+        this.Type=Type;
+    }
 
     protected String Username;
 
@@ -22,7 +32,7 @@ public class User {
 
     protected String Address;
 
-    protected byte Type;
+    protected int Type;
 
     public String getUsername() {
         return Username;
@@ -69,11 +79,11 @@ public class User {
         Address=value;
     }
 
-    public byte getType() {
+    public int getType() {
         return Type;
     }
 
-    public void setType(byte value) {
+    public void setType(int value) {
         Type=value;
     }
 
