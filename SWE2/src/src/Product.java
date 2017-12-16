@@ -11,146 +11,92 @@ public class Product {
     public Product() {
     }
 
-    /**
-     * 
-     */
     private String Name;
-
-    /**
-     * 
-     */
     private String ID;
-
-    /**
-     * 
-     */
     private float Price;
-
-    /**
-     * 
-     */
     private int Quantity;
-
-    /**
-     * 
-     */
     private String Category;
-
-    /**
-     * 
-     */
     private String Brand;
-
-    /**
-     * 
-     */
     private Store store;
+    private int Views;
 
 
 
-    /**
-     * @return
-     */
     public String getName() {
-        // TODO implement here
-        return "";
+        return Name;
     }
 
-    /**
-     * @param value
-     */
+
     public void setName(String value) {
-        // TODO implement here
+    	this.Name=value;
     }
 
-    /**
-     * @return
-     */
+
     public String getID() {
-        // TODO implement here
-        return "";
+        return ID;
     }
 
-    /**
-     * @param value
-     */
     public void setID(String value) {
-        // TODO implement here
+    	this.ID=value;
     }
 
-    /**
-     * @return
-     */
     public float getPrice() {
-        // TODO implement here
-        return 0.0f;
+        return Price;
     }
 
-    /**
-     * @param value
-     */
+
     public void setPrice(float value) {
-        // TODO implement here
+    	Price=value;
     }
 
     /**
      * @return
      */
     public int getQuantity() {
-        // TODO implement here
-        return 0;
+        return Quantity;
     }
 
-    /**
-     * @param value
-     */
+
     public void setQuantity(int value) {
-        // TODO implement here
+    	Quantity=value;
     }
 
-    /**
-     * @return
-     */
+
     public String getCategory() {
-        // TODO implement here
-        return "";
+        return Category;
     }
 
-    /**
-     * @param value
-     */
     public void setCategory(String value) {
-        // TODO implement here
+    	this.Category=value;
     }
 
-    /**
-     * @return
-     */
+
     public String getBrand() {
-        // TODO implement here
-        return "";
+        return Brand;
     }
 
-    /**
-     * @param value
-     */
     public void setBrand(String value) {
-        // TODO implement here
+    	this.Brand=value;
     }
 
-    /**
-     * @return
-     */
+
     public Store getStore() {
-        // TODO implement here
-        return null;
+        return store;
     }
 
-    /**
-     * @param value
-     */
+
     public void setStore(Store value) {
-        // TODO implement here
+    	this.store=value;
     }
+
+
+	public int getViews() {
+		return Views;
+	}
+
+
+	public void setViews(int views) {
+		Views = views;
+	}
 
 }
