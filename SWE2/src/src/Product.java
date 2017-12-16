@@ -18,9 +18,8 @@ public class Product implements Serializable{
     	Category=category;
         Brand=brand;
     }
-    public Product(String id,String name,float price,int quantity,String category,String brand,Store store){
+    public Product(String name,float price,int quantity,String category,String brand,Store store){
     	Name=name;
-        ID=id;
         Price=price;
         Quantity=quantity;
         Category=category;
@@ -35,7 +34,7 @@ public class Product implements Serializable{
     private String Category;
     private String Brand;
     private Store store;
-    private int Views;
+    private int Views=0;
 
 
 
@@ -110,7 +109,6 @@ public class Product implements Serializable{
 	public int getViews() {
 		return Views;
 	}
-
 
 	public void setViews(int views) {
 		Views = views;

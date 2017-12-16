@@ -19,8 +19,8 @@ public class StoreUIController {
 		// TODO Auto-generated constructor stub
     	CurrentUser=user;
 	}
-    private StoreOwner CurrentUser= new StoreOwner();
-    private Store CurrentStore= new Store();
+    private StoreOwner CurrentUser;
+    private Store CurrentStore;
     private IDataBase database= new DataBase();
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -29,7 +29,7 @@ public class StoreUIController {
     	
     	CurrentUser.AddNewStore(Sname);
     	database.InsertNewStore(new Store(Sname));
-
+    	
 	}
     public List<String> getBrandsNames(){
     	return database.RetreiveBrandsNames();
@@ -39,9 +39,8 @@ public class StoreUIController {
     }
     
     public Store searchForStore(String sName){
-    	return  searchForStore(sName);
+    	return  CurrentUser.searchForStore(sName);
     }   
-    
     
     public void setCurrentStore(String currS){
     	CurrentStore= searchForStore(currS);
@@ -50,9 +49,8 @@ public class StoreUIController {
         // TODO implement here
         return CurrentStore;
     }
-    public void AddProduct(String ID,String ProductName, float price, int quantity, String category, String brand) {
+    public void AddProduct(String ProductName, float price, int quantity, String category, String brand) {
     	Product newP= new Product();
-		newP.setID(ID);
 		newP.setName(ProductName);
 		newP.setPrice(price);
 		newP.setQuantity(quantity);
@@ -62,9 +60,6 @@ public class StoreUIController {
 		database.InsertProductToStore(CurrentStore, newP);
     }
 
-    /**
-     * @return
-     */
     public StoreOwner getCurrentUser() {
         // TODO implement here
         return CurrentUser;

@@ -1,8 +1,6 @@
 package src;
 
-import java.awt.Color;
 import java.awt.EventQueue;
-import java.awt.Frame;
 import java.awt.Window;
 
 import javax.swing.JFrame;
@@ -21,19 +19,12 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import javax.swing.JCheckBox;
-import javax.swing.JPanel;
-import javax.swing.border.TitledBorder;
-import javax.swing.UIManager;
-import javax.swing.JSeparator;
 
 public class StoreUI {
 	private JFrame frame;
-	private	StoreUIController sotreController = new StoreUIController();
-	private HomePage homeGUI= new HomePage();
-	private JTextField textField;
-	/**
-	 * @wbp.parser.constructor
-	 */
+	private JTextField txtGetstorename;
+	private	StoreUIController sotreController;
+	private HomePage homeGUI;
 	StoreUI(StoreOwner user,HomePage home){
 		sotreController= new StoreUIController(user);
 		homeGUI= home;
@@ -42,7 +33,23 @@ public class StoreUI {
 	public StoreUIController getStoreUIController(){
 		return sotreController;
 	}
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+		
+			public void run() {
+				try {
+					StoreUI window = new StoreUI();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 	
+	/**
+	 * Create the application.
+	 */
 	public StoreUI() {
 		initialize();
 	}
@@ -52,82 +59,101 @@ public class StoreUI {
 	}
 	 private void initialize() {
 		frame = new JFrame();
-		frame.getContentPane().setBackground(Color.LIGHT_GRAY);
-		frame.setSize(1650, 1080);
-		frame.setTitle("Register");
-		frame.setExtendedState(Frame.MAXIMIZED_BOTH);
-		frame.setBounds(100, 100, 888, 493);
+		frame.setBounds(100, 100, 520, 404);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
+		JButton btnAddSotre = new JButton("Add sotre");
+		btnAddSotre.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				sotreController.addNewStore(txtGetstorename.getText());
+				frame.setVisible(false);
+				initialize();
+			}
+		});
 		
-		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Store", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel.setBounds(245, 121, 844, 529);
-		frame.getContentPane().add(panel);
-		panel.setLayout(null);
+		btnAddSotre.setBounds(32, 96, 272, 23);
+		frame.getContentPane().add(btnAddSotre);
+		JComboBox<String> StoreList = new JComboBox<String>();
+		for(Store s:sotreController.getCurrentUser().getOwnedStores() ){
+			StoreList.addItem(s.getStoreName());
+		}
+		StoreList.setBounds(324, 144, 143, 22);
+		frame.getContentPane().add(StoreList);
+		JButton btnAddProduct = new JButton("Add product to store");
+		btnAddProduct.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				sotreController.setCurrentStore(StoreList.getSelectedItem().toString());
+				frame.setVisible(false);
+				ProductForm pForm = new  ProductForm(StoreUI.this,true);
+				}
+		});
+		btnAddProduct.setBounds(32, 143, 272, 23);
+		frame.getContentPane().add(btnAddProduct);
 		
-		JButton button = new JButton("Sugest product");
-		button.setBounds(406, 21, 141, 23);
-		panel.add(button);
+		JButton btnSugestProduct = new JButton("Sugest product");
+		btnSugestProduct.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.setVisible(false);
+				ProductForm pForm = new  ProductForm(StoreUI.this,false);
+				
+			}
+		});
+		btnSugestProduct.setBounds(32, 291, 272, 23);
+		frame.getContentPane().add(btnSugestProduct);
 		
-		JButton button_1 = new JButton("Get the most viewed product ");
-		button_1.setBounds(121, 310, 220, 23);
-		panel.add(button_1);
+		JButton btnOExploreNumber = new JButton("Get number of products views");
+		btnOExploreNumber.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				sotreController.setCurrentStore(StoreList.getSelectedItem().toString());
+				frame.setVisible(false);
+				ShowPViews pViews= new ShowPViews(StoreUI.this);
+				
+			}
+		});
+		btnOExploreNumber.setBounds(32, 188, 272, 23);
+		frame.getContentPane().add(btnOExploreNumber);
 		
-		JComboBox<String> comboMostViewed = new JComboBox<String>();
-		comboMostViewed.setBounds(361, 311, 143, 20);
-		panel.add(comboMostViewed);
+		JButton btnOGetThe = new JButton("Get the most viewed product ");
+		btnOGetThe.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				sotreController.setCurrentStore(StoreList.getSelectedItem().toString());
+	
+				JOptionPane.showMessageDialog(null, sotreController.getCurrentStore().getMostViewedP().getName()
+						+" -> " +sotreController.getCurrentStore().getMostViewedP().getViews());
+			}
+		});
+		btnOGetThe.setBounds(32, 239, 272, 23);
+		frame.getContentPane().add(btnOGetThe);
+		
+		txtGetstorename = new JTextField();		
+		txtGetstorename.setBounds(324, 97, 143, 20);
+		frame.getContentPane().add(txtGetstorename);
+		txtGetstorename.setColumns(10);
 		
 		JComboBox<String> comboNumViews = new JComboBox<String>();
-		comboNumViews.setBounds(361, 260, 143, 20);
-		panel.add(comboNumViews);
-		
-		JButton button_2 = new JButton("Get number of products views");
-		button_2.setBounds(121, 259, 220, 23);
-		panel.add(button_2);
-		
-		JButton button_3 = new JButton("Add product to store");
-		button_3.setBounds(406, 124, 141, 23);
-		panel.add(button_3);
-		
-		JComboBox<String> StoreList = new JComboBox<String>();
-		StoreList.setBounds(404, 92, 143, 22);
-		panel.add(StoreList);
-		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(20, 93, 186, 20);
-		panel.add(textField);
-		
-		JButton button_4 = new JButton("Add sotre");
-		button_4.setBounds(20, 124, 186, 23);
-		panel.add(button_4);
-		
-		JButton button_5 = new JButton("Home Page");
-		button_5.setBounds(87, 21, 141, 23);
-		panel.add(button_5);
-		
-		JSeparator separator = new JSeparator();
-		separator.setBounds(10, 55, 579, 2);
-		panel.add(separator);
-		
-		JLabel lblStoreName = new JLabel("Store Name :");
-		lblStoreName.setBounds(20, 68, 111, 14);
-		panel.add(lblStoreName);
-		for(int i=0;i<sotreController.getCurrentUser().getStoresName().size();i++){
-			StoreList.addItem(sotreController.getCurrentUser().getStoresName().get(i));
-		
-		}
-		for(int i=0;i<sotreController.getCurrentUser().getStoresName().size();i++){
-			comboNumViews.addItem(sotreController.getCurrentUser().getStoresName().get(i));
-		
+		comboNumViews.setBounds(324, 189, 143, 20);
+		frame.getContentPane().add(comboNumViews);
+		for(Store s:sotreController.getCurrentUser().getOwnedStores() ){
+			comboNumViews.addItem(s.getStoreName());
 		}
 		
-		
-		for(int i=0;i<sotreController.getCurrentUser().getStoresName().size();i++){
-			comboMostViewed.addItem(sotreController.getCurrentUser().getStoresName().get(i));
-		
+		JComboBox<String> comboMostViewed = new JComboBox<String>();
+		comboMostViewed.setBounds(324, 240, 143, 20);
+		frame.getContentPane().add(comboMostViewed);
+		for(Store s:sotreController.getCurrentUser().getOwnedStores() ){
+			comboMostViewed.addItem(s.getStoreName());
 		}
+		
+		JButton btnHomePage = new JButton("Home Page");
+		btnHomePage.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				homeGUI.getFrmHomepage().setVisible(true);
+				frame.setVisible(false);
+			}
+		});
+		btnHomePage.setBounds(32, 35, 89, 23);
+		frame.getContentPane().add(btnHomePage);
+		
 	}
 }

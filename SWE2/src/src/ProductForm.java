@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollBar;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
@@ -15,11 +16,10 @@ import java.awt.event.ActionEvent;
 public class ProductForm {
 
 	private JFrame frame;
-	private JTextField txtID;
 	private JTextField txtEnterName;
 	private JTextField txtPrice;
 	private JTextField txtQuantity;
-	StoreUI storeGUI= new StoreUI();
+	StoreUI storeGUI;
 	ProductForm(StoreUI storeUI, boolean addOrSuggest){
 		this.storeGUI= storeUI;
 		initialize(addOrSuggest);
@@ -27,7 +27,7 @@ public class ProductForm {
 	/**
 	 * Launch the application.
 	 */
-	/*public static void main(String[] args) {
+	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -37,29 +37,24 @@ public class ProductForm {
 				}
 			}
 		});
-	}*/
+	}
 	/**
 	 * Create the application.
 	 */
 	public ProductForm() {
-		initialize(false);
+		initialize(true);
 	}
 
 	
 	private void initialize(boolean addOrSuggest) {
 		frame = new JFrame();
-		frame.setVisible(true);
 		frame.setBounds(100, 100, 454, 388);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
+		frame.setVisible(true);
 		JLabel lblProductName = new JLabel("Name :");
 		lblProductName.setBounds(36, 68, 74, 14);
 		frame.getContentPane().add(lblProductName);
-		
-		JLabel lblProductId = new JLabel(" ID :");
-		lblProductId.setBounds(36, 34, 46, 14);
-		frame.getContentPane().add(lblProductId);
 		
 		JLabel lblPrice = new JLabel("Price :");
 		lblPrice.setBounds(36, 170, 46, 14);
@@ -77,14 +72,7 @@ public class ProductForm {
 		lblQuantity.setBounds(36, 198, 46, 14);
 		frame.getContentPane().add(lblQuantity);
 		
-		txtID = new JTextField();
-		txtID.setText("enter ID");
-		txtID.setBounds(120, 27, 209, 20);
-		frame.getContentPane().add(txtID);
-		txtID.setColumns(10);
-		
 		txtEnterName = new JTextField();
-		txtEnterName.setText("enter Name");
 		txtEnterName.setBounds(120, 61, 209, 20);
 		frame.getContentPane().add(txtEnterName);
 		txtEnterName.setColumns(10);
@@ -116,10 +104,10 @@ public class ProductForm {
 		JButton btnAddProduct = new JButton("Add product");
 		btnAddProduct.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				storeGUI.getStoreUIController().AddProduct(txtID.getText(),txtEnterName.getText(), Float.parseFloat(txtPrice.getText())
+				
+				storeGUI.getStoreUIController().AddProduct(txtEnterName.getText(), Float.parseFloat(txtPrice.getText())
 						, Integer.parseInt(txtQuantity.getText()), Categories.getSelectedItem().toString(), Brands.getSelectedItem().toString());
-			
-				frame.setVisible(false);
+				JOptionPane.showMessageDialog(null, "succsesfully added product ..");
 			}
 		});
 		btnAddProduct.setBounds(160, 261, 123, 23);
@@ -129,6 +117,8 @@ public class ProductForm {
 		btnSugestProduct.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				storeGUI.getStoreUIController().SuggestProduct(txtEnterName.getText(), Categories.getSelectedItem().toString(), Brands.getSelectedItem().toString());		
+				JOptionPane.showMessageDialog(null, "succsesfully suggested product ..");
+
 			}
 		});
 		btnSugestProduct.setBounds(160, 226, 111, 23);
@@ -141,17 +131,13 @@ public class ProductForm {
 				frame.setVisible(false);
 			}
 		});
-		btnStorePage.setBounds(21, 315, 89, 23);
+		btnStorePage.setBounds(21, 315, 123, 23);
 		frame.getContentPane().add(btnStorePage);
 		btnAddProduct.setVisible(addOrSuggest);
 		txtPrice.setVisible(addOrSuggest);
 		txtQuantity.setVisible(addOrSuggest);
-		txtID.setVisible(addOrSuggest);
-		lblProductId.setVisible(addOrSuggest);
 		lblQuantity.setVisible(addOrSuggest);
 		lblPrice.setVisible(addOrSuggest);
-		btnSugestProduct.setVisible(!addOrSuggest);
-		
-	
+		btnSugestProduct.setVisible(!addOrSuggest);	
 	}
 }
