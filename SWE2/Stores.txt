@@ -5,3 +5,8 @@ ldska_null
 asfas_null
 store1_null
 store1_null
+storeBs_null
+s1_null
+s1_null
+s1_null
+s2_null

@@ -23,8 +23,8 @@ import javax.swing.JCheckBox;
 public class StoreUI {
 	private JFrame frame;
 	private JTextField txtGetstorename;
-	private	StoreUIController sotreController = new StoreUIController();
-	private HomePage homeGUI= new HomePage();
+	private	StoreUIController sotreController;
+	private HomePage homeGUI;
 	StoreUI(StoreOwner user,HomePage home){
 		sotreController= new StoreUIController(user);
 		homeGUI= home;
@@ -67,6 +67,7 @@ public class StoreUI {
 		btnAddSotre.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				sotreController.addNewStore(txtGetstorename.getText());
+				frame.setVisible(false);
 				initialize();
 			}
 		});
@@ -74,9 +75,8 @@ public class StoreUI {
 		btnAddSotre.setBounds(32, 96, 272, 23);
 		frame.getContentPane().add(btnAddSotre);
 		JComboBox<String> StoreList = new JComboBox<String>();
-		for(int i=0;i<sotreController.getCurrentUser().getStoresName().size();i++){
-			StoreList.addItem(sotreController.getCurrentUser().getStoresName().get(i));
-		
+		for(Store s:sotreController.getCurrentUser().getOwnedStores() ){
+			StoreList.addItem(s.getStoreName());
 		}
 		StoreList.setBounds(324, 144, 143, 22);
 		frame.getContentPane().add(StoreList);
@@ -84,8 +84,8 @@ public class StoreUI {
 		btnAddProduct.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				sotreController.setCurrentStore(StoreList.getSelectedItem().toString());
-				ProductForm pForm = new  ProductForm(StoreUI.this,true);
 				frame.setVisible(false);
+				ProductForm pForm = new  ProductForm(StoreUI.this,true);
 				}
 		});
 		btnAddProduct.setBounds(32, 143, 272, 23);
@@ -94,8 +94,9 @@ public class StoreUI {
 		JButton btnSugestProduct = new JButton("Sugest product");
 		btnSugestProduct.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ProductForm pForm = new  ProductForm(StoreUI.this,true);
 				frame.setVisible(false);
+				ProductForm pForm = new  ProductForm(StoreUI.this,false);
+				
 			}
 		});
 		btnSugestProduct.setBounds(32, 291, 272, 23);
@@ -105,8 +106,9 @@ public class StoreUI {
 		btnOExploreNumber.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				sotreController.setCurrentStore(StoreList.getSelectedItem().toString());
-				ShowPViews pViews= new ShowPViews(StoreUI.this);
 				frame.setVisible(false);
+				ShowPViews pViews= new ShowPViews(StoreUI.this);
+				
 			}
 		});
 		btnOExploreNumber.setBounds(32, 188, 272, 23);
@@ -116,7 +118,7 @@ public class StoreUI {
 		btnOGetThe.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				sotreController.setCurrentStore(StoreList.getSelectedItem().toString());
-				
+	
 				JOptionPane.showMessageDialog(null, sotreController.getCurrentStore().getMostViewedP().getName()
 						+" -> " +sotreController.getCurrentStore().getMostViewedP().getViews());
 			}
@@ -132,13 +134,16 @@ public class StoreUI {
 		JComboBox<String> comboNumViews = new JComboBox<String>();
 		comboNumViews.setBounds(324, 189, 143, 20);
 		frame.getContentPane().add(comboNumViews);
-		for(int i=0;i<sotreController.getCurrentUser().getStoresName().size();i++){
-			comboNumViews.addItem(sotreController.getCurrentUser().getStoresName().get(i));
-		
+		for(Store s:sotreController.getCurrentUser().getOwnedStores() ){
+			comboNumViews.addItem(s.getStoreName());
 		}
+		
 		JComboBox<String> comboMostViewed = new JComboBox<String>();
 		comboMostViewed.setBounds(324, 240, 143, 20);
 		frame.getContentPane().add(comboMostViewed);
+		for(Store s:sotreController.getCurrentUser().getOwnedStores() ){
+			comboMostViewed.addItem(s.getStoreName());
+		}
 		
 		JButton btnHomePage = new JButton("Home Page");
 		btnHomePage.addActionListener(new ActionListener() {
@@ -149,9 +154,6 @@ public class StoreUI {
 		});
 		btnHomePage.setBounds(32, 35, 89, 23);
 		frame.getContentPane().add(btnHomePage);
-		for(int i=0;i<sotreController.getCurrentUser().getStoresName().size();i++){
-			comboMostViewed.addItem(sotreController.getCurrentUser().getStoresName().get(i));
 		
-		}
 	}
 }

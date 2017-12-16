@@ -12,14 +12,21 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JScrollPane;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ShowPViews {
 
 	private JFrame frame;
 	StoreUI storeGui;
 	private JTable table;
+	private JButton btnStorePage;
 	/**
 	 * Launch the application.
+	 */
+	/**
+	 * @wbp.parser.constructor
 	 */
 	ShowPViews(StoreUI Sgui){
 		storeGui =  Sgui;
@@ -53,22 +60,34 @@ public class ShowPViews {
 		frame.setBounds(100, 100, 425, 399);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
+		frame.setVisible(true);
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(50, 11, 301, 338);
+		scrollPane.setBounds(52, 42, 301, 338);
 		frame.getContentPane().add(scrollPane);
 		Object[] columnsnames = {  "Product Name","#Views"};
-		table = new JTable(new DefaultTableModel(new Object[][] {}, columnsnames));
-		scrollPane.setViewportView(table);
+		table = new JTable();
 		scrollPane.setViewportView(table);
 		
 		DefaultTableModel model = new DefaultTableModel() ;
+		table.setModel(model);
+		model.setColumnIdentifiers(columnsnames);
+
 		List<Product> storeProducts= storeGui.getStoreUIController().getCurrentStore().getStoreProducts();
-		for(int i=0;i<storeProducts.size();i++){
-			Object[] row={storeProducts.get(i).getName(),storeProducts.get(i).getViews()};
+		for(Product p:storeProducts){
+			Object[] row={p.getName(),p.getViews()};
 			model.addRow(row);
 		}
-		table.setModel(model);
+		
+
+		btnStorePage = new JButton("Store page");
+		btnStorePage.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.setVisible(false);
+				storeGui.getFrame().setVisible(true);
+			}
+		});
+		btnStorePage.setBounds(21, 11, 89, 23);
+		frame.getContentPane().add(btnStorePage);
 		model.setColumnIdentifiers(columnsnames);
 	
 		

@@ -19,8 +19,8 @@ public class StoreUIController {
 		// TODO Auto-generated constructor stub
     	CurrentUser=user;
 	}
-    private StoreOwner CurrentUser= new StoreOwner();
-    private Store CurrentStore= new Store();
+    private StoreOwner CurrentUser;
+    private Store CurrentStore;
     private IDataBase database= new DataBase();
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -49,9 +49,8 @@ public class StoreUIController {
         // TODO implement here
         return CurrentStore;
     }
-    public void AddProduct(String ID,String ProductName, float price, int quantity, String category, String brand) {
+    public void AddProduct(String ProductName, float price, int quantity, String category, String brand) {
     	Product newP= new Product();
-		newP.setID(ID);
 		newP.setName(ProductName);
 		newP.setPrice(price);
 		newP.setQuantity(quantity);
