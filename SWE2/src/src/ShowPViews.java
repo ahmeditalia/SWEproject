@@ -2,6 +2,7 @@ package src;
 
 import java.awt.EventQueue;
 
+import javax.management.modelmbean.ModelMBean;
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
 import java.awt.GridBagLayout;
@@ -24,7 +25,7 @@ public class ShowPViews {
 		storeGui =  Sgui;
 		initialize();
 	}
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -35,7 +36,7 @@ public class ShowPViews {
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Create the application.
@@ -49,19 +50,24 @@ public class ShowPViews {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 355);
+		frame.setBounds(100, 100, 425, 399);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(69, 23, 282, 282);
+		scrollPane.setBounds(50, 11, 301, 338);
 		frame.getContentPane().add(scrollPane);
 		Object[] columnsnames = {  "Product Name","#Views"};
 		table = new JTable(new DefaultTableModel(new Object[][] {}, columnsnames));
 		scrollPane.setViewportView(table);
 		scrollPane.setViewportView(table);
-		List<String>s= new ArrayList<>();
+		
 		DefaultTableModel model = new DefaultTableModel() ;
+		List<Product> storeProducts= storeGui.getStoreUIController().getCurrentStore().getStoreProducts();
+		for(int i=0;i<storeProducts.size();i++){
+			Object[] row={storeProducts.get(i).getName(),storeProducts.get(i).getViews()};
+			model.addRow(row);
+		}
 		table.setModel(model);
 		model.setColumnIdentifiers(columnsnames);
 	
