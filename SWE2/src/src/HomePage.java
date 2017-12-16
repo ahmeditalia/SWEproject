@@ -233,7 +233,8 @@ public class HomePage {
 		OpenStore.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (homepagecontroller.getUser() instanceof StoreOwner) {
-					new StoreUI((StoreOwner) homepagecontroller.getUser());
+					new StoreUI((StoreOwner) homepagecontroller.getUser(),HomePage.this);
+					frmHomepage.setVisible(false);
 				}
 			}
 		});
