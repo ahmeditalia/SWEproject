@@ -27,7 +27,7 @@ public class ProductForm {
 	/**
 	 * Launch the application.
 	 */
-	/*public static void main(String[] args) {
+	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -37,22 +37,21 @@ public class ProductForm {
 				}
 			}
 		});
-	}*/
+	}
 	/**
 	 * Create the application.
 	 */
 	public ProductForm() {
-		initialize(false);
+		initialize(true);
 	}
 
 	
 	private void initialize(boolean addOrSuggest) {
 		frame = new JFrame();
-		frame.setVisible(true);
 		frame.setBounds(100, 100, 454, 388);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
+		frame.setVisible(true);
 		JLabel lblProductName = new JLabel("Name :");
 		lblProductName.setBounds(36, 68, 74, 14);
 		frame.getContentPane().add(lblProductName);
@@ -116,6 +115,7 @@ public class ProductForm {
 		JButton btnAddProduct = new JButton("Add product");
 		btnAddProduct.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				storeGUI.getStoreUIController().AddProduct(txtID.getText(),txtEnterName.getText(), Float.parseFloat(txtPrice.getText())
 						, Integer.parseInt(txtQuantity.getText()), Categories.getSelectedItem().toString(), Brands.getSelectedItem().toString());
 			
@@ -150,8 +150,6 @@ public class ProductForm {
 		lblProductId.setVisible(addOrSuggest);
 		lblQuantity.setVisible(addOrSuggest);
 		lblPrice.setVisible(addOrSuggest);
-		btnSugestProduct.setVisible(!addOrSuggest);
-		
-	
+		btnSugestProduct.setVisible(!addOrSuggest);	
 	}
 }

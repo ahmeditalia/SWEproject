@@ -39,7 +39,7 @@ public class StoreUIController {
     }
     
     public Store searchForStore(String sName){
-    	return  searchForStore(sName);
+    	return  CurrentUser.searchForStore(sName);
     }   
     
     
@@ -62,9 +62,7 @@ public class StoreUIController {
 		database.InsertProductToStore(CurrentStore, newP);
     }
 
-    /**
-     * @return
-     */
+   
     public StoreOwner getCurrentUser() {
         // TODO implement here
         return CurrentUser;

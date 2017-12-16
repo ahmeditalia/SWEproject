@@ -17,11 +17,6 @@ public class Adminform {
 	}
 	
 	
-	/**
-	 * Launch the application.
-	 */
-	
-	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -54,7 +49,9 @@ public class Adminform {
 		JButton btnAddProductTo = new JButton("Add product to the system ");
 		btnAddProductTo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//ProductForm pGui= new ProductForm(Adminform.this);
 			}
+			
 		});
 		btnAddProductTo.setBounds(120, 44, 224, 23);
 		frame.getContentPane().add(btnAddProductTo);
