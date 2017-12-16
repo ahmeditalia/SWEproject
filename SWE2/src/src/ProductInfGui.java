@@ -45,7 +45,7 @@ public class ProductInfGui {
 		frame.setBounds(100, 100, 487, 444);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
+		frame.setVisible(true);
 		JLabel lblProdcutName = new JLabel("Prodcut Name:");
 		lblProdcutName.setBounds(53, 84, 111, 14);
 		frame.getContentPane().add(lblProdcutName);
