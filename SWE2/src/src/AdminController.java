@@ -22,10 +22,6 @@ public class AdminController {
     public void AddProductToSystem(String productName, String category, String brand) {
         // TODO implement here
     }
-
-    /**
-     * @return
-     */
     public List<Product> getSuggestedProducts() {
         // TODO implement here
         return null;

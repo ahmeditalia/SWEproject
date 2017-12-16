@@ -27,7 +27,7 @@ public class ProductForm {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -37,7 +37,7 @@ public class ProductForm {
 				}
 			}
 		});
-	}
+	}*/
 	/**
 	 * Create the application.
 	 */
@@ -45,9 +45,7 @@ public class ProductForm {
 		initialize(false);
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
+	
 	private void initialize(boolean addOrSuggest) {
 		frame = new JFrame();
 		frame.setVisible(true);
@@ -130,13 +128,21 @@ public class ProductForm {
 		JButton btnSugestProduct = new JButton("Suggest Product");
 		btnSugestProduct.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				storeGUI.getStoreUIController().SuggestProduct(txtEnterName.getText(), Categories.getSelectedItem().toString(), Brands.getSelectedItem().toString());
-			
-				
+				storeGUI.getStoreUIController().SuggestProduct(txtEnterName.getText(), Categories.getSelectedItem().toString(), Brands.getSelectedItem().toString());		
 			}
 		});
 		btnSugestProduct.setBounds(160, 226, 111, 23);
 		frame.getContentPane().add(btnSugestProduct);
+		
+		JButton btnStorePage = new JButton("Store Page");
+		btnStorePage.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				storeGUI.getFrame().setVisible(true);
+				frame.setVisible(false);
+			}
+		});
+		btnStorePage.setBounds(21, 315, 89, 23);
+		frame.getContentPane().add(btnStorePage);
 		btnAddProduct.setVisible(addOrSuggest);
 		txtPrice.setVisible(addOrSuggest);
 		txtQuantity.setVisible(addOrSuggest);

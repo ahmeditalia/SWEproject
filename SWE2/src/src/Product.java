@@ -1,14 +1,17 @@
 package src;
 
+import java.io.Serializable;
+
 /**
  * 
  */
-public class Product {
+public class Product implements Serializable{
 
     /**
      * Default constructor
      */
-    public Product() {
+	
+	public Product() {
     }
     public Product(String name,String category,String brand) {
     	Name=name;
