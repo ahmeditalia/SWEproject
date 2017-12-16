@@ -181,6 +181,7 @@ public class HomePage {
 		updatetable(model);
 		table.setModel(model);
 		model.setColumnIdentifiers(columnsnames);
+		model.addRow(new Object[] {"sdsa","sdsa","asd","asds","sdsa","sdsa","asd","asds"});
 		JSeparator separator_3 = new JSeparator();
 		separator_3.setBounds(10, 75, 1342, 2);
 		frmHomepage.getContentPane().add(separator_3);
