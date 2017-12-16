@@ -251,7 +251,7 @@ public class HomePage extends JFrame {
 		login.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String username = user_name.getText();
-				String pass = password.getPassword().toString();
+				String pass=String.valueOf(password.getPassword());
 				homepagecontroller.LogIn(username, pass);
 				if (homepagecontroller.getUser() != null) {
 					login.setVisible(false);

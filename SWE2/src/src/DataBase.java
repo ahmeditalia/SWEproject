@@ -72,21 +72,21 @@ public class DataBase implements IDataBase {
 		}
 		for (String user : users) {
 			String[] arr = user.split("_");
-			if (username == arr[0] && password == arr[1]) {
+			if (username.equals(arr[0]) && password.equals(arr[1])) {
 				try {
 					ObjectInputStream object = new ObjectInputStream(
 							new FileInputStream(username + "_" + password + ".txt"));
-					if (arr[3] == "1") {
+					if (arr[2].equals("1")) {
 						NormalUser normalUser = new NormalUser();
 						normalUser = (NormalUser) object.readObject();
 						object.close();
 						return normalUser;
-					} else if (arr[3] == "2") {
+					} else if (arr[2].equals("2")) {
 						StoreOwner storeOwner = new StoreOwner();
 						storeOwner = (StoreOwner) object.readObject();
 						object.close();
 						return storeOwner;
-					} else if (arr[3] == "3") {
+					} else if (arr[2].equals("3")) {
 						Administrator administrator = new Administrator();
 						administrator = (Administrator) object.readObject();
 						object.close();

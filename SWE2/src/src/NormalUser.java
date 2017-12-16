@@ -1,6 +1,13 @@
 package src;
-public class NormalUser extends User {
-    private Cart cart;
+
+import java.io.Serializable;
+
+public class NormalUser extends User implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Cart cart;
     NormalUser(){
         cart=new Cart(this);
     }

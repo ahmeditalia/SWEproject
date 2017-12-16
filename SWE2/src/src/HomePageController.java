@@ -41,16 +41,16 @@ public class HomePageController {
 		IDataBase IDataBase1 = new DataBase();
 		if(accountType==1)
 		{
-			NormalUser user=new NormalUser();
+			NormalUser user=new NormalUser(username,password,email,phoneNumber,gender,address,accountType);
+			IDataBase1.InsertUser(user);
 		}
-		User userTemb = new User();
-		userTemb.setUsername(username);
-		userTemb.setPassword(password);
-		userTemb.setAddress(address);
-		userTemb.setPhoneNumber(phoneNumber);
-		userTemb.setGender(gender);
-		userTemb.setType((byte) accountType);
-		IDataBase1.InsertUser(userTemb);
+		else if(accountType==2)
+		{
+			
+		}
+		else if(accountType==3){
+			
+		}
 	}
 
 	public User getUser() {

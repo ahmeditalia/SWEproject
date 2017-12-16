@@ -1,13 +1,16 @@
 package src;
 
+import java.io.Serializable;
+
+public class User implements Serializable{
 
 
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
-
-public class User {
-
-
-    public User() {
+	public User() {
     }
     
     public User(String Username,String Password,String E_mail,String PhoneNumber,String Gender,String Address,int Type){
