@@ -7,30 +7,15 @@ import java.util.*;
  */
 public class AdminController {
 
+	private IDataBase iDataBase = new DataBase();
 	public AdminController() {
 	}
-
 	public void AddProductToSystem(String productName, String category, String brand) {
 		Product newP = new Product(productName, category, brand);
-
-<<<<<<< HEAD
+		iDataBase.InsertProductToSystem(newP);
 	}
 
-	/**
-	 * @return
-	 */
 	public List<Product> getSuggestedProducts() {
-		// TODO implement here
-		return null;
+		return iDataBase.RetreiveSysProducts();
 	}
-
-    public void AddProductToSystem(String productName, String category, String brand) {
-        // TODO implement here
-    }
-    public List<Product> getSuggestedProducts() {
-        // TODO implement here
-        return null;
-    }
->>>>>>> c439e86e104a5a72cba153e7e197d2c9fcf32a38
-
 }

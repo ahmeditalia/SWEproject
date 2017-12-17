@@ -223,7 +223,6 @@ public class DataBase implements IDataBase {
 		}
 		return list;
 	}
-
 	public void InsertProductToSystem(Product product) {
 		try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter("SystemProducts.txt", true));
