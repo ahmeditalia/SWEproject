@@ -12,6 +12,7 @@ import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.Color;
 
@@ -20,7 +21,6 @@ public class Adminform {
 	private JFrame frame;
 	private AdminController adminController;
 	private HomePage homePage;
-	private JTextField Category;
 	private JTextField Brand;
 	private JTextField product;
 	List<Product> retreiveCategoryProducts;
@@ -68,29 +68,27 @@ public class Adminform {
 		frame.getContentPane().add(product);
 		product.setColumns(10);
 
-		Category = new JTextField();
-		Category.setBounds(179, 282, 131, 20);
-		frame.getContentPane().add(Category);
-		Category.setColumns(10);
-
 		Brand = new JTextField();
 		Brand.setBounds(179, 314, 131, 20);
 		frame.getContentPane().add(Brand);
 		Brand.setColumns(10);
 
-		JComboBox<String> comboBox = new JComboBox<String>();
-		comboBox.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
+		JComboBox<String> Category = new JComboBox<String>();
+		Category.setBounds(179, 282, 131, 21);
+		frame.getContentPane().add(Category);
+		Category.addItem("none");
+		for(String category:adminController.getCategories())
+		{
+			Category.addItem(category);
+		}
 		
+		JComboBox<String> comboBox = new JComboBox<String>();
 		comboBox.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				if (comboBox.getSelectedItem()!="Suggested Products")
 				{
 					product.setText(retreiveCategoryProducts.get(comboBox.getSelectedIndex()-1).getName());
 					product.setEditable(false);
-					Category.setText(retreiveCategoryProducts.get(comboBox.getSelectedIndex()-1).getCategory());
 					Brand.setText(retreiveCategoryProducts.get(comboBox.getSelectedIndex()-1).getBrand());
 				}
 			}
@@ -99,15 +97,20 @@ public class Adminform {
 		JButton add = new JButton("Add");
 		add.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				adminController.AddProductToSystem(product.getText(), Category.getText(), Brand.getText());
+				adminController.AddProductToSystem(product.getText(), String.valueOf(Category.getSelectedItem()), Brand.getText());
 				product.setText("");
-				Category.setText("");
+				Category.setSelectedIndex(0);
 				Brand.setText("");
 				if(comboBox.getSelectedItem()!="Suggested Products")
 				{
 					retreiveCategoryProducts.remove(comboBox.getSelectedIndex()-1);
 					comboBox.removeItemAt(comboBox.getSelectedIndex());
 					product.setEditable(true);
+					retreiveCategoryProducts = adminController.getSuggestedProducts();
+					comboBox.addItem("Suggested Products");
+					for (int i = 0; i < retreiveCategoryProducts.size(); i++) {
+						comboBox.addItem(retreiveCategoryProducts.get(i).getName());
+					}
 					comboBox.setSelectedIndex(0);
 				}
 					
@@ -159,7 +162,7 @@ public class Adminform {
 		JButton btnAddVoucherCard = new JButton("Add Voucher Card Number");
 		btnAddVoucherCard.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				adminController.voucherGenerator();
+				JOptionPane.showMessageDialog(null, adminController.voucherGenerator());
 			}
 		});
 		btnAddVoucherCard.setBounds(442, 162, 168, 23);
@@ -176,10 +179,11 @@ public class Adminform {
 		frame.getContentPane().add(hompage);
 		
 		JLabel AdminLabs = new JLabel("");
-		AdminLabs.setIcon(new ImageIcon("F:\\y3_1\\SW\\proj\\implementation\\SWEproject\\SWE2\\images\\adminlabs.png"));
+		AdminLabs.setIcon(new ImageIcon("images\\adminlabs.png"));
 		AdminLabs.setBounds(141, 11, 489, 114);
 		frame.getContentPane().add(AdminLabs);
-		//ImageIcon img1= new ImageIcon(location)
+		
+
 
 	}
 }
