@@ -36,7 +36,7 @@ public class HomePage {
 	}
 
 	private void updateproducts(String categoryname, String storename) {
-		viewedProducts = homepagecontroller.getProducts(categoryname, storename);
+		viewedProducts = new ArrayList<>(homepagecontroller.getAllProducts());
 	}
 
 	public static void main(String[] args) {
@@ -148,15 +148,15 @@ public class HomePage {
 		Object[] columnsnames = { "#", "Product Name", "Price", "Quantity", "Category", "Brand", "Store", "Select" };
 		JSeparator separator_2 = new JSeparator();
 		separator_2.setOrientation(SwingConstants.VERTICAL);
-		separator_2.setBounds(231, 0, 2, 77);
+		separator_2.setBounds(231, 0, 2, 704);
 		frmHomepage.getContentPane().add(separator_2);
 		JLabel userlogin = new JLabel("");
 		userlogin.setHorizontalAlignment(SwingConstants.CENTER);
-		userlogin.setFont(new Font("Goudy Old Style", Font.PLAIN, 18));
+		userlogin.setFont(new Font("Goudy Old Style", Font.PLAIN, 24));
 		userlogin.setBounds(1083, 0, 269, 68);
 		frmHomepage.getContentPane().add(userlogin);
 		JButton Logout = new JButton("LogOut");
-		Logout.setBounds(1164, 45, 89, 23);
+		Logout.setBounds(1273, 48, 79, 23);
 		frmHomepage.getContentPane().add(Logout);
 		Logout.setVisible(false);
 		JScrollPane scrollPane = new JScrollPane();
@@ -178,12 +178,13 @@ public class HomePage {
 				return true;
 			}
 		};
-		updatetable(model);
 		table.setModel(model);
 		model.setColumnIdentifiers(columnsnames);
+		updateproducts("All", "All");
+		updatetable(model);
 		//model.addRow(new Object[] {"sdsa","sdsa","asd","asds","sdsa","sdsa","asd","asds"});
 		JSeparator separator_3 = new JSeparator();
-		separator_3.setBounds(10, 75, 1342, 2);
+		separator_3.setBounds(233, 75, 1119, 2);
 		frmHomepage.getContentPane().add(separator_3);
 		JLabel logolabel = new JLabel("");
 		ImageIcon backGround =new ImageIcon("images\\images.png");
@@ -203,6 +204,10 @@ public class HomePage {
 		JButton OpenStore = new JButton("Open Store");
 		OpenStore.setBounds(943, 27, 119, 23);
 		frmHomepage.getContentPane().add(OpenStore);
+		
+		JSeparator separator_4 = new JSeparator();
+		separator_4.setBounds(0, 209, 233, 2);
+		frmHomepage.getContentPane().add(separator_4);
 		OpenStore.setVisible(false);
 		if (homepagecontroller.getUser() != null) {
 			login.setVisible(false);
@@ -245,6 +250,7 @@ public class HomePage {
 		// changecategory
 		boxcategory.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				System.out.println("Cat change");
 				updateproducts(boxcategory.getSelectedItem().toString(), boxstores.getSelectedItem().toString());
 				updatetable(model);
 			}
@@ -252,6 +258,7 @@ public class HomePage {
 		// changestore
 		boxstores.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				System.out.println("store change");
 				updateproducts(boxcategory.getSelectedItem().toString(), boxstores.getSelectedItem().toString());
 				updatetable(model);
 			}
@@ -299,13 +306,14 @@ public class HomePage {
 		// addtocart
 		addtocart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				List<Product> products = new ArrayList<>();
 				for (int i = 0; i < table.getRowCount(); i++) {
 					boolean select = Boolean.parseBoolean(table.getModel().getValueAt(i, 1).toString());
 					if (select) {
-						products.add(viewedProducts.get(i));
+						homepagecontroller.AddToCart(viewedProducts.get(i));
 					}
 				}
+				updateproducts("All", "All");
+				updatetable(model);
 			}
 		});
 		// search

@@ -1,18 +1,9 @@
 package src;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
-import javax.swing.JScrollBar;
-import javax.swing.JComboBox;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
+import java.awt.*;
+import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.Color;
 
 public class ProductForm {
 
@@ -21,24 +12,15 @@ public class ProductForm {
 	private JTextField txtQuantity;
 	StoreUI storeGUI;
 	private JTextField SuggestedPName;
+	
+	/**
+	 * @wbp.parser.constructor
+	 */
 	ProductForm(StoreUI storeUI, boolean addOrSuggest){
 		this.storeGUI= storeUI;
 		initialize(addOrSuggest);
 	}
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ProductForm window = new ProductForm();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 	/**
 	 * Create the application.
 	 */

@@ -1,12 +1,11 @@
 package src;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+@SuppressWarnings("serial")
 public class AdminPage extends JFrame {
 
 	private JPanel contentPane;
@@ -14,7 +13,7 @@ public class AdminPage extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -25,10 +24,10 @@ public class AdminPage extends JFrame {
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
-	 * Create the frame.
+	 * @wbp.parser.constructor
 	 */
 	public AdminPage() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

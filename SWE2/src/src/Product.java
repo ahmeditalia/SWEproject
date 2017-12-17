@@ -5,6 +5,7 @@ import java.io.Serializable;
 /**
  * 
  */
+@SuppressWarnings("serial")
 public class Product implements Serializable{
 
     /**
@@ -13,6 +14,7 @@ public class Product implements Serializable{
 	
 	public Product() {
     }
+	
     public Product(String name,String category,String brand) {
     	Name=name;
     	Category=category;

@@ -30,7 +30,7 @@ public class PaymentUI {
 	 */
 	private void initialize() {
 		Payment = new JFrame();
-		Payment.getContentPane().setBackground(Color.LIGHT_GRAY);
+		Payment.getContentPane().setBackground(new Color(178, 34, 34));
 		Payment.setTitle("Payment");
 		Payment.setExtendedState(Frame.MAXIMIZED_BOTH);
 		Payment.setBounds(100, 100, 888, 493);

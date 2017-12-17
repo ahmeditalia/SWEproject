@@ -1,19 +1,12 @@
 package src;
 
-import java.awt.EventQueue;
-import javax.swing.JFrame;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
+import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import java.awt.Color;
 
 public class Adminform {
@@ -24,10 +17,10 @@ public class Adminform {
 	private JTextField Brand;
 	private JTextField product;
 	List<Product> retreiveCategoryProducts;
+	
 	/**
 	 * @wbp.parser.constructor
 	 */
-	
 	public Adminform() {
 		retreiveCategoryProducts = new ArrayList<>();
 		adminController=new AdminController();
@@ -140,7 +133,7 @@ public class Adminform {
 			}
 
 		});
-		addproduct.setBounds(74, 162, 180, 23);
+		addproduct.setBounds(30, 162, 212, 23);
 		frame.getContentPane().add(addproduct);
 
 		add.setBounds(112, 355, 73, 23);
@@ -156,7 +149,7 @@ public class Adminform {
 		frame.getContentPane().add(comboBox);
 
 		JButton btnAddBrandTosystem = new JButton("Add Brand ToSystem");
-		btnAddBrandTosystem.setBounds(273, 162, 147, 23);
+		btnAddBrandTosystem.setBounds(286, 162, 210, 23);
 		frame.getContentPane().add(btnAddBrandTosystem);
 
 		JButton btnAddVoucherCard = new JButton("Add Voucher Card Number");
@@ -165,7 +158,7 @@ public class Adminform {
 				JOptionPane.showMessageDialog(null, adminController.voucherGenerator());
 			}
 		});
-		btnAddVoucherCard.setBounds(442, 162, 168, 23);
+		btnAddVoucherCard.setBounds(547, 162, 199, 23);
 		frame.getContentPane().add(btnAddVoucherCard);
 		
 		JButton hompage = new JButton("Hompage");

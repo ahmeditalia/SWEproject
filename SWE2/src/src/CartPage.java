@@ -32,7 +32,7 @@ public class CartPage {
 	 */
 	private void initialize() {
 		frmCartpage = new JFrame();
-		frmCartpage.getContentPane().setBackground(Color.LIGHT_GRAY);
+		frmCartpage.getContentPane().setBackground(new Color(178, 34, 34));
 		frmCartpage.setTitle("CartPage");
 		frmCartpage.setSize(new Dimension(1650, 1080));
 		frmCartpage.setExtendedState(Frame.MAXIMIZED_BOTH);
@@ -42,7 +42,7 @@ public class CartPage {
 		frmCartpage.setVisible(true);
 		
 		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "ViewCart", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Cart", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel.setBounds(304, 154, 827, 397);
 		frmCartpage.getContentPane().add(panel);
 		panel.setLayout(null);
