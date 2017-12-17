@@ -65,7 +65,7 @@ public class HomePage {
 	 */
 	private void initialize() {
 		frmHomepage = new JFrame();
-		frmHomepage.getContentPane().setBackground(Color.LIGHT_GRAY);
+		frmHomepage.getContentPane().setBackground(new Color(178, 34, 34));
 		frmHomepage.setTitle("HomePage");
 		frmHomepage.setExtendedState(Frame.MAXIMIZED_BOTH);
 		frmHomepage.setBounds(100, 100, 888, 493);
@@ -105,7 +105,7 @@ public class HomePage {
 		frmHomepage.getContentPane().add(lblNewLabel_1);
 		JComboBox<String> boxcategory = new JComboBox<>();
 		boxcategory.setToolTipText("Categories");
-		boxcategory.setBounds(10, 119, 150, 20);
+		boxcategory.setBounds(20, 265, 150, 20);
 		// italia modification
 		List<String> categories = new ArrayList<>();
 		categories = new DataBase().RetreiveCategoriesNames();
@@ -118,7 +118,7 @@ public class HomePage {
 		frmHomepage.getContentPane().add(boxcategory);
 		JComboBox<String> boxstores = new JComboBox<>();
 		boxstores.setToolTipText("stores");
-		boxstores.setBounds(10, 245, 150, 20);
+		boxstores.setBounds(20, 391, 150, 20);
 		// italia modification
 		boxstores.addItem("All");
 		List<String> stores = new ArrayList<>();
@@ -138,12 +138,12 @@ public class HomePage {
 		separator_1.setBounds(919, 0, 2, 77);
 		frmHomepage.getContentPane().add(separator_1);
 		searchtext = new JTextField();
-		searchtext.setBounds(243, 28, 529, 20);
+		searchtext.setBounds(273, 28, 499, 20);
 		frmHomepage.getContentPane().add(searchtext);
 		searchtext.setColumns(10);
 		JLabel lblNewLabel_2 = new JLabel("Categories :");
 		lblNewLabel_2.setFont(new Font("Sitka Banner", Font.BOLD, 16));
-		lblNewLabel_2.setBounds(10, 94, 89, 14);
+		lblNewLabel_2.setBounds(20, 240, 89, 14);
 		frmHomepage.getContentPane().add(lblNewLabel_2);
 		Object[] columnsnames = { "#", "Product Name", "Price", "Quantity", "Category", "Brand", "Store", "Select" };
 		JSeparator separator_2 = new JSeparator();
@@ -156,11 +156,11 @@ public class HomePage {
 		userlogin.setBounds(1083, 0, 269, 68);
 		frmHomepage.getContentPane().add(userlogin);
 		JButton Logout = new JButton("LogOut");
-		Logout.setBounds(1167, 51, 89, 23);
+		Logout.setBounds(1164, 45, 89, 23);
 		frmHomepage.getContentPane().add(Logout);
 		Logout.setVisible(false);
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(231, 79, 1121, 625);
+		scrollPane.setBounds(233, 79, 1119, 625);
 		frmHomepage.getContentPane().add(scrollPane);
 		table = new JTable(new DefaultTableModel(new Object[][] {}, columnsnames));
 		scrollPane.setViewportView(table);
@@ -185,14 +185,16 @@ public class HomePage {
 		JSeparator separator_3 = new JSeparator();
 		separator_3.setBounds(10, 75, 1342, 2);
 		frmHomepage.getContentPane().add(separator_3);
-		JLabel logolabel = new JLabel("ICON");
+		JLabel logolabel = new JLabel("");
+		ImageIcon backGround =new ImageIcon("images\\images.png");
+		logolabel.setIcon(backGround);
 		logolabel.setHorizontalAlignment(SwingConstants.CENTER);
 		logolabel.setFont(new Font("Source Sans Pro", Font.BOLD, 11));
-		logolabel.setBounds(0, 0, 233, 77);
+		logolabel.setBounds(0, 0, 230, 211);
 		frmHomepage.getContentPane().add(logolabel);
 		JLabel storelabel = new JLabel("Stores :");
 		storelabel.setFont(new Font("Sitka Banner", Font.BOLD, 16));
-		storelabel.setBounds(18, 220, 89, 14);
+		storelabel.setBounds(28, 366, 89, 14);
 		frmHomepage.getContentPane().add(storelabel);
 		JButton ControllPanel = new JButton("Controll Panel");
 		ControllPanel.setBounds(945, 27, 117, 23);
@@ -227,15 +229,16 @@ public class HomePage {
 		// adminpage
 		ControllPanel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new Adminform();
+				frmHomepage.setVisible(false);
+				new Adminform((Administrator)homepagecontroller.getUser(),HomePage.this);
 			}
 		});
 		// StoreUI
 		OpenStore.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (homepagecontroller.getUser() instanceof StoreOwner) {
-					new StoreUI((StoreOwner) homepagecontroller.getUser(),HomePage.this);
 					frmHomepage.setVisible(false);
+					new StoreUI((StoreOwner) homepagecontroller.getUser(),HomePage.this);
 				}
 			}
 		});
@@ -257,8 +260,9 @@ public class HomePage {
 		cart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				NormalUser user = (NormalUser) homepagecontroller.getUser();
-				new CartPage(user.getCart(), HomePage.this);
 				frmHomepage.setVisible(false);
+				new CartPage(user.getCart(), HomePage.this);
+				
 			}
 		});
 		// Login

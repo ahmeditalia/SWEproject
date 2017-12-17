@@ -7,6 +7,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class ProductInfGui {
 
@@ -21,6 +22,7 @@ public class ProductInfGui {
 	private JTextField viewsnubmer;
 	private boolean view;
 	private Product product;
+	private JButton btnClose;
 	
 	/**
 	 * @wbp.parser.constructor
@@ -42,13 +44,24 @@ public class ProductInfGui {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.getContentPane().setForeground(new Color(255, 153, 153));
+		frame.getContentPane().setBackground(new Color(178, 34, 34));
 		frame.setBounds(100, 100, 487, 444);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
 		JLabel lblProdcutName = new JLabel("Prodcut Name:");
+		lblProdcutName.setForeground(new Color(255, 153, 153));
 		lblProdcutName.setBounds(53, 84, 111, 14);
 		frame.getContentPane().add(lblProdcutName);
+		btnClose = new JButton("Close");
+		btnClose.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frame.setVisible(false);
+			}
+		});
+		btnClose.setBounds(194, 371, 89, 23);
+		frame.getContentPane().add(btnClose);
 		
 		name = new JTextField();
 		name.setEditable(false);
@@ -57,6 +70,7 @@ public class ProductInfGui {
 		name.setColumns(10);
 		
 		JLabel lblProductId = new JLabel("Product ID :");
+		lblProductId.setForeground(new Color(255, 153, 153));
 		lblProductId.setBounds(53, 40, 111, 14);
 		frame.getContentPane().add(lblProductId);
 		
@@ -67,6 +81,7 @@ public class ProductInfGui {
 		frame.getContentPane().add(id);
 		
 		JLabel lblProdcutPrice = new JLabel("Prodcut Price :");
+		lblProdcutPrice.setForeground(new Color(255, 153, 153));
 		lblProdcutPrice.setBounds(53, 126, 111, 14);
 		frame.getContentPane().add(lblProdcutPrice);
 		
@@ -77,6 +92,7 @@ public class ProductInfGui {
 		frame.getContentPane().add(price);
 		
 		JLabel lblQuantity = new JLabel("Quantity :");
+		lblQuantity.setForeground(new Color(255, 153, 153));
 		lblQuantity.setBounds(53, 167, 111, 14);
 		frame.getContentPane().add(lblQuantity);
 		
@@ -87,6 +103,7 @@ public class ProductInfGui {
 		frame.getContentPane().add(quantity);
 		
 		JLabel lblCategory = new JLabel("Category :");
+		lblCategory.setForeground(new Color(255, 153, 153));
 		lblCategory.setBounds(53, 208, 111, 14);
 		frame.getContentPane().add(lblCategory);
 		
@@ -97,6 +114,7 @@ public class ProductInfGui {
 		frame.getContentPane().add(category);
 		
 		JLabel lblBrand = new JLabel("Brand :");
+		lblBrand.setForeground(new Color(255, 153, 153));
 		lblBrand.setBounds(53, 254, 111, 14);
 		frame.getContentPane().add(lblBrand);
 		
@@ -107,6 +125,7 @@ public class ProductInfGui {
 		frame.getContentPane().add(brand);
 		
 		JLabel lblStore = new JLabel("Store :");
+		lblStore.setForeground(new Color(255, 153, 153));
 		lblStore.setBounds(53, 293, 111, 14);
 		frame.getContentPane().add(lblStore);
 		
@@ -115,8 +134,8 @@ public class ProductInfGui {
 		store.setColumns(10);
 		store.setBounds(194, 290, 132, 20);
 		frame.getContentPane().add(store);
-		
 		JLabel lblviews = new JLabel("#Views :");
+		lblviews.setForeground(new Color(255, 153, 153));
 		lblviews.setBounds(53, 335, 111, 14);
 		frame.getContentPane().add(lblviews);
 		
@@ -132,22 +151,17 @@ public class ProductInfGui {
 			lblviews.setVisible(false);
 			lblProductId.setVisible(false);
 		}
+		else{
+			viewsnubmer.setText(Integer.toString(product.getViews()));
+		}
 		name.setText(product.getName());
 		id.setText(product.getID());
 		price.setText(Float.toString(product.getPrice()));
 		quantity.setText(Integer.toString(product.getQuantity()));
 		brand.setText(product.getBrand());
 		category.setText(product.getCategory());
-		viewsnubmer.setText(Integer.toString(1));
 		store.setText(product.getStore().getStoreName());
 		
-		JButton close = new JButton("Close");
-		close.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frame.setVisible(false);
-			}
-		});
-		close.setBounds(194, 371, 89, 23);
-		frame.getContentPane().add(close);
+		
 	}
 }

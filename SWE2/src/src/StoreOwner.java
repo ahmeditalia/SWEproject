@@ -18,7 +18,10 @@ public class StoreOwner extends User implements Serializable{
 	/**
      * Default constructor
      */
+	
+	private List<Store> OwnedStores;
     public StoreOwner() {
+        OwnedStores= new ArrayList<>();
     }
     
     StoreOwner(String Username,String Password,String E_mail,String PhoneNumber,String Gender,String Address,int Type){
@@ -29,19 +32,13 @@ public class StoreOwner extends User implements Serializable{
         this.Gender=Gender;
         this.Address=Address;
         this.Type=Type;
+        OwnedStores= new ArrayList<>();
     }
 
     
-    private List<Store> OwnedStores= new ArrayList<>();
     
-    // Sa2aaaaaaaaaaaaaaa added functions 
-   /* public List<String>getStoresName(){
-    	List<String> names= new ArrayList<>();
-    	for(int i=0;i<OwnedStores.size();i++){
-    		names.add(OwnedStores.get(i).getStoreName());
-    	}
-    	return names;
-    }*/
+    
+   
     public Store searchForStore(String sName){
     	for (int i=0;i<OwnedStores.size();i++){
     		if (OwnedStores.get(i).getStoreName()== sName)
@@ -54,19 +51,13 @@ public class StoreOwner extends User implements Serializable{
     	s= searchForStore(storeName);
     	if (s!=null){
     		s.AddProduct(product);
-    		
     	}
     }
     public List<Store> getOwnedStores() {
-        // TODO implement here
         return OwnedStores;
     }
-
-    
-
-    
-    public void AddNewStore(String StoreName) {
-    	OwnedStores.add(new Store(StoreName,this));
+    public void AddNewStore(Store store) {
+    	OwnedStores.add(store);
     }
 
 }

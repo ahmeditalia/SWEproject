@@ -1,32 +1,42 @@
 package src;
 
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
 
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
-import java.util.*;
+public class AdminPage extends JFrame {
 
-import javax.swing.*;
+	private JPanel contentPane;
 
-public class AdminPage {
-
-    public AdminPage() {
-    }
-    
-    public AdminPage(Administrator administrator) {
-    }
-    private AdminController admincontroller;
-    private JButton ShowSuggestedProducts;
-    private JButton AddProduct;
-    public void ShowSuggestedProductsPressed() {
-        // TODO implement here
-    }
-    public void AddProductPressed() {
-    }
-    public AdminController getAdmincontroller() {
-        return null;
-    }
-
+	/**
+	 * Launch the application.
+	 */
 	public static void main(String[] args) {
-		
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					AdminPage frame = new AdminPage();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public AdminPage() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
+		setContentPane(contentPane);
 	}
 
 }

@@ -66,7 +66,7 @@ public interface IDataBase {
 
     /**
      * @param store
-     */
+    */
     public void InsertNewStore(Store store);
     
     
@@ -78,4 +78,5 @@ public interface IDataBase {
     
     public List<String> RetreiveStoreNames();
 
+    public List<Product> RetreiveSuggestedProduct();
 }

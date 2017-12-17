@@ -62,7 +62,6 @@ public class DataBase implements IDataBase {
 				} catch (IOException e) {
 				} catch (ClassNotFoundException e) {
 				}
-
 			}
 		}
 		return products;
@@ -392,6 +391,32 @@ public class DataBase implements IDataBase {
 		} catch (IOException e) {
 		}
 		return new ArrayList<>();
+	}
+
+	@Override
+	public List<Product> RetreiveSuggestedProduct() {
+		List<Product> list = new ArrayList<>();
+		List<String> files = new ArrayList<>();
+		Path path = Paths.get("SuggestedProducts.txt");
+		try {
+			files = Files.readAllLines(path);
+
+		} catch (IOException e) {
+		}
+		for (String filename : files) {
+			try {
+				ObjectInputStream object = new ObjectInputStream(new FileInputStream("Suggested_" + filename + ".txt"));
+				try {
+					list.add((Product) object.readObject());
+				} catch (ClassNotFoundException e) {
+				}
+				object.close();
+			} catch (FileNotFoundException e) {
+				continue;
+			} catch (IOException e) {
+			}
+		}
+		return list;
 	}
 
 }
