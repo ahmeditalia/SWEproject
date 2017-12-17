@@ -31,7 +31,6 @@ public class ProductForm {
 	public ProductForm() {
 		initialize(true);
 	}
-
 	
 	@SuppressWarnings("deprecation")
 	private void initialize(boolean addOrSuggest) {
@@ -77,8 +76,33 @@ public class ProductForm {
 		txtQuantity.setBounds(582, 432, 209, 20);
 		frame.getContentPane().add(txtQuantity);
 		txtQuantity.setColumns(10);
-
+		JComboBox<String> productName = new JComboBox<String>();
+		/*productName.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(productName.getSelectedItem()!="")
+				{	Categories.setSelectedItem(products.get(productName.getSelectedIndex()-1).getCategory());
+					Brands.setSelectedItem(products.get(productName.getSelectedIndex()-1).getBrand());
+				}
+			}
+		});*/
+		productName.addItem("select product");
+		
+		for(Product p: storeGUI.getStoreUIController().GetSystemProducts()){
+			productName.addItem(p.getName());
+		}
 		JComboBox<String> Categories = new JComboBox<String>();
+		Categories.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (Categories.getSelectedIndex()!=0){
+					productName.removeAllItems();
+					productName.addItem("select product");
+					for(Product p: storeGUI.getStoreUIController().getCategoryProducts(Categories.getSelectedItem().toString())){
+						productName.addItem(p.getName());
+					}
+			}
+			}
+				
+		});
 		Categories.setBounds(582, 288, 209, 17);
 		frame.getContentPane().add(Categories);
 		Categories.addItem("select category");
@@ -93,25 +117,6 @@ public class ProductForm {
 			Brands.addItem(storeGUI.getStoreUIController().getBrandsNames().get(i));
 		}
 		
-		JComboBox<String> productName = new JComboBox<String>();
-		/*productName.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				if(productName.getSelectedItem()!="")
-				{	Categories.setSelectedItem(products.get(productName.getSelectedIndex()-1).getCategory());
-					Brands.setSelectedItem(products.get(productName.getSelectedIndex()-1).getBrand());
-				}
-			}
-		});*/
-		productName.addItem("select product");
-		if (Categories.getSelectedIndex()!=0){
-		for(Product p: storeGUI.getStoreUIController().getCategoryProducts(Categories.getSelectedItem().toString())){
-			productName.addItem(p.getName());
-		}
-		}else{
-			for(Product p: storeGUI.getStoreUIController().GetSystemProducts()){
-				productName.addItem(p.getName());
-			}
-		}
 		
 		JButton btnAddProduct = new JButton("Add product");
 		btnAddProduct.addActionListener(new ActionListener() {
@@ -128,6 +133,8 @@ public class ProductForm {
 				storeGUI.getStoreUIController().AddProduct(productName.getSelectedItem().toString(), Float.parseFloat(txtPrice.getText())
 						, Integer.parseInt(txtQuantity.getText()), Categories.getSelectedItem().toString(), Brands.getSelectedItem().toString());
 				JOptionPane.showMessageDialog(null, "succsesfully added product ..");
+				frame.setVisible(false);
+				initialize(true);
 				}
 			}
 		});
@@ -148,7 +155,10 @@ public class ProductForm {
 				else{
 				storeGUI.getStoreUIController().SuggestProduct(SuggestedPName.getText(), Categories.getSelectedItem().toString(), Brands.getSelectedItem().toString());		
 				JOptionPane.showMessageDialog(null, "succsesfully suggested product ..");
+				frame.setVisible(false);
+				initialize(false);
 				}
+				
 			}
 		});
 		btnSugestProduct.setBounds(622, 463, 111, 23);
