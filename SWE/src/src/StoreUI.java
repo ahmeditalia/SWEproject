@@ -1,36 +1,10 @@
 package src;
 
-import java.awt.EventQueue;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.RenderingHints;
-import java.awt.Window;
-
-import javax.swing.JFrame;
-import javax.annotation.processing.Messager;
-import javax.sound.midi.ShortMessage;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
+import javax.swing.*;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ArrayBlockingQueue;
 import java.awt.event.ActionEvent;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.text.TabableView;
-import javax.xml.ws.handler.MessageContext;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JComboBox;
-import javax.swing.JCheckBox;
-import java.awt.Color;
-import javax.swing.JTable;
-import javax.swing.JScrollPane;
-import java.awt.Font;
+import java.awt.*;
 
 public class StoreUI {
 	private JFrame frame;
@@ -95,7 +69,7 @@ public class StoreUI {
 			public void actionPerformed(ActionEvent e) {
 				if(StoreList.getSelectedItem().toString()!="select store"){
 				sotreController.setCurrentStore(StoreList.getSelectedItem().toString());
-				ProductForm pForm = new  ProductForm(StoreUI.this,true);
+				new  ProductForm(StoreUI.this,true);
 				}else
 					JOptionPane.showMessageDialog(null, "select a store first!!");
 				}
@@ -107,7 +81,7 @@ public class StoreUI {
 		btnSugestProduct.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//frame.setVisible(false);
-				ProductForm pForm = new  ProductForm(StoreUI.this,false);
+				new  ProductForm(StoreUI.this,false);
 				
 			}
 		});
@@ -119,7 +93,7 @@ public class StoreUI {
 			public void actionPerformed(ActionEvent e) {
 				if(StoreList.getSelectedItem().toString()!="select store"){
 				sotreController.setCurrentStore(StoreList.getSelectedItem().toString());
-				ProductInfGui pGui= new ProductInfGui(sotreController.getCurrentStore().getMostViewedP(),true);
+				new ProductInfGui(sotreController.getCurrentStore().getMostViewedP(),true);
 				
 				}else
 					JOptionPane.showMessageDialog(null, "select a store first!!");

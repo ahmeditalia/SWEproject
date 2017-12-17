@@ -16,7 +16,6 @@ public class StoreUIController {
     }
 
     public StoreUIController(StoreOwner user) {
-		// TODO Auto-generated constructor stub
     	CurrentUser=user;
 	}
     private StoreOwner CurrentUser;
@@ -25,10 +24,9 @@ public class StoreUIController {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void addNewStore(String Sname) {
-		// TODO Auto-generated method stub
-    	
-    	CurrentUser.AddNewStore(Sname);
-    	database.InsertNewStore(new Store(Sname));
+    	Store store=new Store(Sname, CurrentUser);
+    	CurrentUser.AddNewStore(store);
+    	database.InsertNewStore(store);
     	
 	}
     public List<String> getBrandsNames(){

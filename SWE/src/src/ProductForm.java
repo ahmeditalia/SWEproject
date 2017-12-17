@@ -1,18 +1,11 @@
 package src;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
-import javax.swing.JScrollBar;
-import javax.swing.JComboBox;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
+import java.awt.*;
+import javax.swing.*;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.ActionEvent;
-import java.awt.Color;
 
 public class ProductForm {
 
@@ -21,24 +14,16 @@ public class ProductForm {
 	private JTextField txtQuantity;
 	StoreUI storeGUI;
 	private JTextField SuggestedPName;
+	private List<Product> products=new ArrayList<>();
+	
+	/**
+	 * @wbp.parser.constructor
+	 */
 	ProductForm(StoreUI storeUI, boolean addOrSuggest){
 		this.storeGUI= storeUI;
 		initialize(addOrSuggest);
 	}
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ProductForm window = new ProductForm();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 	/**
 	 * Create the application.
 	 */
@@ -89,22 +74,39 @@ public class ProductForm {
 		txtQuantity.setBounds(154, 209, 209, 20);
 		frame.getContentPane().add(txtQuantity);
 		txtQuantity.setColumns(10);
-		JComboBox<String> productName = new JComboBox<String>();
-		for(Product p: storeGUI.getStoreUIController().GetSystemProducts()){
-			productName.addItem(p.getName());
-		}
+
 		JComboBox<String> Categories = new JComboBox<String>();
 		Categories.setBounds(154, 107, 209, 17);
 		frame.getContentPane().add(Categories);
+		Categories.addItem("");
 		for(int i=0;i<storeGUI.getStoreUIController().getCategoriesNames().size();i++){
 			Categories.addItem(storeGUI.getStoreUIController().getCategoriesNames().get(i));
 		}
 		JComboBox<String> Brands = new JComboBox<String>();
 		Brands.setBounds(154, 146, 209, 20);
 		frame.getContentPane().add(Brands);
+		Brands.addItem("");
 		for(int i=0;i<storeGUI.getStoreUIController().getBrandsNames().size();i++){
 			Brands.addItem(storeGUI.getStoreUIController().getBrandsNames().get(i));
 		}
+		
+		JComboBox<String> productName = new JComboBox<String>();
+		productName.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(productName.getSelectedItem()!="")
+				{
+					Categories.setSelectedItem(products.get(productName.getSelectedIndex()-1).getCategory());
+					Brands.setSelectedItem(products.get(productName.getSelectedIndex()-1).getBrand());
+				}
+			}
+		});
+		products=storeGUI.getStoreUIController().GetSystemProducts();
+		productName.addItem("");
+		for(Product p: products){
+			productName.addItem(p.getName());
+		}
+		
+		
 		JButton btnAddProduct = new JButton("Add product");
 		btnAddProduct.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
