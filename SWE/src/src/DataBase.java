@@ -138,7 +138,7 @@ public class DataBase implements IDataBase {
 		return list;
 	}
 
-	public void InsertProductToCart(Cart cart) {
+	public void UpdateProductToCart(Cart cart) {
 		UpdateUser(cart.getCartOwner());
 	}
 
@@ -405,6 +405,34 @@ public class DataBase implements IDataBase {
 			}
 		}
 		return list;
+	}
+
+	@Override
+	public void updateStoreInfo(Store store) {
+		try {
+			ObjectOutputStream object = new ObjectOutputStream(
+					new FileOutputStream(store.getStoreName() + "_" + store.getOwner().getUsername() + ".txt"));
+			object.writeObject(store);
+			object.close();
+		} catch (FileNotFoundException e) {
+		} catch (IOException e) {
+		}
+		UpdateUser(store.getOwner());		
+	}
+
+
+
+	@Override
+	public void updateProductInfo(Product product) {
+		try {
+			ObjectOutputStream object = new ObjectOutputStream(
+					new FileOutputStream(product.getName() + "_" + product.getID() + ".txt"));
+			object.writeObject(product);
+			object.close();
+		} catch (FileNotFoundException e) {
+		} catch (IOException e) {
+		}
+		updateStoreInfo(product.getStore());
 	}
 
 }

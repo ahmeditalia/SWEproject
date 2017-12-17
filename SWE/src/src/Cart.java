@@ -18,9 +18,11 @@ public class Cart implements Serializable{
     }
     public void AddToCart(Product product) {
         CartProducts.add(product);
+        new DataBase().UpdateProductToCart(this);
     }
     public void RemoveFromCart(Product product) {
         CartProducts.remove(product);
+        new DataBase().UpdateProductToCart(this);
     }
     public float EmptyCart() {
         float balance=0;

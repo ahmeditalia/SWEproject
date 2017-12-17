@@ -35,7 +35,7 @@ public interface IDataBase {
      */
     public List<Product> RetreiveCategoryProducts(String categoryName);
 
-    public void InsertProductToCart(Cart cart);
+    public void UpdateProductToCart(Cart cart);
 
     /**
      * @param NewUser
@@ -79,4 +79,8 @@ public interface IDataBase {
     public List<String> RetreiveStoreNames();
 
     public List<Product> RetreiveSuggestedProduct();
+    
+    public void updateStoreInfo(Store store);
+        
+    public void updateProductInfo(Product product);
 }
