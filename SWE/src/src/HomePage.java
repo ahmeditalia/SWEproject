@@ -103,9 +103,11 @@ public class HomePage {
 		frmHomepage.getContentPane().add(user_name);
 		user_name.setColumns(10);
 		JLabel lblNewLabel = new JLabel("User Name:");
+		lblNewLabel.setForeground(new Color(255, 153, 153));
 		lblNewLabel.setBounds(1083, 14, 74, 14);
 		frmHomepage.getContentPane().add(lblNewLabel);
 		JLabel lblNewLabel_1 = new JLabel("Password :");
+		lblNewLabel_1.setForeground(new Color(255, 153, 153));
 		lblNewLabel_1.setBounds(1083, 51, 74, 14);
 		frmHomepage.getContentPane().add(lblNewLabel_1);
 		JComboBox<String> boxcategory = new JComboBox<>();
@@ -147,6 +149,7 @@ public class HomePage {
 		frmHomepage.getContentPane().add(searchtext);
 		searchtext.setColumns(10);
 		JLabel lblNewLabel_2 = new JLabel("Categories :");
+		lblNewLabel_2.setForeground(new Color(255, 153, 153));
 		lblNewLabel_2.setFont(new Font("Sitka Banner", Font.BOLD, 16));
 		lblNewLabel_2.setBounds(20, 240, 89, 14);
 		frmHomepage.getContentPane().add(lblNewLabel_2);
@@ -199,6 +202,7 @@ public class HomePage {
 		logolabel.setBounds(0, 0, 230, 211);
 		frmHomepage.getContentPane().add(logolabel);
 		JLabel storelabel = new JLabel("Stores :");
+		storelabel.setForeground(new Color(255, 153, 153));
 		storelabel.setFont(new Font("Sitka Banner", Font.BOLD, 16));
 		storelabel.setBounds(28, 366, 89, 14);
 		frmHomepage.getContentPane().add(storelabel);
