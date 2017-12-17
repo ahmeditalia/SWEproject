@@ -33,13 +33,6 @@ public class StoreUIController {
 		return new DataBase().RetreiveCategoriesNames();
 	}
 
-	public Store searchForStore(String sName) {
-		return CurrentUser.searchForStore(sName);
-	}
-
-	public void setCurrentStore(String currS) {
-		CurrentStore = searchForStore(currS);
-	}
 
 	public Store getCurrentStore() {
 		return CurrentStore;
@@ -60,10 +53,6 @@ public class StoreUIController {
 		this.CurrentUser = value;
 	}
 
-	/**
-	 * @return
-	 */
-
 	public void SuggestProduct(String productName, String Category, String Brand) {
 		new DataBase().InsertSuggestedProduct(new Product(productName, Category, Brand));
 	}
@@ -74,8 +63,7 @@ public class StoreUIController {
 	public List<Product> GetSystemProducts() {
 		return new DataBase().RetreiveSysProducts();
 	}
-
-	public void ChangeStore(int storeindex) {
+	public void setCurrentStore(int storeindex) {
 		this.CurrentStore=CurrentUser.getOwnedStores().get(storeindex);
 	}
 }

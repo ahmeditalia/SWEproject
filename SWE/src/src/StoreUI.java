@@ -63,7 +63,7 @@ public class StoreUI {
 			public void actionPerformed(ActionEvent arg0) {
 				if(selectStoreToShow.getSelectedItem()!="All stores")
 				{
-					sotreController.ChangeStore(selectStoreToShow.getSelectedIndex()-1);
+					sotreController.setCurrentStore(selectStoreToShow.getSelectedIndex()-1);
 				}
 			}
 		});
@@ -78,11 +78,13 @@ public class StoreUI {
 		JButton btnAddProduct = new JButton("Add product to store");
 		btnAddProduct.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(StoreList.getSelectedItem().toString()!="select store"){
-				sotreController.setCurrentStore(StoreList.getSelectedItem().toString());
-				new  ProductForm(StoreUI.this,true);
-				}else
+				if(selectStoreToShow.getSelectedItem().toString()=="All stores"){
 					JOptionPane.showMessageDialog(null, "select a store first!!");
+
+				}else{
+					//frame.setVisible(false);
+					new  ProductForm(StoreUI.this,true);
+				}
 				}
 		});
 		btnAddProduct.setBounds(34, 370, 158, 33);
@@ -102,13 +104,10 @@ public class StoreUI {
 		JButton btnOGetThe = new JButton("Most viewed product ");
 		btnOGetThe.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(StoreList.getSelectedItem().toString()!="select store"){
-				sotreController.setCurrentStore(StoreList.getSelectedItem().toString());
-				new ProductInfGui(sotreController.getCurrentStore().getMostViewedP(),true);
-				
-				}else
+				if(selectStoreToShow.getSelectedItem().toString()=="All stores"){
 					JOptionPane.showMessageDialog(null, "select a store first!!");
-
+				}else
+					new ProductInfGui(sotreController.getCurrentStore().getMostViewedP(),true);
 				}
 		});
 		btnOGetThe.setBounds(34, 425, 158, 29);
@@ -118,9 +117,7 @@ public class StoreUI {
 		txtGetstorename.setBounds(214, 324, 144, 26);
 		frame.getContentPane().add(txtGetstorename);
 		txtGetstorename.setColumns(10);
-		for(Store s:sotreController.getCurrentUser().getOwnedStores() ){
-			comboMostViewed.addItem(s.getStoreName());
-		}
+		
 		
 		JButton btnHomePage = new JButton("Home Page");
 		btnHomePage.addActionListener(new ActionListener() {

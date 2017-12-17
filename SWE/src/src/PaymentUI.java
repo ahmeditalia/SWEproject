@@ -80,7 +80,6 @@ public class PaymentUI {
 		});
 		submit.setBounds(241, 251, 109, 23);
 		panel.add(submit);
-
 		JLabel lblChooseYourPayment = new JLabel("Choose your payment Method :");
 		lblChooseYourPayment.setBounds(214, 75, 211, 14);
 		panel.add(lblChooseYourPayment);
