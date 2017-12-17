@@ -66,7 +66,7 @@ public interface IDataBase {
 
     /**
      * @param store
-     */
+    */
     public void InsertNewStore(Store store);
     
     
