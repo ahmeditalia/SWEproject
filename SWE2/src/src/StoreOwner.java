@@ -46,18 +46,14 @@ public class StoreOwner extends User implements Serializable{
     	}
     	return null;
     }
-    public void AddProductToStore(Product product, String storeName) {
-    	Store s= new Store();
-    	s= searchForStore(storeName);
-    	if (s!=null){
-    		s.AddProduct(product);
-    	}
-    }
+
     public List<Store> getOwnedStores() {
         return OwnedStores;
     }
-    public void AddNewStore(Store store) {
+    public void AddNewStore(String storeName) {
+    	Store store=new Store(storeName, this);
     	OwnedStores.add(store);
+    	new DataBase().InsertNewStore(store);
     }
 
 }

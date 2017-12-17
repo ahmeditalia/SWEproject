@@ -38,7 +38,7 @@ public class DataBase implements IDataBase {
 			}
 		}
 		for (String filename : files) {
-			if (filename.substring(0, filename.indexOf("_")) == ProductName) {
+			if (filename.substring(0, filename.indexOf("_")).equals(ProductName)) {
 				try {
 					ObjectInputStream object = new ObjectInputStream(new FileInputStream(filename + ".txt"));
 					products.add((Product) object.readObject());

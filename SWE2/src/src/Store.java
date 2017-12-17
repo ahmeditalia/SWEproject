@@ -37,11 +37,24 @@ public class Store implements Serializable{
 		return mostP;
 	}
 
-	public void AddProduct(Product product) {
-		StoreProducts.add(product);
+	public void AddProduct(String name,float price,int quantity,String category,String brand){
+		Product newProduct=new Product(name, price, quantity, category, brand, this);
+		StoreProducts.add(newProduct);
+		new DataBase().InsertProductToStore(this, newProduct);
 	}
 
 	public void SellProduct(Product product, User user) {
+		for(int i=0;i<StoreProducts.size();i++)
+		{
+			if(StoreProducts.get(i)==product)
+			{
+				if(StoreProducts.get(i).getQuantity()==1)
+				{
+					StoreProducts.remove(i);
+				}
+				StoreProducts.get(i).setQuantity(StoreProducts.get(i).getQuantity()-1);
+			}
+		}
 		SoldProducts.put(product, user);
 	}
 

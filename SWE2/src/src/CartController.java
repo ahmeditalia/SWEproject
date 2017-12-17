@@ -2,8 +2,8 @@ package src;
 public class CartController {
 	private Cart UserCart;
 
-	public CartController(NormalUser user) {
-		UserCart = new Cart(user);
+	public CartController(Cart cart) {
+		UserCart = cart;
 	}
 
 	public float EmptyCart() {

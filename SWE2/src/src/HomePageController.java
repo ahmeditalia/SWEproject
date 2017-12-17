@@ -61,10 +61,15 @@ public class HomePageController {
 		return (IDataBase1.RetreiveAllProducts());
 	}
 	public List<Product>getProducts(String category,String store){
-		List<Product> products =getAllProducts();
+		List<Product> products=new ArrayList<>();
+		if(category.equals("All"))
+			products =getAllProducts();
+		else {
+			products=new DataBase().RetreiveCategoryProducts(category);
+		}
 		List<Product> temp=new ArrayList<Product>();
 		for(int i=0;i<products.size();i++){
-			if((products.get(i).getCategory().equals(category)||category.equals("All"))&&(products.get(i).getStore().getStoreName().equals(store)||store.equals("All"))){
+			if((products.get(i).getStore().getStoreName().equals(store)||store.equals("All"))){
 				temp.add(products.get(i));
 			}
 		}

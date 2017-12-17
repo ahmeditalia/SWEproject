@@ -31,7 +31,6 @@ public class Cart implements Serializable{
             storeTmp.SellProduct(productTmp,CartOwner);
         }
         CartProducts.clear();
-        CartOwner.setCart(this);
         return balance;
     }
     public NormalUser getCartOwner() {
