@@ -82,6 +82,7 @@ public class Adminform {
 				{
 					product.setText(retreiveCategoryProducts.get(comboBox.getSelectedIndex()-1).getName());
 					product.setEditable(false);
+					Category.setSelectedItem(retreiveCategoryProducts.get(comboBox.getSelectedIndex()-1).getCategory());
 					Brand.setText(retreiveCategoryProducts.get(comboBox.getSelectedIndex()-1).getBrand());
 				}
 			}
@@ -99,11 +100,6 @@ public class Adminform {
 					retreiveCategoryProducts.remove(comboBox.getSelectedIndex()-1);
 					comboBox.removeItemAt(comboBox.getSelectedIndex());
 					product.setEditable(true);
-					retreiveCategoryProducts = adminController.getSuggestedProducts();
-					comboBox.addItem("Suggested Products");
-					for (int i = 0; i < retreiveCategoryProducts.size(); i++) {
-						comboBox.addItem(retreiveCategoryProducts.get(i).getName());
-					}
 					comboBox.setSelectedIndex(0);
 				}
 					

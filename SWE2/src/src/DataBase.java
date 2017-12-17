@@ -232,6 +232,7 @@ public class DataBase implements IDataBase {
 		try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter("SuggestedProducts.txt", true));
 			writer.write(product.getName());
+			writer.newLine();
 			writer.close();
 		} catch (IOException e) {
 		}
