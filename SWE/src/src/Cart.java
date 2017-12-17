@@ -28,9 +28,7 @@ public class Cart implements Serializable{
         float balance=0;
         for(int i=0;i<CartProducts.size();i++){
             Product productTmp=CartProducts.get(i);
-            balance+=productTmp.getPrice();
-            Store storeTmp=productTmp.getStore();
-            storeTmp.SellProduct(productTmp,CartOwner);
+            balance+=productTmp.getStore().SellProduct(productTmp,CartOwner);
         }
         CartProducts.clear();
         new DataBase().UpdateProductCart(this);

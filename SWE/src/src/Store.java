@@ -43,21 +43,27 @@ public class Store implements Serializable{
 		new DataBase().InsertProductToStore(this, newProduct);
 	}
 
-	public void SellProduct(Product product, User user) {
+	public float SellProduct(Product product, User user) {
+		float balance=0;
 		for(int i=0;i<StoreProducts.size();i++)
 		{
 			if(StoreProducts.get(i)==product)
 			{
 				if(StoreProducts.get(i).getQuantity()==1)
 				{
+					Product temp=StoreProducts.get(i);
 					StoreProducts.remove(i);
-					new DataBase().updateStoreInfo(this);
+					new DataBase().deleteProduct(temp);
+					balance=product.getPrice();
+					break;
 				}
 				StoreProducts.get(i).setQuantity(StoreProducts.get(i).getQuantity()-1);
+				balance=product.getPrice();
 				new DataBase().updateProductInfo(StoreProducts.get(i));
 			}
 		}
 		SoldProducts.put(product, user);
+		return balance;
 	}
 
 	public String getStoreName() {
