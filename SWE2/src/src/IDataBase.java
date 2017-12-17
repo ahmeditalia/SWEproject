@@ -78,5 +78,4 @@ public interface IDataBase {
     
     public List<String> RetreiveStoreNames();
 
-    public List<Product> RetreiveSuggestedProduct();
 }
