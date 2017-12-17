@@ -49,7 +49,7 @@ public class VoucherCard extends PaymentUI {
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (cardnumber.getText().equals("")
-						|| homePage.getHomepagecontroller().checkVoucherCards(cardnumber.getText())) {
+						|| !homePage.getHomepagecontroller().checkVoucherCards(cardnumber.getText())) {
 					JOptionPane.showMessageDialog(null, "Incrroect VoucherNumber");
 					cardnumber.setText("");
 					return;
