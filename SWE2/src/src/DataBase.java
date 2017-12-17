@@ -62,7 +62,6 @@ public class DataBase implements IDataBase {
 				} catch (IOException e) {
 				} catch (ClassNotFoundException e) {
 				}
-
 			}
 		}
 		return products;
