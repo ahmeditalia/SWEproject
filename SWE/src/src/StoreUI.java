@@ -57,13 +57,24 @@ public class StoreUI {
 		
 		btnAddSotre.setBounds(34, 321, 158, 29);
 		frame.getContentPane().add(btnAddSotre);
-		JComboBox<String> StoreList = new JComboBox<String>();
-		StoreList.addItem("select store");
+		
+		JComboBox<String> selectStoreToShow = new JComboBox<String>();
+		selectStoreToShow.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(selectStoreToShow.getSelectedItem()!="All stores")
+				{
+					sotreController.ChangeStore(selectStoreToShow.getSelectedIndex()-1);
+				}
+			}
+		});
+		
+		selectStoreToShow.addItem("All stores");
+
+		selectStoreToShow.setBounds(636, 124, 175, 20);
+		frame.getContentPane().add(selectStoreToShow);
 		for(Store s:sotreController.getCurrentUser().getOwnedStores() ){
-			StoreList.addItem(s.getStoreName());
+			selectStoreToShow.addItem(s.getStoreName());
 		}
-		StoreList.setBounds(213, 375, 145, 23);
-		frame.getContentPane().add(StoreList);
 		JButton btnAddProduct = new JButton("Add product to store");
 		btnAddProduct.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -107,12 +118,6 @@ public class StoreUI {
 		txtGetstorename.setBounds(214, 324, 144, 26);
 		frame.getContentPane().add(txtGetstorename);
 		txtGetstorename.setColumns(10);
-
-		
-		JComboBox<String> comboMostViewed = new JComboBox<String>();
-		comboMostViewed.addItem("select store");
-		comboMostViewed.setBounds(213, 428, 145, 23);
-		frame.getContentPane().add(comboMostViewed);
 		for(Store s:sotreController.getCurrentUser().getOwnedStores() ){
 			comboMostViewed.addItem(s.getStoreName());
 		}
@@ -132,22 +137,7 @@ public class StoreUI {
 		ImageIcon backGround =new ImageIcon("images\\create-your-own-online-store.jpg");
 		IMAGE.setIcon(backGround);
 		
-		JComboBox<String> selectStoreToShow = new JComboBox<String>();
-		selectStoreToShow.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				if(selectStoreToShow.getSelectedItem()!="All stores")
-				{
-					sotreController.ChangeStore(selectStoreToShow.getSelectedIndex()-1);
-				}
-			}
-		});
-		selectStoreToShow.addItem("All stores");
-
-		selectStoreToShow.setBounds(771, 122, 175, 20);
-		frame.getContentPane().add(selectStoreToShow);
-		for(Store s:sotreController.getCurrentUser().getOwnedStores() ){
-			selectStoreToShow.addItem(s.getStoreName());
-		}
+		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(396, 155, 958, 550);
 		frame.getContentPane().add(scrollPane);
@@ -165,7 +155,7 @@ public class StoreUI {
 			}
 		}
 		
-		JButton btnDisplayStoreProducts = new JButton("Display Store Products");
+		JButton btnDisplayStoreProducts = new JButton("Display Products");
 		btnDisplayStoreProducts.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				model.setRowCount(0);
@@ -185,14 +175,15 @@ public class StoreUI {
 				
 			}
 		});
-		btnDisplayStoreProducts.setBounds(564, 121, 168, 23);
+		btnDisplayStoreProducts.setBounds(863, 123, 168, 23);
 		frame.getContentPane().add(btnDisplayStoreProducts);
 		
 		
 		
-		JLabel lblNewLabel = new JLabel("Select Store");
+		JLabel lblNewLabel = new JLabel("Select Store to get in :");
+		lblNewLabel.setFont(new Font("Serif", Font.PLAIN, 16));
 		lblNewLabel.setForeground(new Color(255, 153, 153));
-		lblNewLabel.setBounds(968, 125, 73, 14);
+		lblNewLabel.setBounds(436, 124, 158, 17);
 		frame.getContentPane().add(lblNewLabel);
 		
 		JLabel lblWelcomeHome = new JLabel("Welcome To your Store "+StoreOwnerName);
