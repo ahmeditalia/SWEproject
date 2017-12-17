@@ -18,11 +18,11 @@ public class Cart implements Serializable{
     }
     public void AddToCart(Product product) {
         CartProducts.add(product);
-        new DataBase().UpdateProductToCart(this);
+        new DataBase().UpdateProductCart(this);
     }
     public void RemoveFromCart(Product product) {
         CartProducts.remove(product);
-        new DataBase().UpdateProductToCart(this);
+        new DataBase().UpdateProductCart(this);
     }
     public float EmptyCart() {
         float balance=0;
@@ -33,6 +33,7 @@ public class Cart implements Serializable{
             storeTmp.SellProduct(productTmp,CartOwner);
         }
         CartProducts.clear();
+        new DataBase().UpdateProductCart(this);
         return balance;
     }
     public NormalUser getCartOwner() {

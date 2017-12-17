@@ -138,7 +138,7 @@ public class DataBase implements IDataBase {
 		return list;
 	}
 
-	public void UpdateProductToCart(Cart cart) {
+	public void UpdateProductCart(Cart cart) {
 		UpdateUser(cart.getCartOwner());
 	}
 

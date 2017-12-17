@@ -290,6 +290,8 @@ public class HomePage {
 					lblNewLabel_1.setVisible(false);
 					Logout.setVisible(true);
 					userlogin.setText("Welcome " + homepagecontroller.getUser().getUsername());
+					user_name.setText("");
+					password.setText("");
 					if (homepagecontroller.getUser().getType() == 1) {
 						addtocart.setVisible(true);
 						cart.setVisible(true);
@@ -329,6 +331,7 @@ public class HomePage {
 					return;
 				}
 				updatetable(model);
+				searchtext.setText("");
 			}
 		});
 		// register

@@ -35,7 +35,7 @@ public interface IDataBase {
      */
     public List<Product> RetreiveCategoryProducts(String categoryName);
 
-    public void UpdateProductToCart(Cart cart);
+    public void UpdateProductCart(Cart cart);
 
     /**
      * @param NewUser
