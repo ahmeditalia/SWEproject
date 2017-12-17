@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import javax.swing.SwingConstants;
 
 public class ProductInfGui {
 
@@ -23,6 +24,7 @@ public class ProductInfGui {
 	private boolean view;
 	private Product product;
 	private JButton btnClose;
+	private JButton btnNewButton;
 	
 	/**
 	 * @wbp.parser.constructor
@@ -50,8 +52,9 @@ public class ProductInfGui {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		JLabel lblProdcutName = new JLabel("Prodcut Name:");
-		lblProdcutName.setForeground(new Color(255, 153, 153));
+		lblProdcutName.setForeground(new Color(178, 34, 34));
 		lblProdcutName.setBounds(53, 84, 111, 14);
 		frame.getContentPane().add(lblProdcutName);
 		btnClose = new JButton("Close");
@@ -70,7 +73,7 @@ public class ProductInfGui {
 		name.setColumns(10);
 		
 		JLabel lblProductId = new JLabel("Product ID :");
-		lblProductId.setForeground(new Color(255, 153, 153));
+		lblProductId.setForeground(new Color(178, 34, 34));
 		lblProductId.setBounds(53, 40, 111, 14);
 		frame.getContentPane().add(lblProductId);
 		
@@ -81,7 +84,7 @@ public class ProductInfGui {
 		frame.getContentPane().add(id);
 		
 		JLabel lblProdcutPrice = new JLabel("Prodcut Price :");
-		lblProdcutPrice.setForeground(new Color(255, 153, 153));
+		lblProdcutPrice.setForeground(new Color(178, 34, 34));
 		lblProdcutPrice.setBounds(53, 126, 111, 14);
 		frame.getContentPane().add(lblProdcutPrice);
 		
@@ -92,7 +95,7 @@ public class ProductInfGui {
 		frame.getContentPane().add(price);
 		
 		JLabel lblQuantity = new JLabel("Quantity :");
-		lblQuantity.setForeground(new Color(255, 153, 153));
+		lblQuantity.setForeground(new Color(178, 34, 34));
 		lblQuantity.setBounds(53, 167, 111, 14);
 		frame.getContentPane().add(lblQuantity);
 		
@@ -103,7 +106,7 @@ public class ProductInfGui {
 		frame.getContentPane().add(quantity);
 		
 		JLabel lblCategory = new JLabel("Category :");
-		lblCategory.setForeground(new Color(255, 153, 153));
+		lblCategory.setForeground(new Color(178, 34, 34));
 		lblCategory.setBounds(53, 208, 111, 14);
 		frame.getContentPane().add(lblCategory);
 		
@@ -114,7 +117,7 @@ public class ProductInfGui {
 		frame.getContentPane().add(category);
 		
 		JLabel lblBrand = new JLabel("Brand :");
-		lblBrand.setForeground(new Color(255, 153, 153));
+		lblBrand.setForeground(new Color(178, 34, 34));
 		lblBrand.setBounds(53, 254, 111, 14);
 		frame.getContentPane().add(lblBrand);
 		
@@ -125,7 +128,7 @@ public class ProductInfGui {
 		frame.getContentPane().add(brand);
 		
 		JLabel lblStore = new JLabel("Store :");
-		lblStore.setForeground(new Color(255, 153, 153));
+		lblStore.setForeground(new Color(178, 34, 34));
 		lblStore.setBounds(53, 293, 111, 14);
 		frame.getContentPane().add(lblStore);
 		
@@ -135,7 +138,7 @@ public class ProductInfGui {
 		store.setBounds(194, 290, 132, 20);
 		frame.getContentPane().add(store);
 		JLabel lblviews = new JLabel("#Views :");
-		lblviews.setForeground(new Color(255, 153, 153));
+		lblviews.setForeground(new Color(178, 34, 34));
 		lblviews.setBounds(53, 335, 111, 14);
 		frame.getContentPane().add(lblviews);
 		
@@ -161,6 +164,12 @@ public class ProductInfGui {
 		brand.setText(product.getBrand());
 		category.setText(product.getCategory());
 		store.setText(product.getStore().getStoreName());
+		
+		btnNewButton = new JButton("Product information");
+		btnNewButton.setForeground(new Color(178, 34, 34));
+		btnNewButton.setVerticalAlignment(SwingConstants.TOP);
+		btnNewButton.setBounds(-26, 11, 507, 394);
+		frame.getContentPane().add(btnNewButton);
 		
 		
 	}
