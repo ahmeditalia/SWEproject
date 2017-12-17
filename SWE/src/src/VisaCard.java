@@ -22,8 +22,9 @@ public class VisaCard extends PaymentUI {
 	/**
 	 * @wbp.parser.constructor
 	 */
-	public VisaCard(HomePage homePage) {
+	public VisaCard(CartPage cartPage,HomePage homePage) {
 		this.homePage = homePage;
+		this.cartPage=cartPage;
 		initialize();
 	}
 
@@ -77,7 +78,12 @@ public class VisaCard extends PaymentUI {
 			public void actionPerformed(ActionEvent arg0) {
 				if (username.getText().equals("") || password.getText().equals("") || cardnumber.getText().equals("")) {
 					JOptionPane.showMessageDialog(null, "All information require");
+					username.setText("");
+					password.setText("");
+					cardnumber.setText("");
+					return;
 				}
+				JOptionPane.showMessageDialog(null, cartPage.getCartController().EmptyCart());
 				homePage.getFrmHomepage().setVisible(true);
 				VisaCard.setVisible(false);
 			}
