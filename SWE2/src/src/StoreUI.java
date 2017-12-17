@@ -162,8 +162,6 @@ public class StoreUI {
 		});
 		btnHomePage.setBounds(34, 276, 100, 23);
 		frame.getContentPane().add(btnHomePage);
-		
-		
 		JLabel IMAGE = new JLabel("");
 		IMAGE.setBounds(34, 11, 304, 244);
 		frame.getContentPane().add(IMAGE);
