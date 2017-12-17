@@ -117,9 +117,7 @@ public class StoreUI {
 		txtGetstorename.setBounds(214, 324, 144, 26);
 		frame.getContentPane().add(txtGetstorename);
 		txtGetstorename.setColumns(10);
-		for(Store s:sotreController.getCurrentUser().getOwnedStores() ){
-			comboMostViewed.addItem(s.getStoreName());
-		}
+		
 		
 		JButton btnHomePage = new JButton("Home Page");
 		btnHomePage.addActionListener(new ActionListener() {
