@@ -35,7 +35,7 @@ public class RegisterPage {
 	 */
 	private void initialize() {
 		frmRegister = new JFrame();
-		frmRegister.getContentPane().setBackground(Color.LIGHT_GRAY);
+		frmRegister.getContentPane().setBackground(new Color(178, 34, 34));
 		frmRegister.setSize(1650, 1080);
 		frmRegister.setTitle("Register");
 		frmRegister.setExtendedState(Frame.MAXIMIZED_BOTH);
@@ -44,6 +44,7 @@ public class RegisterPage {
 		frmRegister.getContentPane().setLayout(null);
 
 		JPanel panel = new JPanel();
+		panel.setBackground(new Color(255, 153, 153));
 		panel.setBorder(
 				new TitledBorder(null, "Register", TitledBorder.CENTER, TitledBorder.TOP, null, Color.DARK_GRAY));
 		panel.setBounds(430, 60, 521, 644);

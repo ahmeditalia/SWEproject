@@ -2,6 +2,7 @@ package src;
 
 import java.awt.EventQueue;
 import javax.swing.JFrame;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -12,6 +13,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import java.awt.Color;
 
 public class Adminform {
 
@@ -22,23 +24,10 @@ public class Adminform {
 	private JTextField Brand;
 	private JTextField product;
 	List<Product> retreiveCategoryProducts;
-/*
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Adminform window = new Adminform();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-*/
 	/**
-	 * Create the application.
+	 * @wbp.parser.constructor
 	 */
+	
 	public Adminform() {
 		retreiveCategoryProducts = new ArrayList<>();
 		adminController=new AdminController();
@@ -51,40 +40,41 @@ public class Adminform {
 		this.homePage=homePage;
 		initialize();
 	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
+	
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 729, 464);
+		frame.getContentPane().setBackground(new Color(51, 153, 204));
+		frame.setBounds(100, 100, 794, 496);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
 		JLabel productlabel = new JLabel("Product");
-		productlabel.setBounds(60, 172, 46, 14);
+		productlabel.setForeground(new Color(255, 153, 153));
+		productlabel.setBounds(112, 257, 46, 14);
 		frame.getContentPane().add(productlabel);
 
 		JLabel categorylabel = new JLabel("Category :");
-		categorylabel.setBounds(60, 197, 66, 21);
+		categorylabel.setForeground(new Color(255, 153, 153));
+		categorylabel.setBounds(112, 282, 66, 21);
 		frame.getContentPane().add(categorylabel);
 
 		JLabel brandlabel = new JLabel("Brand :");
-		brandlabel.setBounds(60, 232, 46, 14);
+		brandlabel.setForeground(new Color(255, 153, 153));
+		brandlabel.setBounds(112, 317, 46, 14);
 		frame.getContentPane().add(brandlabel);
 
 		product = new JTextField();
-		product.setBounds(127, 169, 131, 20);
+		product.setBounds(179, 254, 131, 20);
 		frame.getContentPane().add(product);
 		product.setColumns(10);
 
 		Category = new JTextField();
-		Category.setBounds(127, 197, 131, 20);
+		Category.setBounds(179, 282, 131, 20);
 		frame.getContentPane().add(Category);
 		Category.setColumns(10);
 
 		Brand = new JTextField();
-		Brand.setBounds(127, 229, 131, 20);
+		Brand.setBounds(179, 314, 131, 20);
 		frame.getContentPane().add(Brand);
 		Brand.setColumns(10);
 
@@ -147,10 +137,10 @@ public class Adminform {
 			}
 
 		});
-		addproduct.setBounds(10, 27, 180, 23);
+		addproduct.setBounds(74, 162, 180, 23);
 		frame.getContentPane().add(addproduct);
 
-		add.setBounds(60, 270, 73, 23);
+		add.setBounds(112, 355, 73, 23);
 		frame.getContentPane().add(add);
 
 
@@ -159,11 +149,11 @@ public class Adminform {
 		for (int i = 0; i < retreiveCategoryProducts.size(); i++) {
 			comboBox.addItem(retreiveCategoryProducts.get(i).getName());
 		}
-		comboBox.setBounds(268, 169, 186, 21);
+		comboBox.setBounds(320, 254, 186, 21);
 		frame.getContentPane().add(comboBox);
 
 		JButton btnAddBrandTosystem = new JButton("Add Brand ToSystem");
-		btnAddBrandTosystem.setBounds(209, 27, 147, 23);
+		btnAddBrandTosystem.setBounds(273, 162, 147, 23);
 		frame.getContentPane().add(btnAddBrandTosystem);
 
 		JButton btnAddVoucherCard = new JButton("Add Voucher Card Number");
@@ -172,7 +162,7 @@ public class Adminform {
 				adminController.voucherGenerator();
 			}
 		});
-		btnAddVoucherCard.setBounds(378, 27, 168, 23);
+		btnAddVoucherCard.setBounds(442, 162, 168, 23);
 		frame.getContentPane().add(btnAddVoucherCard);
 		
 		JButton hompage = new JButton("Hompage");
@@ -182,8 +172,14 @@ public class Adminform {
 				homePage.getFrmHomepage().setVisible(true);
 			}
 		});
-		hompage.setBounds(469, 367, 89, 23);
+		hompage.setBounds(331, 367, 89, 23);
 		frame.getContentPane().add(hompage);
+		
+		JLabel AdminLabs = new JLabel("");
+		AdminLabs.setIcon(new ImageIcon("F:\\y3_1\\SW\\proj\\implementation\\SWEproject\\SWE2\\images\\adminlabs.png"));
+		AdminLabs.setBounds(141, 11, 489, 114);
+		frame.getContentPane().add(AdminLabs);
+		//ImageIcon img1= new ImageIcon(location)
 
 	}
 }

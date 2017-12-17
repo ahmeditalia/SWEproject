@@ -48,19 +48,9 @@ public class StoreUI {
 	public StoreUIController getStoreUIController(){
 		return sotreController;
 	}
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-		
-			public void run() {
-				try {
-					StoreUI window = new StoreUI();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	/**
+	 * @wbp.parser.constructor
+	 */
 	
 	public StoreUI() {
 		initialize();
