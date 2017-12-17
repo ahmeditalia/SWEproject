@@ -36,38 +36,39 @@ public class Adminform {
 	
 	private void initialize() {
 		frame = new JFrame();
-		frame.getContentPane().setBackground(new Color(51, 153, 204));
+		frame.getContentPane().setBackground(new Color(178, 34, 34));
 		frame.setBounds(100, 100, 794, 496);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		JLabel productlabel = new JLabel("Product");
-		productlabel.setForeground(new Color(255, 153, 153));
-		productlabel.setBounds(112, 257, 46, 14);
+		productlabel.setForeground(new Color(178, 34, 34));
+		productlabel.setBounds(642, 340, 46, 14);
 		frame.getContentPane().add(productlabel);
 
 		JLabel categorylabel = new JLabel("Category :");
-		categorylabel.setForeground(new Color(255, 153, 153));
-		categorylabel.setBounds(112, 282, 66, 21);
+		categorylabel.setForeground(new Color(178, 34, 34));
+		categorylabel.setBounds(642, 365, 66, 21);
 		frame.getContentPane().add(categorylabel);
 
 		JLabel brandlabel = new JLabel("Brand :");
-		brandlabel.setForeground(new Color(255, 153, 153));
-		brandlabel.setBounds(112, 317, 46, 14);
+		brandlabel.setForeground(new Color(178, 34, 34));
+		brandlabel.setBounds(642, 389, 46, 14);
 		frame.getContentPane().add(brandlabel);
 
 		product = new JTextField();
-		product.setBounds(179, 254, 131, 20);
+		product.setBounds(709, 337, 131, 20);
 		frame.getContentPane().add(product);
 		product.setColumns(10);
 
 		Brand = new JTextField();
-		Brand.setBounds(179, 314, 131, 20);
+		Brand.setBounds(709, 397, 131, 20);
 		frame.getContentPane().add(Brand);
 		Brand.setColumns(10);
 
 		JComboBox<String> Category = new JComboBox<String>();
-		Category.setBounds(179, 282, 131, 21);
+		Category.setBounds(709, 365, 131, 21);
 		frame.getContentPane().add(Category);
 		Category.addItem("none");
 		for(String category:adminController.getCategories())
@@ -129,10 +130,10 @@ public class Adminform {
 			}
 
 		});
-		addproduct.setBounds(30, 162, 212, 23);
+		addproduct.setBounds(378, 344, 212, 23);
 		frame.getContentPane().add(addproduct);
 
-		add.setBounds(112, 355, 73, 23);
+		add.setBounds(642, 427, 73, 23);
 		frame.getContentPane().add(add);
 
 
@@ -141,11 +142,11 @@ public class Adminform {
 		for (int i = 0; i < retreiveCategoryProducts.size(); i++) {
 			comboBox.addItem(retreiveCategoryProducts.get(i).getName());
 		}
-		comboBox.setBounds(320, 254, 186, 21);
+		comboBox.setBounds(850, 337, 186, 21);
 		frame.getContentPane().add(comboBox);
 
 		JButton btnAddBrandTosystem = new JButton("Add Brand ToSystem");
-		btnAddBrandTosystem.setBounds(286, 162, 210, 23);
+		btnAddBrandTosystem.setBounds(378, 382, 210, 23);
 		frame.getContentPane().add(btnAddBrandTosystem);
 
 		JButton btnAddVoucherCard = new JButton("Add Voucher Card Number");
@@ -154,7 +155,7 @@ public class Adminform {
 				JOptionPane.showMessageDialog(null, adminController.voucherGenerator());
 			}
 		});
-		btnAddVoucherCard.setBounds(547, 162, 199, 23);
+		btnAddVoucherCard.setBounds(378, 427, 212, 23);
 		frame.getContentPane().add(btnAddVoucherCard);
 		
 		JButton hompage = new JButton("Hompage");
@@ -164,14 +165,19 @@ public class Adminform {
 				homePage.getFrmHomepage().setVisible(true);
 			}
 		});
-		hompage.setBounds(331, 367, 89, 23);
+		hompage.setBounds(378, 302, 89, 23);
 		frame.getContentPane().add(hompage);
 		
 		JLabel AdminLabs = new JLabel("");
 		AdminLabs.setIcon(new ImageIcon("images\\adminlabs.png"));
-		AdminLabs.setBounds(141, 11, 489, 114);
+		AdminLabs.setBounds(461, 123, 489, 114);
 		frame.getContentPane().add(AdminLabs);
 		
+		JButton button = new JButton("");
+		button.setBackground(new Color(102, 153, 255));
+		button.setBounds(326, 120, 753, 490);
+		frame.getContentPane().add(button);
+		button.setEnabled(false);
 
 
 	}
