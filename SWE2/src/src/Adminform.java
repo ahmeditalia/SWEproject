@@ -179,7 +179,7 @@ public class Adminform {
 		frame.getContentPane().add(hompage);
 		
 		JLabel AdminLabs = new JLabel("");
-		AdminLabs.setIcon(new ImageIcon("images\\adminlabs.png"));
+		AdminLabs.setIcon(new ImageIcon("F:\\y3_1\\SW\\proj\\implementation\\SWEproject\\SWE2\\images\\adminlabs.png"));
 		AdminLabs.setBounds(141, 11, 489, 114);
 		frame.getContentPane().add(AdminLabs);
 		

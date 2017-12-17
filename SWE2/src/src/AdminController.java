@@ -21,7 +21,7 @@ public class AdminController {
 	}
 
 	public List<Product> getSuggestedProducts() {
-		return new DataBase().RetreiveSuggestedProduct();
+		return new DataBase().RetreiveSysProducts();
 	}
 	public Administrator getAdmin() {
 		return admin;
@@ -30,12 +30,7 @@ public class AdminController {
 		this.admin = admin;
 	}
 	
-	public List<String> getCategories()
-	{
-		return new DataBase().RetreiveCategoriesNames();
-	}
-	
-	public String voucherGenerator()
+	public void voucherGenerator()
 	{
 		String alphabet="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabscdefghijklmnopqrstuvwxyz";
 		String voucherNo="";
@@ -45,6 +40,5 @@ public class AdminController {
 			voucherNo+=alphabet.charAt(random.nextInt(alphabet.length()));
 		}
 		new DataBase().provideVoucherCard(voucherNo);
-		return voucherNo;
 	}
 }
