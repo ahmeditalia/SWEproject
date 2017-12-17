@@ -244,7 +244,6 @@ public class HomePage {
 			public void actionPerformed(ActionEvent e) {
 				updateproducts(boxcategory.getSelectedItem().toString(), boxstores.getSelectedItem().toString());
 				updatetable(model);
-				System.out.println("change " + viewedProducts.size());
 			}
 		});
 		// changestore
