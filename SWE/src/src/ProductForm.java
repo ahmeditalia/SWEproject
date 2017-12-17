@@ -40,50 +40,51 @@ public class ProductForm {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		JLabel lblProductName = new JLabel("Name :");
 		lblProductName.setForeground(new Color(255, 153, 153));
-		lblProductName.setBounds(70, 68, 74, 14);
+		lblProductName.setBounds(498, 355, 74, 14);
 		frame.getContentPane().add(lblProductName);
 		
 		JLabel lblPrice = new JLabel("Price :");
 		lblPrice.setForeground(new Color(255, 153, 153));
-		lblPrice.setBounds(70, 184, 46, 14);
+		lblPrice.setBounds(498, 407, 46, 14);
 		frame.getContentPane().add(lblPrice);
 		
 		JLabel lblCategory = new JLabel("Category :");
 		lblCategory.setForeground(new Color(255, 153, 153));
-		lblCategory.setBounds(70, 110, 57, 14);
+		lblCategory.setBounds(498, 291, 57, 14);
 		frame.getContentPane().add(lblCategory);
 		
 		JLabel lblBrand = new JLabel("Brand :");
 		lblBrand.setForeground(new Color(255, 153, 153));
-		lblBrand.setBounds(70, 149, 46, 14);
+		lblBrand.setBounds(498, 324, 46, 14);
 		frame.getContentPane().add(lblBrand);
 		
 		JLabel lblQuantity = new JLabel("Quantity:");
 		lblQuantity.setForeground(new Color(255, 153, 153));
-		lblQuantity.setBounds(70, 212, 46, 14);
+		lblQuantity.setBounds(498, 435, 46, 14);
 		frame.getContentPane().add(lblQuantity);
 		
 		txtPrice = new JTextField();
-		txtPrice.setBounds(154, 177, 209, 20);
+		txtPrice.setBounds(582, 400, 209, 20);
 		frame.getContentPane().add(txtPrice);
 		txtPrice.setColumns(10);
 		
 		txtQuantity = new JTextField();
-		txtQuantity.setBounds(154, 209, 209, 20);
+		txtQuantity.setBounds(582, 432, 209, 20);
 		frame.getContentPane().add(txtQuantity);
 		txtQuantity.setColumns(10);
 
 		JComboBox<String> Categories = new JComboBox<String>();
-		Categories.setBounds(154, 107, 209, 17);
+		Categories.setBounds(582, 288, 209, 17);
 		frame.getContentPane().add(Categories);
-		Categories.addItem("");
+		Categories.addItem("select category");
 		for(int i=0;i<storeGUI.getStoreUIController().getCategoriesNames().size();i++){
 			Categories.addItem(storeGUI.getStoreUIController().getCategoriesNames().get(i));
 		}
 		JComboBox<String> Brands = new JComboBox<String>();
-		Brands.setBounds(154, 146, 209, 20);
+		Brands.setBounds(582, 321, 209, 20);
 		frame.getContentPane().add(Brands);
 		Brands.addItem("");
 		for(int i=0;i<storeGUI.getStoreUIController().getBrandsNames().size();i++){
@@ -94,8 +95,7 @@ public class ProductForm {
 		productName.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(productName.getSelectedItem()!="")
-				{
-					Categories.setSelectedItem(products.get(productName.getSelectedIndex()-1).getCategory());
+				{	Categories.setSelectedItem(products.get(productName.getSelectedIndex()-1).getCategory());
 					Brands.setSelectedItem(products.get(productName.getSelectedIndex()-1).getBrand());
 				}
 			}
@@ -124,7 +124,7 @@ public class ProductForm {
 				}
 			}
 		});
-		btnAddProduct.setBounds(194, 275, 123, 23);
+		btnAddProduct.setBounds(622, 498, 123, 23);
 		frame.getContentPane().add(btnAddProduct);
 		
 		JButton btnSugestProduct = new JButton("Suggest Product");
@@ -138,7 +138,7 @@ public class ProductForm {
 				}
 			}
 		});
-		btnSugestProduct.setBounds(194, 240, 111, 23);
+		btnSugestProduct.setBounds(622, 463, 111, 23);
 		frame.getContentPane().add(btnSugestProduct);
 		JButton btnStorePage = new JButton("Back to store");
 		btnStorePage.addActionListener(new ActionListener() {
@@ -147,14 +147,21 @@ public class ProductForm {
 			}
 		});
 		
-		btnStorePage.setBounds(70, 22, 111, 23);
+		btnStorePage.setBounds(498, 245, 111, 23);
 		frame.getContentPane().add(btnStorePage);
-		productName.setBounds(154, 65, 209, 20);
+		productName.setBounds(582, 352, 209, 20);
 		frame.getContentPane().add(productName);
 		SuggestedPName = new JTextField();
-		SuggestedPName.setBounds(154, 65, 209, 20);
+		SuggestedPName.setBounds(582, 352, 209, 20);
 		frame.getContentPane().add(SuggestedPName);
 		SuggestedPName.setColumns(10);
+		
+		JLabel lblEnterProductInformation = new JLabel("                               Enter product information");
+		lblEnterProductInformation.setVerticalAlignment(SwingConstants.TOP);
+		lblEnterProductInformation.setBackground(new Color(255, 153, 153));
+		lblEnterProductInformation.setForeground(Color.BLACK);
+		lblEnterProductInformation.setBounds(396, 132, 458, 467);
+		frame.getContentPane().add(lblEnterProductInformation);
 		btnAddProduct.setVisible(addOrSuggest);
 		productName.setVisible(addOrSuggest);
 		txtPrice.setVisible(addOrSuggest);
