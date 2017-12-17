@@ -62,17 +62,6 @@ public class StoreUI {
 		});
 	}
 	
-	/**
-	 * Create the application.
-	 */
-	/*private Image scalImage(Image img, int w,int h){
-		BufferedImage image= new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
-		Graphics2D g=  image.createGraphics();
-		g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-		g.drawImage(img, 0, 0,w,h, null);
-		g.dispose();
-		return image;
-	}*/
 	public StoreUI() {
 		initialize();
 	}
@@ -178,7 +167,7 @@ public class StoreUI {
 		JLabel IMAGE = new JLabel("");
 		IMAGE.setBounds(34, 11, 304, 244);
 		frame.getContentPane().add(IMAGE);
-		ImageIcon backGround =new ImageIcon("F:\\y3_1\\SW\\proj\\implementation\\SWEproject\\images\\create-your-own-online-store.jpg");
+		ImageIcon backGround =new ImageIcon("images\\create-your-own-online-store.jpg");
 		IMAGE.setIcon(backGround);
 		
 		JComboBox<String> selectStoreToShow = new JComboBox<String>();

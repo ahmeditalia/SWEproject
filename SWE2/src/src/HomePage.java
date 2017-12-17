@@ -186,7 +186,7 @@ public class HomePage {
 		separator_3.setBounds(10, 75, 1342, 2);
 		frmHomepage.getContentPane().add(separator_3);
 		JLabel logolabel = new JLabel("");
-		ImageIcon backGround =new ImageIcon("F:\\y3_1\\SW\\proj\\implementation\\SWEproject\\images\\images.png");
+		ImageIcon backGround =new ImageIcon("images\\images.png");
 		logolabel.setIcon(backGround);
 		logolabel.setHorizontalAlignment(SwingConstants.CENTER);
 		logolabel.setFont(new Font("Source Sans Pro", Font.BOLD, 11));
