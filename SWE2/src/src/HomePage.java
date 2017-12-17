@@ -36,7 +36,7 @@ public class HomePage {
 	}
 
 	private void updateproducts(String categoryname, String storename) {
-		viewedProducts = new ArrayList<>(homepagecontroller.getAllProducts());
+		viewedProducts = new ArrayList<>(homepagecontroller.getProducts(categoryname, storename));
 	}
 
 	public static void main(String[] args) {
@@ -180,7 +180,7 @@ public class HomePage {
 		};
 		table.setModel(model);
 		model.setColumnIdentifiers(columnsnames);
-		updateproducts("All", "All");
+		viewedProducts = new ArrayList<>(homepagecontroller.getAllProducts());
 		updatetable(model);
 		//model.addRow(new Object[] {"sdsa","sdsa","asd","asds","sdsa","sdsa","asd","asds"});
 		JSeparator separator_3 = new JSeparator();
