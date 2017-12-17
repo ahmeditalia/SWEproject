@@ -24,6 +24,7 @@ import javax.swing.text.TabableView;
 import javax.xml.ws.handler.MessageContext;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JComboBox;
 import javax.swing.JCheckBox;
 import java.awt.Color;
@@ -104,6 +105,7 @@ public class StoreUI {
 		btnAddSotre.setBounds(34, 321, 158, 29);
 		frame.getContentPane().add(btnAddSotre);
 		JComboBox<String> StoreList = new JComboBox<String>();
+		StoreList.addItem("select store");
 		for(Store s:sotreController.getCurrentUser().getOwnedStores() ){
 			StoreList.addItem(s.getStoreName());
 		}
@@ -112,9 +114,11 @@ public class StoreUI {
 		JButton btnAddProduct = new JButton("Add product to store");
 		btnAddProduct.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(StoreList.getSelectedItem().toString()!="select store"){
 				sotreController.setCurrentStore(StoreList.getSelectedItem().toString());
-				//frame.setVisible(false);
 				ProductForm pForm = new  ProductForm(StoreUI.this,true);
+				}else
+					JOptionPane.showMessageDialog(null, "select a store first!!");
 				}
 		});
 		btnAddProduct.setBounds(34, 370, 158, 33);
@@ -134,9 +138,14 @@ public class StoreUI {
 		JButton btnOGetThe = new JButton("Most viewed product ");
 		btnOGetThe.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(StoreList.getSelectedItem().toString()!="select store"){
 				sotreController.setCurrentStore(StoreList.getSelectedItem().toString());
 				ProductInfGui pGui= new ProductInfGui(sotreController.getCurrentStore().getMostViewedP(),true);
-			}
+				
+				}else
+					JOptionPane.showMessageDialog(null, "select a store first!!");
+
+				}
 		});
 		btnOGetThe.setBounds(34, 425, 158, 29);
 		frame.getContentPane().add(btnOGetThe);
@@ -148,6 +157,7 @@ public class StoreUI {
 
 		
 		JComboBox<String> comboMostViewed = new JComboBox<String>();
+		comboMostViewed.addItem("select store");
 		comboMostViewed.setBounds(213, 428, 145, 23);
 		frame.getContentPane().add(comboMostViewed);
 		for(Store s:sotreController.getCurrentUser().getOwnedStores() ){
@@ -172,6 +182,8 @@ public class StoreUI {
 		IMAGE.setIcon(backGround);
 		
 		JComboBox<String> selectStoreToShow = new JComboBox<String>();
+		selectStoreToShow.addItem("All stores");
+
 		selectStoreToShow.setBounds(771, 122, 175, 20);
 		frame.getContentPane().add(selectStoreToShow);
 		for(Store s:sotreController.getCurrentUser().getOwnedStores() ){
@@ -197,12 +209,22 @@ public class StoreUI {
 		JButton btnDisplayStoreProducts = new JButton("Display Store Products");
 		btnDisplayStoreProducts.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				sotreController.setCurrentStore(selectStoreToShow.getSelectedItem().toString());
 				model.setRowCount(0);
+				if(selectStoreToShow.getSelectedItem().toString()=="All stores"){
+					for(Store s:sotreController.getCurrentUser().getOwnedStores()){
+						for(Product p:s.getStoreProducts()){
+							Object[] row= {p.getID(),p.getName(),p.getQuantity(),p.getPrice(),p.getCategory(),p.getBrand(),p.getViews(),s.getStoreName()};
+							model.addRow(row);
+						}
+					}
+				}else{
+				sotreController.setCurrentStore(selectStoreToShow.getSelectedItem().toString());
 				for(Product p: sotreController.getCurrentStore().getStoreProducts()){
 					Object[] row= {p.getID(),p.getName(),p.getQuantity(),p.getPrice(),p.getCategory(),p.getBrand(),p.getViews(),sotreController.getCurrentStore().getStoreName()};
 					model.addRow(row);
 				}
+				}
+				
 			}
 		});
 		btnDisplayStoreProducts.setBounds(564, 121, 168, 23);
