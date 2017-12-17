@@ -435,4 +435,14 @@ public class DataBase implements IDataBase {
 		updateStoreInfo(product.getStore());
 	}
 
+	@Override
+	public void deleteProduct(Product product) {
+		Path path = Paths.get(product.getName() + "_" + product.getID() + ".txt");
+		try {
+			Files.delete(path);
+		} catch (Exception e) {
+		}
+		updateStoreInfo(product.getStore());
+	}
+	
 }

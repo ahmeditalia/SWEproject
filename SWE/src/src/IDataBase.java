@@ -83,4 +83,6 @@ public interface IDataBase {
     public void updateStoreInfo(Store store);
         
     public void updateProductInfo(Product product);
+    
+    public void deleteProduct(Product product);
 }
