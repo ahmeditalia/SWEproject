@@ -27,6 +27,11 @@ public class HomePage {
 	}
 
 	private void updatetable(DefaultTableModel model) {
+		int rowcount=model.getRowCount();
+		for(int i=rowcount-1;i>=0;i--)
+		{
+			model.removeRow(i);
+		}
 		for (Product product : viewedProducts) {
 			Object[] row = { product.getID(), product.getName(), Float.toString(product.getPrice()),
 					Integer.toString(product.getQuantity()), product.getCategory(), product.getBrand(),
@@ -124,7 +129,7 @@ public class HomePage {
 		List<String> stores = new ArrayList<>();
 		stores = new DataBase().RetreiveStoreNames();
 		for (String a : stores) {
-			boxstores.addItem(a);
+			boxstores.addItem(a.substring(0, a.indexOf("_")));
 
 		}
 		// end modification
@@ -250,7 +255,6 @@ public class HomePage {
 		// changecategory
 		boxcategory.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Cat change");
 				updateproducts(boxcategory.getSelectedItem().toString(), boxstores.getSelectedItem().toString());
 				updatetable(model);
 			}
@@ -258,7 +262,6 @@ public class HomePage {
 		// changestore
 		boxstores.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("store change");
 				updateproducts(boxcategory.getSelectedItem().toString(), boxstores.getSelectedItem().toString());
 				updatetable(model);
 			}
@@ -307,7 +310,7 @@ public class HomePage {
 		addtocart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				for (int i = 0; i < table.getRowCount(); i++) {
-					boolean select = Boolean.parseBoolean(table.getModel().getValueAt(i, 1).toString());
+					boolean select = Boolean.parseBoolean(table.getModel().getValueAt(i, 7).toString());
 					if (select) {
 						homepagecontroller.AddToCart(viewedProducts.get(i));
 					}
@@ -320,11 +323,12 @@ public class HomePage {
 		search.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String textsearch = searchtext.getText();
-				List<Product> searchresult = homepagecontroller.DirectSearch(textsearch);
-				if (searchresult == null || searchresult.isEmpty()) {
+				viewedProducts = homepagecontroller.DirectSearch(textsearch);
+				if (viewedProducts == null || viewedProducts.isEmpty()) {
 					JOptionPane.showMessageDialog(null, "NOT EXCITE !");
 					return;
 				}
+				updatetable(model);
 			}
 		});
 		// register

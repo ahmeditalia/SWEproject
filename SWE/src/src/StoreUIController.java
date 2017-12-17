@@ -1,7 +1,5 @@
 package src;
 
-
-
 import java.util.*;
 
 /**
@@ -9,85 +7,75 @@ import java.util.*;
  */
 public class StoreUIController {
 
-    /**
-     * Default constructor
-     */
-    public StoreUIController() {
-    }
-
-    public StoreUIController(StoreOwner user) {
-    	CurrentUser=user;
+	/**
+	 * Default constructor
+	 */
+	public StoreUIController() {
 	}
-    private StoreOwner CurrentUser;
-    private Store CurrentStore;
-    private IDataBase database= new DataBase();
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public void addNewStore(String Sname) {
-    	Store store=new Store(Sname, CurrentUser);
-    	CurrentUser.AddNewStore(store);
-    	database.InsertNewStore(store);
-    	
+	public StoreUIController(StoreOwner user) {
+		CurrentUser = user;
 	}
-    public List<String> getBrandsNames(){
-    	return database.RetreiveBrandsNames();
-    }
-    public List<String> getCategoriesNames(){
-    	return database.RetreiveCategoriesNames();
-    }
-    
-    public Store searchForStore(String sName){
-    	return  CurrentUser.searchForStore(sName);
-    }   
-    
-    public void setCurrentStore(String currS){
-    	CurrentStore= searchForStore(currS);
-    }
-    public Store getCurrentStore() {
-        // TODO implement here
-        return CurrentStore;
-    }
-    public void AddProduct(String ProductName, float price, int quantity, String category, String brand) {
-    	Product newP= new Product();
-		newP.setName(ProductName);
-		newP.setPrice(price);
-		newP.setQuantity(quantity);
-		newP.setCategory(category);
-		newP.setBrand(brand);
-		CurrentUser.AddProductToStore(newP,CurrentStore.getStoreName());
-		database.InsertProductToStore(CurrentStore, newP);
-    }
 
-    public StoreOwner getCurrentUser() {
-        // TODO implement here
-        return CurrentUser;
-    }
+	private StoreOwner CurrentUser;
+	private Store CurrentStore;
 
-    /**
-     * @param value
-     */
-    public void setCurrentUser(StoreOwner value) {
-        // TODO implement here
-    }
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	public void addNewStore(String Sname) {
+		CurrentUser.AddNewStore(Sname);
+	}
 
-    /**
-     * @return
-     */
-     
-    public void SuggestProduct(String productName, String Category, String Brand) {
-        // TODO implement here
-    	database.InsertSuggestedProduct(new Product( productName, Category, Brand));
-    }
+	public List<String> getBrandsNames() {
+		return new DataBase().RetreiveBrandsNames();
+	}
 
-    /**
-     * @return
-     */
-    public List<Product> GetSystemProducts() {
-        // TODO implement here
-        return database.RetreiveSysProducts();
-    }
-   
-    public void ChangeStore(String storeName) {
-        // TODO implement here
-    }
+	public List<String> getCategoriesNames() {
+		return new DataBase().RetreiveCategoriesNames();
+	}
+
+	public Store searchForStore(String sName) {
+		return CurrentUser.searchForStore(sName);
+	}
+
+	public void setCurrentStore(String currS) {
+		CurrentStore = searchForStore(currS);
+	}
+
+	public Store getCurrentStore() {
+		return CurrentStore;
+	}
+
+	public void AddProduct(String ProductName, float price, int quantity, String category, String brand) {
+		CurrentStore.AddProduct(ProductName, price, quantity, category, brand);
+	}
+
+	public StoreOwner getCurrentUser() {
+		return CurrentUser;
+	}
+
+	/**
+	 * @param value
+	 */
+	public void setCurrentUser(StoreOwner value) {
+		this.CurrentUser = value;
+	}
+
+	/**
+	 * @return
+	 */
+
+	public void SuggestProduct(String productName, String Category, String Brand) {
+		new DataBase().InsertSuggestedProduct(new Product(productName, Category, Brand));
+	}
+
+	/**
+	 * @return
+	 */
+	public List<Product> GetSystemProducts() {
+		return new DataBase().RetreiveSysProducts();
+	}
+
+	public void ChangeStore(int storeindex) {
+		this.CurrentStore=CurrentUser.getOwnedStores().get(storeindex);
+	}
 }

@@ -8,16 +8,15 @@ import java.awt.event.ActionEvent;
 public class PaymentUI {
 
 	private JFrame Payment;
-	private CartController cartController;
+	private CartPage cartPage;
 	protected HomePage homePage;
 
 	/**
 	 * @wbp.parser.constructor
 	 */
-	public PaymentUI(Cart cart, HomePage homePage) {
+	public PaymentUI(CartPage cartpage, HomePage homePage) {
 		this.homePage = homePage;
-		cartController = new CartController((NormalUser)this.homePage.getHomepagecontroller().getUser());
-		cartController.setUserCart(cart);
+		cartPage=cartpage;
 		initialize();
 	}
 

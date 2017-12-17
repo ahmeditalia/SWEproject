@@ -3,6 +3,7 @@ package src;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
@@ -16,9 +17,9 @@ public class CartPage {
 
 	
 	public CartPage(Cart cart,HomePage homepage) {
-		initialize();
 		this.cart = cart;
 		this.homePage = homepage;
+		initialize();
 	}
 	/**
 	 * @wbp.parser.entryPoint
@@ -30,6 +31,24 @@ public class CartPage {
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	private void updatetable(DefaultTableModel model) {
+		int rowcount=model.getRowCount();
+		for(int i=rowcount-1;i>=0;i--)
+		{
+			model.removeRow(i);
+		}
+		for (Product product : cart.getCartProducts()) {
+			Object[] row = {product.getName(), Float.toString(product.getPrice()),
+					Integer.toString(product.getQuantity()), product.getCategory(), product.getBrand(),
+					product.getStore().getStoreName(), false };
+			model.addRow(row);
+		}
+	}
+	
+	public JFrame getFrmHomepage() {
+		return frmCartpage;
+	} 
+	
 	private void initialize() {
 		frmCartpage = new JFrame();
 		frmCartpage.getContentPane().setBackground(new Color(178, 34, 34));
@@ -58,12 +77,12 @@ public class CartPage {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 114, 807, 272);
 		panel.add(scrollPane);
-		String[] columnsnames = {"Product Name", "Price","Category", "Brand", "Store" };
+		String[] columnsnames = {"Product Name", "Price","Quantity","Category", "Brand", "Store" };
 		table = new JTable(new DefaultTableModel(new String[][] {},columnsnames));
 		scrollPane.setViewportView(table);
 		Purchase.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new PaymentUI(cart,homePage);
+				new PaymentUI(CartPage.this,homePage);
 				frmCartpage.setVisible(false);
 			}
 		});
@@ -73,5 +92,7 @@ public class CartPage {
 				frmCartpage.setVisible(false);
 			}
 		});
+		DefaultTableModel model=(DefaultTableModel)table.getModel();
+		updatetable(model);
 	}
 }

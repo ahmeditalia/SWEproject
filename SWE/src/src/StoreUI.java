@@ -133,6 +133,14 @@ public class StoreUI {
 		IMAGE.setIcon(backGround);
 		
 		JComboBox<String> selectStoreToShow = new JComboBox<String>();
+		selectStoreToShow.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(selectStoreToShow.getSelectedItem()!="All stores")
+				{
+					sotreController.ChangeStore(selectStoreToShow.getSelectedIndex()-1);
+				}
+			}
+		});
 		selectStoreToShow.addItem("All stores");
 
 		selectStoreToShow.setBounds(771, 122, 175, 20);
@@ -169,7 +177,6 @@ public class StoreUI {
 						}
 					}
 				}else{
-				sotreController.setCurrentStore(selectStoreToShow.getSelectedItem().toString());
 				for(Product p: sotreController.getCurrentStore().getStoreProducts()){
 					Object[] row= {p.getID(),p.getName(),p.getQuantity(),p.getPrice(),p.getCategory(),p.getBrand(),p.getViews(),sotreController.getCurrentStore().getStoreName()};
 					model.addRow(row);
