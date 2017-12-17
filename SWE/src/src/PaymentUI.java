@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 public class PaymentUI {
 
 	private JFrame Payment;
-	private CartPage cartPage;
+	protected CartPage cartPage;
 	protected HomePage homePage;
 
 	/**
@@ -66,13 +66,13 @@ public class PaymentUI {
 					return;
 				}
 					if (visacard.isSelected()) {
-						new VisaCard(homePage);
+						new VisaCard(cartPage,homePage);
 						Payment.setVisible(false);
 					} else if (vouchercard.isSelected()) {
-						new VoucherCard(homePage);
+						new VoucherCard(cartPage,homePage);
 						Payment.setVisible(false);
 					} else {
-						cartController.EmptyCart();
+						JOptionPane.showMessageDialog(null, cartPage.getCartController().EmptyCart());
 						homePage.getFrmHomepage().setVisible(true);
 						Payment.setVisible(false);
 					}

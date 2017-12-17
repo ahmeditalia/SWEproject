@@ -12,12 +12,12 @@ public class CartPage {
 
 	private JFrame frmCartpage;
 	private HomePage homePage;
-	private Cart cart;
+	private CartController cartController;
 	private JTable table;
 
 	
 	public CartPage(Cart cart,HomePage homepage) {
-		this.cart = cart;
+		this.cartController = new CartController(cart);
 		this.homePage = homepage;
 		initialize();
 	}
@@ -31,13 +31,18 @@ public class CartPage {
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	public CartController getCartController() {
+		return cartController;
+	} 
+	
+	
 	private void updatetable(DefaultTableModel model) {
 		int rowcount=model.getRowCount();
 		for(int i=rowcount-1;i>=0;i--)
 		{
 			model.removeRow(i);
 		}
-		for (Product product : cart.getCartProducts()) {
+		for (Product product : cartController.getUserCart().getCartProducts()) {
 			Object[] row = {product.getName(), Float.toString(product.getPrice()),
 					Integer.toString(product.getQuantity()), product.getCategory(), product.getBrand(),
 					product.getStore().getStoreName(), false };
@@ -45,9 +50,7 @@ public class CartPage {
 		}
 	}
 	
-	public JFrame getFrmHomepage() {
-		return frmCartpage;
-	} 
+
 	
 	private void initialize() {
 		frmCartpage = new JFrame();

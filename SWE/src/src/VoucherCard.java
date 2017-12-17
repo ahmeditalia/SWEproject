@@ -19,8 +19,9 @@ public class VoucherCard extends PaymentUI {
 		initialize();
 	}
 	
-	public VoucherCard(HomePage homePage) {
+	public VoucherCard(CartPage cartPage,HomePage homePage) {
 		this.homePage = homePage;
+		this.cartPage=cartPage;
 		initialize();
 	}
 	
@@ -50,7 +51,10 @@ public class VoucherCard extends PaymentUI {
 				if (cardnumber.getText().equals("")
 						|| homePage.getHomepagecontroller().checkVoucherCards(cardnumber.getText())) {
 					JOptionPane.showMessageDialog(null, "Incrroect VoucherNumber");
+					cardnumber.setText("");
+					return;
 				}
+				JOptionPane.showMessageDialog(null, cartPage.getCartController().EmptyCart());
 				homePage.getFrmHomepage().setVisible(true);
 				VoucherCard.setVisible(false);
 			}
