@@ -37,15 +37,6 @@ public class StoreOwner extends User implements Serializable{
 
     
     
-    
-   
-    public Store searchForStore(String sName){
-    	for (int i=0;i<OwnedStores.size();i++){
-    		if (OwnedStores.get(i).getStoreName()== sName)
-    			return OwnedStores.get(i);
-    	}
-    	return null;
-    }
 
     public List<Store> getOwnedStores() {
         return OwnedStores;
