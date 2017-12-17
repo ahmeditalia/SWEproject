@@ -60,6 +60,9 @@ public class StoreUIController {
 	/**
 	 * @return
 	 */
+	public List<Product> getCategoryProducts(String categoryName){
+		return new DataBase().RetreiveCategoryProducts(categoryName);
+	}
 	public List<Product> GetSystemProducts() {
 		return new DataBase().RetreiveSysProducts();
 	}
