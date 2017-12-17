@@ -7,18 +7,15 @@ public class HomePageController {
 
 	}
 	public void LogIn(String username, String password) {
-		IDataBase IDataBase1 = new DataBase();
-		user=IDataBase1.RetreiveUser(username, password);
+		user=new DataBase().RetreiveUser(username, password);
 	}
 
 	public List<Product> DirectSearch(String SearchText) {
-		IDataBase IDataBase1 = new DataBase();
-		return (IDataBase1.RetreiveProduct(SearchText));
+		return (new DataBase().RetreiveProduct(SearchText));
 	}
 
 	public List<Product> Explore(String categoryName) {
-		IDataBase IDataBase1 = new DataBase();
-		return (IDataBase1.RetreiveCategoryProducts(categoryName));
+		return (new DataBase().RetreiveCategoryProducts(categoryName));
 	}
 
 	public void AddToCart(Product product) {
@@ -26,21 +23,20 @@ public class HomePageController {
 	}
 
 	public void Register(String username, String password, String email, String phoneNumber, String gender, String address, int accountType) {
-		IDataBase IDataBase1 = new DataBase();
 
 		if(accountType==1)
 		{
 			NormalUser user=new NormalUser(username,password,email,phoneNumber,gender,address,accountType);
-			IDataBase1.InsertUser(user);
+			new DataBase().InsertUser(user);
 		}
 		else if(accountType==2)
 		{
 			StoreOwner user=new StoreOwner(username,password,email,phoneNumber,gender,address,accountType);
-			IDataBase1.InsertUser(user);
+			new DataBase().InsertUser(user);
 		}
 		else if(accountType==3){
 			Administrator user=new Administrator(username,password,email,phoneNumber,gender,address,accountType);
-			IDataBase1.InsertUser(user);
+			new DataBase().InsertUser(user);
 		}
 	}
 	public User getUser() {
@@ -52,13 +48,11 @@ public class HomePageController {
 	}
 
 	public List<String> getCategoriesNames() {
-		IDataBase IDataBase1 = new DataBase();
-		return (IDataBase1.RetreiveCategoriesNames());
+		return (new DataBase().RetreiveCategoriesNames());
 	}
 
 	public List<Product>getAllProducts(){
-		IDataBase IDataBase1 = new DataBase();
-		return (IDataBase1.RetreiveAllProducts());
+		return (new DataBase().RetreiveAllProducts());
 	}
 	public List<Product>getProducts(String category,String store){
 		List<Product> products=new ArrayList<>();
@@ -76,7 +70,6 @@ public class HomePageController {
 		return temp;
 	}
 	public boolean checkVoucherCards(String card){
-		IDataBase IDataBase1 = new DataBase();
-		return (IDataBase1.CheckVoucherCard(card));
+		return (new DataBase().CheckVoucherCard(card));
 	}
 }
