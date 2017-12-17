@@ -7,15 +7,38 @@ import java.util.*;
  */
 public class AdminController {
 
-	private IDataBase iDataBase = new DataBase();
+	
+	private Administrator admin;
+	
 	public AdminController() {
+	}
+	public AdminController(Administrator admin) {
+		this.admin=admin;
 	}
 	public void AddProductToSystem(String productName, String category, String brand) {
 		Product newP = new Product(productName, category, brand);
-		iDataBase.InsertProductToSystem(newP);
+		new DataBase().InsertProductToSystem(newP);
 	}
 
 	public List<Product> getSuggestedProducts() {
-		return iDataBase.RetreiveSysProducts();
+		return new DataBase().RetreiveSysProducts();
+	}
+	public Administrator getAdmin() {
+		return admin;
+	}
+	public void setAdmin(Administrator admin) {
+		this.admin = admin;
+	}
+	
+	public void voucherGenerator()
+	{
+		String alphabet="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabscdefghijklmnopqrstuvwxyz";
+		String voucherNo="";
+		Random random=new Random();
+		for(int i=0;i<6;i++)
+		{
+			voucherNo+=alphabet.charAt(random.nextInt(alphabet.length()));
+		}
+		new DataBase().provideVoucherCard(voucherNo);
 	}
 }
