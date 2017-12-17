@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale.Category;
 import java.awt.event.ActionEvent;
 
 public class ProductForm {
@@ -14,7 +15,7 @@ public class ProductForm {
 	private JTextField txtQuantity;
 	StoreUI storeGUI;
 	private JTextField SuggestedPName;
-	private List<Product> products=new ArrayList<>();
+	//private List<Product> products=new ArrayList<>();
 	
 	/**
 	 * @wbp.parser.constructor
@@ -80,32 +81,36 @@ public class ProductForm {
 		Categories.setBounds(582, 288, 209, 17);
 		frame.getContentPane().add(Categories);
 		Categories.addItem("select category");
-		for(int i=0;i<storeGUI.getStoreUIController().getCategoriesNames().size();i++){
-			Categories.addItem(storeGUI.getStoreUIController().getCategoriesNames().get(i));
+		for(String cName:storeGUI.getStoreUIController().getCategoriesNames()){
+			Categories.addItem(cName);
 		}
 		JComboBox<String> Brands = new JComboBox<String>();
 		Brands.setBounds(582, 321, 209, 20);
 		frame.getContentPane().add(Brands);
-		Brands.addItem("");
+		Brands.addItem("select brand");
 		for(int i=0;i<storeGUI.getStoreUIController().getBrandsNames().size();i++){
 			Brands.addItem(storeGUI.getStoreUIController().getBrandsNames().get(i));
 		}
 		
 		JComboBox<String> productName = new JComboBox<String>();
-		productName.addActionListener(new ActionListener() {
+		/*productName.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(productName.getSelectedItem()!="")
 				{	Categories.setSelectedItem(products.get(productName.getSelectedIndex()-1).getCategory());
 					Brands.setSelectedItem(products.get(productName.getSelectedIndex()-1).getBrand());
 				}
 			}
-		});
-		products=storeGUI.getStoreUIController().GetSystemProducts();
-		productName.addItem("");
-		for(Product p: products){
+		});*/
+		productName.addItem("select product");
+		if (Categories.getSelectedIndex()!=0){
+		for(Product p: storeGUI.getStoreUIController().getCategoryProducts(Categories.getSelectedItem().toString())){
 			productName.addItem(p.getName());
 		}
-		
+		}else{
+			for(Product p: storeGUI.getStoreUIController().GetSystemProducts()){
+				productName.addItem(p.getName());
+			}
+		}
 		
 		JButton btnAddProduct = new JButton("Add product");
 		btnAddProduct.addActionListener(new ActionListener() {
@@ -116,7 +121,8 @@ public class ProductForm {
 				}
 				else if (txtPrice.getText().isEmpty()){
 					JOptionPane.showMessageDialog(null, "enter the price !!");
-
+				}else if(productName.getSelectedIndex()==0){
+					JOptionPane.showMessageDialog(null, "select product first !!");
 				}else{
 				storeGUI.getStoreUIController().AddProduct(productName.getSelectedItem().toString(), Float.parseFloat(txtPrice.getText())
 						, Integer.parseInt(txtQuantity.getText()), Categories.getSelectedItem().toString(), Brands.getSelectedItem().toString());
@@ -132,7 +138,13 @@ public class ProductForm {
 			public void actionPerformed(ActionEvent e) {
 				if (SuggestedPName.getText().isEmpty()){
 					JOptionPane.showMessageDialog(null, "Enter the product name");
-				}else{
+				}else if(Categories.getSelectedIndex()==0){
+					JOptionPane.showMessageDialog(null, "Select category first !!");
+				}
+				else if(Categories.getSelectedIndex()==0){
+					JOptionPane.showMessageDialog(null, "Select Brand first !!");
+				}
+				else{
 				storeGUI.getStoreUIController().SuggestProduct(SuggestedPName.getText(), Categories.getSelectedItem().toString(), Brands.getSelectedItem().toString());		
 				JOptionPane.showMessageDialog(null, "succsesfully suggested product ..");
 				}
