@@ -237,8 +237,8 @@ public class HomePage {
 		OpenStore.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (homepagecontroller.getUser() instanceof StoreOwner) {
-					new StoreUI((StoreOwner) homepagecontroller.getUser(),HomePage.this);
 					frmHomepage.setVisible(false);
+					new StoreUI((StoreOwner) homepagecontroller.getUser(),HomePage.this);
 				}
 			}
 		});
@@ -261,8 +261,9 @@ public class HomePage {
 		cart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				NormalUser user = (NormalUser) homepagecontroller.getUser();
-				new CartPage(user.getCart(), HomePage.this);
 				frmHomepage.setVisible(false);
+				new CartPage(user.getCart(), HomePage.this);
+				
 			}
 		});
 		// Login
