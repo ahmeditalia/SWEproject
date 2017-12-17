@@ -47,7 +47,7 @@ public class Adminform {
 		frame.setBounds(100, 100, 794, 496);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-
+		frame.setVisible(true);
 		JLabel productlabel = new JLabel("Product");
 		productlabel.setForeground(new Color(255, 153, 153));
 		productlabel.setBounds(112, 257, 46, 14);

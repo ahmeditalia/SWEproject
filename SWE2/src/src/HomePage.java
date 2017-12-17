@@ -229,7 +229,8 @@ public class HomePage {
 		// adminpage
 		ControllPanel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new Adminform();
+				frmHomepage.setVisible(false);
+				new Adminform((Administrator)homepagecontroller.getUser(),HomePage.this);
 			}
 		});
 		// StoreUI
