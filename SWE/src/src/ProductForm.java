@@ -93,13 +93,20 @@ public class ProductForm {
 		JComboBox<String> Categories = new JComboBox<String>();
 		Categories.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				productName.removeAllItems();
+				productName.addItem("select product");
 				if (Categories.getSelectedIndex()!=0){
-					productName.removeAllItems();
-					productName.addItem("select product");
+					
 					for(Product p: storeGUI.getStoreUIController().getCategoryProducts(Categories.getSelectedItem().toString())){
 						productName.addItem(p.getName());
 					}
 			}
+				else{
+			
+					for(Product p: storeGUI.getStoreUIController().GetSystemProducts()){
+						productName.addItem(p.getName());
+					}
+				}
 			}
 				
 		});
@@ -167,6 +174,7 @@ public class ProductForm {
 		btnStorePage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
+				storeGUI.initialize();;
 			}
 		});
 		

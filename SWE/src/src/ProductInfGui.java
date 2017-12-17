@@ -171,7 +171,7 @@ public class ProductInfGui {
 		btnNewButton.setVerticalAlignment(SwingConstants.TOP);
 		btnNewButton.setBounds(438, 131, 472, 444);
 		frame.getContentPane().add(btnNewButton);
-		
+		btnNewButton.setEnabled(false);
 		
 	}
 }
