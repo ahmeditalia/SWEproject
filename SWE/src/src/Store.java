@@ -51,8 +51,10 @@ public class Store implements Serializable{
 				if(StoreProducts.get(i).getQuantity()==1)
 				{
 					StoreProducts.remove(i);
+					new DataBase().updateStoreInfo(this);
 				}
 				StoreProducts.get(i).setQuantity(StoreProducts.get(i).getQuantity()-1);
+				new DataBase().updateProductInfo(StoreProducts.get(i));
 			}
 		}
 		SoldProducts.put(product, user);
