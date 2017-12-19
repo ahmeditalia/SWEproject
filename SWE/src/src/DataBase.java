@@ -1,6 +1,7 @@
 package src;
 
 import java.io.*;
+import java.nio.Buffer;
 import java.nio.file.*;
 import java.util.*;
 
@@ -93,8 +94,20 @@ public class DataBase implements IDataBase {
 		return null;
 	}
 
+	public void InsertBrand(String bName) {
+		try {
+			BufferedWriter file = new BufferedWriter(new FileWriter("Brands.txt", true));
+			file.write(bName);
+			file.newLine();
+			file.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	public List<String> RetreiveBrandsNames() {
-		Path path = Paths.get("Categories.txt");
+		Path path = Paths.get("Brands.txt");
 		try {
 			return Files.readAllLines(path);
 		} catch (IOException e) {
@@ -225,6 +238,7 @@ public class DataBase implements IDataBase {
 		} catch (FileNotFoundException e) {
 		} catch (IOException e) {
 		}
+		InsertBrand(product.getBrand());
 		deleteSuggestedProduct(product);
 	}
 
@@ -417,10 +431,8 @@ public class DataBase implements IDataBase {
 		} catch (FileNotFoundException e) {
 		} catch (IOException e) {
 		}
-		UpdateUser(store.getOwner());		
+		UpdateUser(store.getOwner());
 	}
-
-
 
 	@Override
 	public void updateProductInfo(Product product) {
@@ -444,5 +456,5 @@ public class DataBase implements IDataBase {
 		}
 		updateStoreInfo(product.getStore());
 	}
-	
+
 }

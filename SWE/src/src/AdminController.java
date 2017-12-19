@@ -47,4 +47,10 @@ public class AdminController {
 		new DataBase().provideVoucherCard(voucherNo);
 		return voucherNo;
 	}
+	public void addBrandToSystem(String bName){
+		new DataBase().InsertBrand(bName);
+	}
+	public List<String> getSysBrands(){
+		return new DataBase().RetreiveBrandsNames();
+	}
 }
