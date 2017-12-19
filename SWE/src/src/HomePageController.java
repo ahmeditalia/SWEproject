@@ -1,22 +1,25 @@
 package src;
+
 import java.util.*;
 
 public class HomePageController {
 	private User user;
+
 	HomePageController() {
 
 	}
+
 	public void LogIn(String username, String password) {
-		user=new DataBase().RetreiveUser(username, password);
+		user = new DataBase().RetreiveUser(username, password);
 	}
 
 	public List<Product> DirectSearch(String SearchText) {
-		List<Product> products= new DataBase().RetreiveProduct(SearchText);
-		for (int i=0;i<products.size();i++)
-			products.get(i).setViews(products.get(i).getViews()+1);
-		for (int i=0;i<products.size();i++)
+		List<Product> products = new DataBase().RetreiveProduct(SearchText);
+		for (int i = 0; i < products.size(); i++) {
+			products.get(i).setViews(products.get(i).getViews() + 1);
 			new DataBase().updateProductInfo(products.get(i));
-			return (products);
+		}
+		return (products);
 	}
 
 	public List<Product> Explore(String categoryName) {
@@ -27,23 +30,22 @@ public class HomePageController {
 		((NormalUser) user).AddToCart(product);
 	}
 
-	public void Register(String username, String password, String email, String phoneNumber, String gender, String address, int accountType) {
+	public void Register(String username, String password, String email, String phoneNumber, String gender,
+			String address, int accountType) {
 
-		if(accountType==1)
-		{
-			NormalUser user=new NormalUser(username,password,email,phoneNumber,gender,address,accountType);
+		if (accountType == 1) {
+			NormalUser user = new NormalUser(username, password, email, phoneNumber, gender, address, accountType);
 			new DataBase().InsertUser(user);
-		}
-		else if(accountType==2)
-		{
-			StoreOwner user=new StoreOwner(username,password,email,phoneNumber,gender,address,accountType);
+		} else if (accountType == 2) {
+			StoreOwner user = new StoreOwner(username, password, email, phoneNumber, gender, address, accountType);
 			new DataBase().InsertUser(user);
-		}
-		else if(accountType==3){
-			Administrator user=new Administrator(username,password,email,phoneNumber,gender,address,accountType);
+		} else if (accountType == 3) {
+			Administrator user = new Administrator(username, password, email, phoneNumber, gender, address,
+					accountType);
 			new DataBase().InsertUser(user);
 		}
 	}
+
 	public User getUser() {
 		return user;
 	}
@@ -56,25 +58,27 @@ public class HomePageController {
 		return (new DataBase().RetreiveCategoriesNames());
 	}
 
-	public List<Product>getAllProducts(){
+	public List<Product> getAllProducts() {
 		return (new DataBase().RetreiveAllProducts());
 	}
-	public List<Product>getProducts(String category,String store){
-		List<Product> products=new ArrayList<>();
-		if(category.equals("All"))
-			products =getAllProducts();
+
+	public List<Product> getProducts(String category, String store) {
+		List<Product> products = new ArrayList<>();
+		if (category.equals("All"))
+			products = getAllProducts();
 		else {
-			products=new DataBase().RetreiveCategoryProducts(category);
+			products = new DataBase().RetreiveCategoryProducts(category);
 		}
-		List<Product> temp=new ArrayList<Product>();
-		for(int i=0;i<products.size();i++){
-			if((products.get(i).getStore().getStoreName().equals(store)||store.equals("All"))){
+		List<Product> temp = new ArrayList<Product>();
+		for (int i = 0; i < products.size(); i++) {
+			if ((products.get(i).getStore().getStoreName().equals(store) || store.equals("All"))) {
 				temp.add(products.get(i));
 			}
 		}
 		return temp;
 	}
-	public boolean checkVoucherCards(String card){
+
+	public boolean checkVoucherCards(String card) {
 		return (new DataBase().CheckVoucherCard(card));
 	}
 }
