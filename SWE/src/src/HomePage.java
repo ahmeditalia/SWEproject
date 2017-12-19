@@ -115,7 +115,7 @@ public class HomePage {
 		boxcategory.setBounds(20, 265, 150, 20);
 		// italia modification
 		List<String> categories = new ArrayList<>();
-		categories = new DataBase().RetreiveCategoriesNames();
+		categories = homepagecontroller.getCategoriesNames();
 		boxcategory.addItem("All");
 		for (String a : categories) {
 			boxcategory.addItem(a);
@@ -129,7 +129,7 @@ public class HomePage {
 		// italia modification
 		boxstores.addItem("All");
 		List<String> stores = new ArrayList<>();
-		stores = new DataBase().RetreiveStoreNames();
+		stores = homepagecontroller.RetreiveStoreNames();
 		for (String a : stores) {
 			boxstores.addItem(a.substring(0, a.indexOf("_")));
 

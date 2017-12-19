@@ -16,15 +16,12 @@ public class HomePageController {
 	public List<Product> DirectSearch(String SearchText) {
 		List<Product> products = new DataBase().RetreiveProduct(SearchText);
 		for (int i = 0; i < products.size(); i++) {
-			products.get(i).setViews(products.get(i).getViews() + 1);
+			products.get(i).updateViews();
 			new DataBase().updateProductInfo(products.get(i));
 		}
 		return (products);
 	}
 
-	public List<Product> Explore(String categoryName) {
-		return (new DataBase().RetreiveCategoryProducts(categoryName));
-	}
 
 	public void AddToCart(Product product) {
 		((NormalUser) user).AddToCart(product);
@@ -57,7 +54,9 @@ public class HomePageController {
 	public List<String> getCategoriesNames() {
 		return (new DataBase().RetreiveCategoriesNames());
 	}
-
+	public List<String> RetreiveStoreNames() {
+		return (new DataBase().RetreiveStoreNames());
+	}
 	public List<Product> getAllProducts() {
 		return (new DataBase().RetreiveAllProducts());
 	}

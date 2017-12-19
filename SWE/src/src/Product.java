@@ -5,10 +5,16 @@ import java.io.Serializable;
 /**
  * 
  */
-@SuppressWarnings("serial")
 public class Product implements Serializable{
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+
+
+	/**
      * Default constructor
      */
 	
@@ -114,6 +120,11 @@ public class Product implements Serializable{
 
 	public void setViews(int views) {
 		Views = views;
+	}
+	
+	public void updateViews()
+	{
+		Views++;
 	}
 
 }
