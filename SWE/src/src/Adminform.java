@@ -17,23 +17,23 @@ public class Adminform {
 	private JTextField Brand;
 	private JTextField product;
 	List<Product> retreiveCategoryProducts;
-	
+
 	/**
 	 * @wbp.parser.constructor
 	 */
 	public Adminform() {
 		retreiveCategoryProducts = new ArrayList<>();
-		adminController=new AdminController();
+		adminController = new AdminController();
 		initialize();
 	}
 
-	Adminform(Administrator admin,HomePage homePage) {
+	Adminform(Administrator admin, HomePage homePage) {
 		retreiveCategoryProducts = new ArrayList<>();
-		adminController=new AdminController(admin);
-		this.homePage=homePage;
+		adminController = new AdminController(admin);
+		this.homePage = homePage;
 		initialize();
 	}
-	
+
 	private void initialize() {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(new Color(178, 34, 34));
@@ -71,20 +71,19 @@ public class Adminform {
 		Category.setBounds(709, 365, 131, 21);
 		frame.getContentPane().add(Category);
 		Category.addItem("none");
-		for(String category:adminController.getCategories())
-		{
+		for (String category : adminController.getCategories()) {
 			Category.addItem(category);
 		}
-		
+
 		JComboBox<String> comboBox = new JComboBox<String>();
 		comboBox.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				if (comboBox.getSelectedItem()!="Suggested Products")
-				{
-					product.setText(retreiveCategoryProducts.get(comboBox.getSelectedIndex()-1).getName());
+				if (comboBox.getSelectedItem() != "Suggested Products") {
+					product.setText(retreiveCategoryProducts.get(comboBox.getSelectedIndex() - 1).getName());
 					product.setEditable(false);
-					Category.setSelectedItem(retreiveCategoryProducts.get(comboBox.getSelectedIndex()-1).getCategory());
-					Brand.setText(retreiveCategoryProducts.get(comboBox.getSelectedIndex()-1).getBrand());
+					Category.setSelectedItem(
+							retreiveCategoryProducts.get(comboBox.getSelectedIndex() - 1).getCategory());
+					Brand.setText(retreiveCategoryProducts.get(comboBox.getSelectedIndex() - 1).getBrand());
 				}
 			}
 		});
@@ -92,20 +91,22 @@ public class Adminform {
 		JButton add = new JButton("Add");
 		add.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (product.isVisible()){
-				adminController.AddProductToSystem(product.getText(), String.valueOf(Category.getSelectedItem()), Brand.getText());
-				product.setText("");
-				Category.setSelectedIndex(0);
-				Brand.setText("");
-				if(comboBox.getSelectedItem()!="Suggested Products")
-				{
-					retreiveCategoryProducts.remove(comboBox.getSelectedIndex()-1);
-					comboBox.removeItemAt(comboBox.getSelectedIndex());
-					product.setEditable(true);
-					comboBox.setSelectedIndex(0);
-				}
-				}
-				else{
+				if (product.isVisible()) {
+					if (Category.getSelectedItem().equals("Suggested Products"))
+						adminController.AddProductToSystem(product.getText(),
+								String.valueOf(Category.getSelectedItem()), Brand.getText());
+					else
+						JOptionPane.showMessageDialog(null, "pls enter the category");
+					product.setText("");
+					Category.setSelectedIndex(0);
+					Brand.setText("");
+					if (comboBox.getSelectedItem() != "Suggested Products") {
+						retreiveCategoryProducts.remove(comboBox.getSelectedIndex() - 1);
+						comboBox.removeItemAt(comboBox.getSelectedIndex());
+						product.setEditable(true);
+						comboBox.setSelectedIndex(0);
+					}
+				} else {
 					adminController.addBrandToSystem(Brand.getText());
 					Brand.setText("");
 				}
@@ -141,7 +142,6 @@ public class Adminform {
 		add.setBounds(709, 427, 73, 23);
 		frame.getContentPane().add(add);
 
-
 		retreiveCategoryProducts = adminController.getSuggestedProducts();
 		comboBox.addItem("Suggested Products");
 		for (int i = 0; i < retreiveCategoryProducts.size(); i++) {
@@ -155,7 +155,7 @@ public class Adminform {
 			public void actionPerformed(ActionEvent arg0) {
 				brandlabel.setVisible(true);
 				Brand.setVisible(true);
-				add.setVisible(true);	
+				add.setVisible(true);
 				productlabel.setVisible(false);
 				categorylabel.setVisible(false);
 				brandlabel.setVisible(false);
@@ -175,7 +175,7 @@ public class Adminform {
 		});
 		btnAddVoucherCard.setBounds(376, 445, 212, 23);
 		frame.getContentPane().add(btnAddVoucherCard);
-		
+
 		JButton hompage = new JButton("Hompage");
 		hompage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -185,18 +185,17 @@ public class Adminform {
 		});
 		hompage.setBounds(376, 307, 89, 23);
 		frame.getContentPane().add(hompage);
-		
+
 		JLabel AdminLabs = new JLabel("");
 		AdminLabs.setIcon(new ImageIcon("images\\adminlabs.png"));
 		AdminLabs.setBounds(461, 123, 489, 114);
 		frame.getContentPane().add(AdminLabs);
-		
+
 		JButton button = new JButton("");
 		button.setBackground(new Color(102, 153, 255));
 		button.setBounds(326, 120, 753, 490);
 		frame.getContentPane().add(button);
 		button.setEnabled(false);
-
 
 	}
 }
