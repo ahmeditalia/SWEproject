@@ -119,9 +119,8 @@ public class ProductForm {
 		JComboBox<String> Brands = new JComboBox<String>();
 		Brands.setBounds(582, 321, 209, 20);
 		frame.getContentPane().add(Brands);
-		Brands.addItem("select brand");
-		for(int i=0;i<storeGUI.getStoreUIController().getBrandsNames().size();i++){
-			Brands.addItem(storeGUI.getStoreUIController().getBrandsNames().get(i));
+		for(String B:storeGUI.getStoreUIController().getBrandsNames()){
+			Brands.addItem(B);
 		}
 		
 		

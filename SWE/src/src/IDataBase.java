@@ -58,10 +58,8 @@ public interface IDataBase {
      * @param product
      */
     public void InsertProductToSystem(Product product);
+    public void InsertBrand(String bName);
 
-    /**
-     * @param product
-     */
     public void InsertSuggestedProduct(Product product);
 
     /**

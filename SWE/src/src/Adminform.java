@@ -54,7 +54,7 @@ public class Adminform {
 
 		JLabel brandlabel = new JLabel("Brand :");
 		brandlabel.setForeground(new Color(178, 34, 34));
-		brandlabel.setBounds(642, 389, 46, 14);
+		brandlabel.setBounds(642, 400, 46, 14);
 		frame.getContentPane().add(brandlabel);
 
 		product = new JTextField();
@@ -92,6 +92,7 @@ public class Adminform {
 		JButton add = new JButton("Add");
 		add.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				if (product.isVisible()){
 				adminController.AddProductToSystem(product.getText(), String.valueOf(Category.getSelectedItem()), Brand.getText());
 				product.setText("");
 				Category.setSelectedIndex(0);
@@ -103,7 +104,11 @@ public class Adminform {
 					product.setEditable(true);
 					comboBox.setSelectedIndex(0);
 				}
-					
+				}
+				else{
+					adminController.addBrandToSystem(Brand.getText());
+					Brand.setText("");
+				}
 			}
 		});
 
@@ -130,10 +135,10 @@ public class Adminform {
 			}
 
 		});
-		addproduct.setBounds(378, 344, 212, 23);
+		addproduct.setBounds(376, 347, 212, 23);
 		frame.getContentPane().add(addproduct);
 
-		add.setBounds(642, 427, 73, 23);
+		add.setBounds(709, 427, 73, 23);
 		frame.getContentPane().add(add);
 
 
@@ -146,7 +151,20 @@ public class Adminform {
 		frame.getContentPane().add(comboBox);
 
 		JButton btnAddBrandTosystem = new JButton("Add Brand ToSystem");
-		btnAddBrandTosystem.setBounds(378, 382, 210, 23);
+		btnAddBrandTosystem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				brandlabel.setVisible(true);
+				Brand.setVisible(true);
+				add.setVisible(true);	
+				productlabel.setVisible(false);
+				categorylabel.setVisible(false);
+				brandlabel.setVisible(false);
+				product.setVisible(false);
+				Category.setVisible(false);
+				comboBox.setVisible(false);
+			}
+		});
+		btnAddBrandTosystem.setBounds(378, 396, 210, 23);
 		frame.getContentPane().add(btnAddBrandTosystem);
 
 		JButton btnAddVoucherCard = new JButton("Add Voucher Card Number");
@@ -155,7 +173,7 @@ public class Adminform {
 				JOptionPane.showMessageDialog(null, adminController.voucherGenerator());
 			}
 		});
-		btnAddVoucherCard.setBounds(378, 427, 212, 23);
+		btnAddVoucherCard.setBounds(376, 445, 212, 23);
 		frame.getContentPane().add(btnAddVoucherCard);
 		
 		JButton hompage = new JButton("Hompage");
@@ -165,7 +183,7 @@ public class Adminform {
 				homePage.getFrmHomepage().setVisible(true);
 			}
 		});
-		hompage.setBounds(378, 302, 89, 23);
+		hompage.setBounds(376, 307, 89, 23);
 		frame.getContentPane().add(hompage);
 		
 		JLabel AdminLabs = new JLabel("");
