@@ -92,11 +92,16 @@ public class Adminform {
 		add.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (product.isVisible()) {
+<<<<<<< HEAD
 					if (Category.getSelectedItem().equals("Suggested Products"))
 						adminController.AddProductToSystem(product.getText(),
 								String.valueOf(Category.getSelectedItem()), Brand.getText());
 					else
 						JOptionPane.showMessageDialog(null, "pls enter the category");
+=======
+					adminController.AddProductToSystem(product.getText(), String.valueOf(Category.getSelectedItem()),
+				                  Brand.getText());
+>>>>>>> 7e700c392e44fb0e4ce9c44a2e85a9628efcbf3e
 					product.setText("");
 					Category.setSelectedIndex(0);
 					Brand.setText("");
