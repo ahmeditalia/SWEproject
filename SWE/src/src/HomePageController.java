@@ -11,7 +11,12 @@ public class HomePageController {
 	}
 
 	public List<Product> DirectSearch(String SearchText) {
-		return (new DataBase().RetreiveProduct(SearchText));
+		List<Product> products= new DataBase().RetreiveProduct(SearchText);
+		for (int i=0;i<products.size();i++)
+			products.get(i).setViews(products.get(i).getViews()+1);
+		for (int i=0;i<products.size();i++)
+			new DataBase().updateProductInfo(products.get(i));
+			return (products);
 	}
 
 	public List<Product> Explore(String categoryName) {
