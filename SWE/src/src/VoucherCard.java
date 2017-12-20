@@ -9,6 +9,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
 
 public class VoucherCard extends PaymentUI {
@@ -18,7 +20,10 @@ public class VoucherCard extends PaymentUI {
 	public VoucherCard() {
 		initialize();
 	}
-	
+	/**
+	 * @wbp.parser.constructor
+	 */
+
 	public VoucherCard(CartPage cartPage,HomePage homePage) {
 		this.homePage = homePage;
 		this.cartPage=cartPage;
@@ -34,6 +39,12 @@ public class VoucherCard extends PaymentUI {
 		VoucherCard.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		VoucherCard.getContentPane().setLayout(null);
 		VoucherCard.setVisible(true);
+		VoucherCard.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent arg0) {
+				homePage.getDatabase().writeAll();
+			}
+		});
 		JPanel panel = new JPanel();
 		panel.setBounds(460, 202, 488, 303);
 		VoucherCard.getContentPane().add(panel);
@@ -54,13 +65,22 @@ public class VoucherCard extends PaymentUI {
 					cardnumber.setText("");
 					return;
 				}
-				JOptionPane.showMessageDialog(null, cartPage.getCartController().EmptyCart());
+				JOptionPane.showMessageDialog(null, cartPage.getCartController().EmptyCart(homePage.getDatabase()));
 				homePage.getFrmHomepage().setVisible(true);
 				VoucherCard.setVisible(false);
 			}
 		});
 		btnSubmit.setBounds(183, 191, 114, 23);
 		panel.add(btnSubmit);
+		
+		JButton btnHomepage = new JButton("HomePage");
+		btnHomepage.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				VoucherCard.setVisible(false);
+				homePage.getFrmHomepage().setVisible(true);
+			}
+		});
+		btnHomepage.setBounds(341, 38, 89, 23);
+		panel.add(btnHomepage);
 	}
-
 }

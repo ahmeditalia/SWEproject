@@ -2,6 +2,8 @@ package src;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -15,9 +17,12 @@ public class StoreUI {
 	String StoreOwnerName="";
 	StoreUI(StoreOwner user,HomePage home){
 		StoreOwnerName= user.Username;
-		sotreController= new StoreUIController(user);
+		sotreController= new StoreUIController(user,home.getDatabase());
 		homeGUI= home;
 		initialize();
+	}
+	HomePage getHomePage(){
+		return homeGUI;
 	}
 	public StoreUIController getStoreUIController(){
 		return sotreController;
@@ -42,6 +47,12 @@ public class StoreUI {
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		frame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent arg0) {
+				homeGUI.getDatabase().writeAll();
+			}
+		});
 		JButton btnAddSotre = new JButton("Add New sotre");
 		btnAddSotre.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -169,8 +180,8 @@ public class StoreUI {
 		JButton btnHomePage = new JButton("Home Page");
 		btnHomePage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				homeGUI.getFrmHomepage().setVisible(true);
 				frame.setVisible(false);
+				homeGUI.getFrmHomepage().setVisible(true);
 			}
 		});
 		btnHomePage.setBounds(34, 276, 100, 23);

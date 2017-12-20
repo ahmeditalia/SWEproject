@@ -10,11 +10,13 @@ public class StoreUIController {
 	/**
 	 * Default constructor
 	 */
+	private IDataBase dataBase;
 	public StoreUIController() {
 	}
 
-	public StoreUIController(StoreOwner user) {
+	public StoreUIController(StoreOwner user,IDataBase data) {
 		CurrentUser = user;
+		dataBase=data;
 	}
 
 	private StoreOwner CurrentUser;
@@ -22,15 +24,15 @@ public class StoreUIController {
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public void addNewStore(String Sname) {
-		CurrentUser.AddNewStore(Sname);
+		CurrentUser.AddNewStore(Sname,dataBase);
 	}
 
 	public List<String> getBrandsNames() {
-		return new DataBase().RetreiveBrandsNames();
+		return dataBase.RetreiveBrandsNames();
 	}
 
 	public List<String> getCategoriesNames() {
-		return new DataBase().RetreiveCategoriesNames();
+		return dataBase.RetreiveCategoriesNames();
 	}
 
 
@@ -39,7 +41,7 @@ public class StoreUIController {
 	}
 
 	public void AddProduct(String ProductName, float price, int quantity, String category, String brand) {
-		CurrentStore.AddProduct(ProductName, price, quantity, category, brand);
+		CurrentStore.AddProduct(ProductName, price, quantity, category, brand,dataBase);
 	}
 
 	public StoreOwner getCurrentUser() {
@@ -54,17 +56,17 @@ public class StoreUIController {
 	}
 
 	public void SuggestProduct(String productName, String Category, String Brand) {
-		new DataBase().InsertSuggestedProduct(new Product(productName, Category, Brand));
+		dataBase.InsertSuggestedProduct(new Product(productName, Category, Brand));
 	}
 
 	/**
 	 * @return
 	 */
 	public List<Product> getCategoryProducts(String categoryName){
-		return new DataBase().RetreiveCategoryProducts(categoryName);
+		return dataBase.RetreiveCategoryProducts(categoryName);
 	}
 	public List<Product> GetSystemProducts() {
-		return new DataBase().RetreiveSysProducts();
+		return dataBase.RetreiveSysProducts();
 	}
 	public void setCurrentStore(int storeindex) {
 		this.CurrentStore=CurrentUser.getOwnedStores().get(storeindex);

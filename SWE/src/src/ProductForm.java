@@ -3,6 +3,8 @@ package src;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale.Category;
@@ -186,6 +188,12 @@ public class ProductForm {
 		frame.getContentPane().add(SuggestedPName);
 		SuggestedPName.setColumns(10);
 
+		frame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent arg0) {
+				storeGUI.getHomePage().getDatabase().writeAll();
+			}
+		});
 		JButton btnNewButton = new JButton("Enter product information");
 		btnNewButton.setForeground(new Color(204, 0, 0));
 

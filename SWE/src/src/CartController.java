@@ -6,8 +6,8 @@ public class CartController {
 		UserCart = cart;
 	}
 
-	public float EmptyCart() {
-		return (UserCart.EmptyCart());
+	public float EmptyCart(IDataBase dataBase) {
+		return (UserCart.EmptyCart(dataBase));
 	}
 
 	public Cart getUserCart() {

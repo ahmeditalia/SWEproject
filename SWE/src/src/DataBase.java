@@ -7,8 +7,139 @@ import java.util.*;
 public class DataBase implements IDataBase {
 
 	private int ID;
+	private List<NormalUser> normalUsers;
+	private List<StoreOwner> Storeowners;
+	private List<Administrator> Admins;
+	private Map<String, List<Product>> categoryProducts;
+	private List<Product> Sysproducts;
+	private List<Product> suggestedProducts;
+	private List<Store> stores;
+	private List<String> brands;
+	private List<String> vouchercards;
 
 	public DataBase() {
+		normalUsers = new ArrayList<>();
+		Storeowners = new ArrayList<>();
+		Admins = new ArrayList<>();
+		suggestedProducts = new ArrayList<>();
+		
+		
+		categoryProducts = new HashMap<>();
+		categoryProducts.put("Electronics", new ArrayList<>());
+		categoryProducts.put("Clothes", new ArrayList<>());
+		categoryProducts.put("Mobile", new ArrayList<>());
+		categoryProducts.put("Laptops", new ArrayList<>());
+		categoryProducts.put("Shoes", new ArrayList<>());
+
+		Sysproducts = new ArrayList<>();
+		stores = new ArrayList<>();
+		brands = new ArrayList<>();
+		vouchercards = new ArrayList<>();
+
+	}
+
+	public void writeAll() {
+		/*
+		 * try {
+		 * 
+		 * for (Map.Entry<String, List<Product>> p :
+		 * categoryProducts.entrySet()) { ObjectOutputStream writer = new
+		 * ObjectOutputStream(new FileOutputStream(p.getKey() + ".txt"));
+		 * writer.writeObject(p.getValue()); writer.close(); } } catch
+		 * (IOException e1) { }
+		 */
+
+		try {
+			BufferedWriter out = new BufferedWriter(new FileWriter("IDCounter.txt"));
+			out.write(Integer.toString(ID));
+			out.close();
+		} catch (Exception e) {
+		}
+
+		try {
+			BufferedWriter file = new BufferedWriter(new FileWriter("Brands.txt"));
+			for (String s : brands) {
+				file.write(s);
+				file.newLine();
+			}
+			file.close();
+
+		} catch (IOException e) {
+		}
+
+		try {
+			BufferedWriter file = new BufferedWriter(new FileWriter("VoucherCards.txt"));
+			for (String s : vouchercards) {
+				file.write(s);
+				file.newLine();
+			}
+			file.close();
+
+		} catch (IOException e) {
+		}
+
+		try {
+			ObjectOutputStream file = new ObjectOutputStream(new FileOutputStream("NormalUsers.txt"));
+			file.writeObject(normalUsers);
+			file.close();
+
+		} catch (IOException e) {
+		}
+
+		try {
+			ObjectOutputStream file = new ObjectOutputStream(new FileOutputStream("StoreOwners.txt"));
+			file.writeObject(Storeowners);
+			file.close();
+
+		} catch (IOException e) {
+		}
+
+		try {
+			ObjectOutputStream file = new ObjectOutputStream(new FileOutputStream("Admins.txt"));
+			file.writeObject(Admins);
+			file.close();
+
+		} catch (IOException e) {
+		}
+
+		try {
+			ObjectOutputStream file = new ObjectOutputStream(new FileOutputStream("Stores.txt"));
+			file.writeObject(stores);
+			file.close();
+
+		} catch (IOException e) {
+		}
+
+		try {
+			ObjectOutputStream file = new ObjectOutputStream(new FileOutputStream("SystemProducts.txt"));
+			file.writeObject(Sysproducts);
+			file.close();
+
+		} catch (IOException e) {
+		}
+
+		try {
+			ObjectOutputStream file = new ObjectOutputStream(new FileOutputStream("SuggestedProducts.txt"));
+			file.writeObject(suggestedProducts);
+			file.close();
+
+		} catch (IOException e) {
+		}
+
+		try {
+			ObjectOutputStream file = new ObjectOutputStream(new FileOutputStream("Categories_Products.txt"));
+			file.writeObject(categoryProducts);
+			file.close();
+
+		} catch (IOException e) {
+		}
+
+	}
+
+	public void readAll() {
+
+		Path path;
+
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader("IDCounter.txt"));
 			ID = Integer.parseInt(reader.readLine());
@@ -18,442 +149,259 @@ public class DataBase implements IDataBase {
 		} catch (IOException e) {
 
 		}
+
+		path = Paths.get("Brands.txt");
+		try {
+			brands = Files.readAllLines(path);
+		} catch (IOException e1) {
+		}
+
+		path = Paths.get("VoucherCards.txt");
+		try {
+			vouchercards = Files.readAllLines(path);
+		} catch (IOException e1) {
+		}
+
+		try {
+			ObjectInputStream file = new ObjectInputStream(new FileInputStream("NormalUsers.txt"));
+			normalUsers = (List<NormalUser>) file.readObject();
+			file.close();
+
+		} catch (IOException e) {
+		} catch (ClassNotFoundException e) {
+		}
+
+		try {
+			ObjectInputStream file = new ObjectInputStream(new FileInputStream("StoreOwners.txt"));
+			Storeowners = (List<StoreOwner>) file.readObject();
+			file.close();
+
+		} catch (IOException e) {
+		} catch (ClassNotFoundException e) {
+		}
+
+		try {
+			ObjectInputStream file = new ObjectInputStream(new FileInputStream("Admins.txt"));
+			Admins = (List<Administrator>) file.readObject();
+			file.close();
+
+		} catch (IOException e) {
+		} catch (ClassNotFoundException e) {
+		}
+
+		try {
+			ObjectInputStream file = new ObjectInputStream(new FileInputStream("Stores.txt"));
+			stores = (List<Store>) file.readObject();
+			file.close();
+
+		} catch (IOException e) {
+		} catch (ClassNotFoundException e) {
+		}
+
+		try {
+			ObjectInputStream file = new ObjectInputStream(new FileInputStream("SystemProducts.txt"));
+			Sysproducts = (List<Product>) file.readObject();
+			file.close();
+
+		} catch (IOException e) {
+		} catch (ClassNotFoundException e) {
+		}
+
+		try {
+			ObjectInputStream file = new ObjectInputStream(new FileInputStream("SuggestedProducts.txt"));
+			suggestedProducts = (List<Product>) file.readObject();
+			file.close();
+
+		} catch (IOException e) {
+		} catch (ClassNotFoundException e) {
+		}
+
+		try {
+			ObjectInputStream file = new ObjectInputStream(new FileInputStream("Categories_Products.txt"));
+			categoryProducts = (Map<String, List<Product>>) file.readObject();
+			file.close();
+
+		} catch (IOException e) {
+		} catch (ClassNotFoundException e) {
+		}
 	}
 
 	public List<Product> RetreiveProduct(String ProductName) {
-		List<String> catrgories = new ArrayList<>();
-		List<String> files = new ArrayList<>();
-		List<Product> products = new ArrayList<>();
-		Path path = Paths.get("Categories.txt");
-		try {
-			catrgories = Files.readAllLines(path);
-		} catch (IOException e1) {
-		}
-		for (String filename : catrgories) {
-			path = Paths.get(filename + ".txt");
-			try {
-				files.addAll(Files.readAllLines(path));
-			} catch (IOException e) {
-
-			}
-		}
-		for (String filename : files) {
-			if (filename.substring(0, filename.indexOf("_")).equals(ProductName)) {
-				try {
-					ObjectInputStream object = new ObjectInputStream(new FileInputStream(filename + ".txt"));
-					products.add((Product) object.readObject());
-					object.close();
-				} catch (FileNotFoundException e) {
-				} catch (IOException e) {
-				} catch (ClassNotFoundException e) {
+		List<Product> returnProduct = new ArrayList<>();
+		for (Map.Entry<String, List<Product>> entry : categoryProducts.entrySet()) {
+			for (Product p : entry.getValue()) {
+				if (p.getName().equals(ProductName)) {
+					returnProduct.add(p);
 				}
 			}
 		}
-		return products;
+		return returnProduct;
 	}
 
 	public User RetreiveUser(String username, String password) {
-		List<String> users = new ArrayList<>();
-		Path path = Paths.get("Users.txt");
-		try {
-			users = Files.readAllLines(path);
-		} catch (IOException e) {
+		for (NormalUser user : normalUsers) {
+			if (user.getUsername().equals(username) && user.getPassword().equals(password))
+				return user;
 		}
-		for (String user : users) {
-			String[] arr = user.split("_");
-			if (username.equals(arr[0]) && password.equals(arr[1])) {
-				try {
-					ObjectInputStream object = new ObjectInputStream(
-							new FileInputStream(username + "_" + password + ".txt"));
-					if (arr[2].equals("1")) {
-						NormalUser normalUser = new NormalUser();
-						normalUser = (NormalUser) object.readObject();
-						object.close();
-						return normalUser;
-					} else if (arr[2].equals("2")) {
-						StoreOwner storeOwner = new StoreOwner();
-						storeOwner = (StoreOwner) object.readObject();
-						object.close();
-						return storeOwner;
-					} else if (arr[2].equals("3")) {
-						Administrator administrator = new Administrator();
-						administrator = (Administrator) object.readObject();
-						object.close();
-						return administrator;
-					}
-					object.close();
-				} catch (FileNotFoundException e) {
-
-				} catch (IOException e) {
-
-				} catch (ClassNotFoundException e) {
-				}
-			}
+		for (StoreOwner user : Storeowners) {
+			if (user.getUsername().equals(username) && user.getPassword().equals(password))
+				return user;
+		}
+		for (Administrator user : Admins) {
+			if (user.getUsername().equals(username) && user.getPassword().equals(password))
+				return user;
 		}
 		return null;
 	}
 
 	public void InsertBrand(String bName) {
-		try {
-			BufferedWriter file = new BufferedWriter(new FileWriter("Brands.txt", true));
-			file.write(bName);
-			file.newLine();
-			file.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		brands.add(bName);
 	}
 
 	public List<String> RetreiveBrandsNames() {
-		Path path = Paths.get("Brands.txt");
-		try {
-			return Files.readAllLines(path);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
+		return brands;
 	}
 
 	public List<String> RetreiveCategoriesNames() {
-		Path path = Paths.get("Categories.txt");
-		try {
-			return Files.readAllLines(path);
-		} catch (IOException e) {
-			e.printStackTrace();
+		List<String> list = new ArrayList<>(categoryProducts.keySet());
+		return list;
+	}
+
+	public List<Product> RetreiveCategoryProducts(String categoryName) {
+		for (Map.Entry<String, List<Product>> list : categoryProducts.entrySet()) {
+			if (list.getKey().equals(categoryName)) {
+				return list.getValue();
+			}
 		}
 		return null;
 	}
 
-	public List<Product> RetreiveCategoryProducts(String categoryName) {
-		List<Product> list = new ArrayList<>();
-		List<String> files = new ArrayList<>();
-		Path path = Paths.get(categoryName + ".txt");
-		try {
-			files = Files.readAllLines(path);
-
-		} catch (IOException e) {
-		}
-		for (String filename : files) {
-			try {
-				ObjectInputStream object = new ObjectInputStream(new FileInputStream(filename + ".txt"));
-				try {
-					list.add((Product) object.readObject());
-				} catch (ClassNotFoundException e) {
-				}
-				object.close();
-			} catch (FileNotFoundException e) {
-				continue;
-			} catch (IOException e) {
-			}
-		}
-		return list;
-	}
-
-	public void UpdateProductCart(Cart cart) {
-		UpdateUser(cart.getCartOwner());
-	}
-
 	public void InsertUser(User user) {
-		try {
-			BufferedWriter writer = new BufferedWriter(new FileWriter("Users.txt", true));
-			writer.write(user.getUsername() + "_" + user.getPassword() + "_" + user.getType());
-			writer.newLine();
-			writer.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+		if (user instanceof NormalUser) {
+			normalUsers.add((NormalUser) user);
+		} else if (user instanceof StoreOwner) {
+			Storeowners.add((StoreOwner) user);
+		} else if (user instanceof Administrator) {
+			Admins.add((Administrator) user);
 		}
-		UpdateUser(user);
-	}
-
-	public void EmptyUserCart(NormalUser user) {
-		UpdateUser(user);
 	}
 
 	public void InsertProductToStore(Store store, Product product) {
 		product.setID(Integer.toString(ID));
-		try {
-			BufferedWriter writer = new BufferedWriter(new FileWriter(product.getCategory() + ".txt", true));
-			writer.write(product.getName() + "_" + product.getID());
-			writer.newLine();
-			writer.close();
-		} catch (IOException e1) {
+		ID++;
+		for (Map.Entry<String, List<Product>> list : categoryProducts.entrySet()) {
+			if (list.getKey().equals(product.getCategory())) {
+				list.getValue().add(product);
+			}
 		}
-
-		try {
-			ObjectOutputStream object = new ObjectOutputStream(
-					new FileOutputStream(product.getName() + "_" + product.getID() + ".txt"));
-			object.writeObject(product);
-			object.close();
-		} catch (FileNotFoundException e) {
-		} catch (IOException e) {
-		}
-		UpdateUser(store.getOwner());
-		IncrementID();
-
 	}
 
 	public List<Product> RetreiveSysProducts() {
-		List<Product> list = new ArrayList<>();
-		List<String> files = new ArrayList<>();
-		Path path = Paths.get("SystemProducts.txt");
-		try {
-			files = Files.readAllLines(path);
-
-		} catch (IOException e) {
-		}
-		for (String filename : files) {
-			try {
-				ObjectInputStream object = new ObjectInputStream(new FileInputStream("System_" + filename + ".txt"));
-				try {
-					list.add((Product) object.readObject());
-				} catch (ClassNotFoundException e) {
-				}
-				object.close();
-			} catch (FileNotFoundException e) {
-				continue;
-			} catch (IOException e) {
-			}
-		}
-		return list;
+		return Sysproducts;
 	}
 
 	public void InsertProductToSystem(Product product) {
-		try {
-			BufferedWriter writer = new BufferedWriter(new FileWriter("SystemProducts.txt", true));
-			writer.write(product.getName());
-			writer.newLine();
-			writer.close();
-		} catch (IOException e) {
-		}
-
-		try {
-			ObjectOutputStream object = new ObjectOutputStream(
-					new FileOutputStream("System_" + product.getName() + ".txt"));
-			object.writeObject(product);
-			object.close();
-		} catch (FileNotFoundException e) {
-		} catch (IOException e) {
-		}
+		Sysproducts.add(product);
 		InsertBrand(product.getBrand());
-		deleteSuggestedProduct(product);
 	}
 
 	public void InsertSuggestedProduct(Product product) {
-		try {
-			BufferedWriter writer = new BufferedWriter(new FileWriter("SuggestedProducts.txt", true));
-			writer.write(product.getName());
-			writer.newLine();
-			writer.close();
-		} catch (IOException e) {
-		}
-		try {
-			ObjectOutputStream object = new ObjectOutputStream(
-					new FileOutputStream("Suggested_" + product.getName() + ".txt"));
-			object.writeObject(product);
-			object.close();
-		} catch (FileNotFoundException e) {
-
-		} catch (IOException e) {
-
-		}
+		suggestedProducts.add(product);
 	}
 
 	@Override
 	public void InsertNewStore(Store store) {
-		try {
-			BufferedWriter writer = new BufferedWriter(new FileWriter("Stores.txt", true));
-			writer.write(store.getStoreName() + "_" + store.getOwner().getUsername());
-			writer.newLine();
-			writer.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		try {
-			ObjectOutputStream object = new ObjectOutputStream(
-					new FileOutputStream(store.getStoreName() + "_" + store.getOwner().getUsername() + ".txt"));
-			object.writeObject(store);
-			object.close();
-		} catch (FileNotFoundException e) {
-		} catch (IOException e) {
-		}
-		UpdateUser(store.getOwner());
+		stores.add(store);
 	}
 
 	@Override
 	public void provideVoucherCard(String VoucherNo) {
-		try {
-			BufferedWriter writer = new BufferedWriter(new FileWriter("VoucherCards.txt", true));
-			writer.write(VoucherNo);
-			writer.newLine();
-			writer.close();
-		} catch (IOException e) {
-		}
+		vouchercards.add(VoucherNo);
 	}
 
 	@Override
 	public boolean CheckVoucherCard(String VoucherNo) {
-		Path path = Paths.get("VoucherCards.txt");
-		try {
-			return Files.readAllLines(path).contains(VoucherNo);
-		} catch (IOException e) {
+		for (String v : vouchercards) {
+			if (v.equals(VoucherNo))
+				return true;
 		}
 		return false;
 	}
 
-	public int getID() {
-		return ID;
-	}
-
-	public void setID(int iD) {
-		ID = iD;
-	}
-
-	protected void UpdateUser(User user) {
-		ObjectOutputStream object;
-		try {
-			object = new ObjectOutputStream(
-					new FileOutputStream(user.getUsername() + "_" + user.getPassword() + ".txt"));
-			if (user instanceof NormalUser) {
-				object.writeObject(((NormalUser) user));
-			} else if (user instanceof StoreOwner) {
-				object.writeObject(((StoreOwner) user));
-			} else if (user instanceof Administrator) {
-				object.writeObject(((Administrator) user));
-			}
-			object.close();
-		} catch (FileNotFoundException e) {
-		} catch (IOException e) {
-		}
-
-	}
-
-	protected void IncrementID() {
-		ID++;
-		try {
-			BufferedWriter out = new BufferedWriter(new FileWriter("IDCounter.txt"));
-			out.write(Integer.toString(ID));
-			out.close();
-		} catch (Exception e) {
-		}
-
-	}
-
 	protected void deleteSuggestedProduct(Product product) {
-		Path path = Paths.get("Suggested_" + product.getName() + ".txt");
-		try {
-			Files.delete(path);
-		} catch (Exception e) {
-
-		}
+		suggestedProducts.remove(product);
 	}
 
 	@Override
 	public List<Product> RetreiveAllProducts() {
-		List<String> catrgories = new ArrayList<>();
-		List<String> files = new ArrayList<>();
-		List<Product> products = new ArrayList<>();
-		Path path = Paths.get("Categories.txt");
-		try {
-			catrgories = Files.readAllLines(path);
-		} catch (IOException e1) {
-		}
-		for (String filename : catrgories) {
-			path = Paths.get(filename + ".txt");
-			try {
-
-				files.addAll(Files.readAllLines(path));
-
-			} catch (IOException e) {
-
-			}
-		}
-		for (String filename : files) {
-			try {
-				ObjectInputStream object = new ObjectInputStream(new FileInputStream(filename + ".txt"));
-				products.add((Product) object.readObject());
-				object.close();
-			} catch (FileNotFoundException e) {
-			} catch (IOException e) {
-			} catch (ClassNotFoundException e) {
-			}
-
-		}
-		return products;
-	}
-
-	@Override
-	public List<String> RetreiveStoreNames() {
-		Path path = Paths.get("Stores.txt");
-		try {
-			return Files.readAllLines(path);
-		} catch (IOException e) {
-		}
-		return new ArrayList<>();
-	}
-
-	@Override
-	public List<Product> RetreiveSuggestedProduct() {
 		List<Product> list = new ArrayList<>();
-		List<String> files = new ArrayList<>();
-		Path path = Paths.get("SuggestedProducts.txt");
-		try {
-			files = Files.readAllLines(path);
-
-		} catch (IOException e) {
-		}
-		for (String filename : files) {
-			try {
-				ObjectInputStream object = new ObjectInputStream(new FileInputStream("Suggested_" + filename + ".txt"));
-				try {
-					list.add((Product) object.readObject());
-				} catch (ClassNotFoundException e) {
-				}
-				object.close();
-			} catch (FileNotFoundException e) {
-				continue;
-			} catch (IOException e) {
-			}
+		for (Map.Entry<String, List<Product>> entry : categoryProducts.entrySet()) {
+			list.addAll(entry.getValue());
 		}
 		return list;
 	}
 
 	@Override
-	public void updateStoreInfo(Store store) {
-		try {
-			ObjectOutputStream object = new ObjectOutputStream(
-					new FileOutputStream(store.getStoreName() + "_" + store.getOwner().getUsername() + ".txt"));
-			object.writeObject(store);
-			object.close();
-		} catch (FileNotFoundException e) {
-		} catch (IOException e) {
+	public List<String> RetreiveStoreNames() {
+		List<String> storenames = new ArrayList<>();
+		for (Store s : stores) {
+			storenames.add(s.getStoreName());
 		}
-		UpdateUser(store.getOwner());
+		return storenames;
 	}
 
 	@Override
-	public void updateProductInfo(Product product) {
-		try {
-			ObjectOutputStream object = new ObjectOutputStream(
-					new FileOutputStream(product.getName() + "_" + product.getID() + ".txt"));
-			object.writeObject(product);
-			object.close();
-		} catch (FileNotFoundException e) {
-		} catch (IOException e) {
-		}
-		updateStoreInfo(product.getStore());
+	public List<Product> RetreiveSuggestedProduct() {
+		return suggestedProducts;
 	}
 
 	@Override
 	public void deleteProduct(Product product) {
-		Path path = Paths.get(product.getName() + "_" + product.getID() + ".txt");
-		try {
-			Files.delete(path);
-		} catch (Exception e) {
+		for (Map.Entry<String, List<Product>> entry : categoryProducts.entrySet()) {
+			if (entry.getValue().contains(product)) {
+				entry.getValue().remove(product);
+			}
 		}
-		updateStoreInfo(product.getStore());
+	}
+
+	public List<Store> getStores() {
+		return stores;
+	}
+
+	public void setStores(List<Store> stores) {
+		this.stores = stores;
+	}
+
+	public List<String> getBrands() {
+		return brands;
+	}
+
+	public void setBrands(List<String> brands) {
+		this.brands = brands;
+	}
+
+	public List<Product> getSysproducts() {
+		return Sysproducts;
+	}
+
+	public void setSysproducts(List<Product> sysproducts) {
+		Sysproducts = sysproducts;
+	}
+
+	public Map<String, List<Product>> getCategoryProducts() {
+		return categoryProducts;
+	}
+
+	public void setCategoryProducts(Map<String, List<Product>> categoryProducts) {
+		this.categoryProducts = categoryProducts;
+	}
+
+	public List<String> getVouchercards() {
+		return vouchercards;
+	}
+
+	public void setVouchercards(List<String> vouchercards) {
+		this.vouchercards = vouchercards;
 	}
 
 }

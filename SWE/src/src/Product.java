@@ -25,6 +25,7 @@ public class Product implements Serializable{
     	Name=name;
     	Category=category;
         Brand=brand;
+        Views=0;
     }
     public Product(String name,float price,int quantity,String category,String brand,Store store){
     	Name=name;
@@ -33,6 +34,7 @@ public class Product implements Serializable{
         Category=category;
         Brand=brand;
         this.store=store;
+        Views=0;
     }
 
     private String Name;
@@ -42,7 +44,7 @@ public class Product implements Serializable{
     private String Category;
     private String Brand;
     private Store store;
-    private int Views=0;
+    private int Views;
 
 
 

@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
@@ -29,7 +31,7 @@ public class Adminform {
 
 	Adminform(Administrator admin, HomePage homePage) {
 		retreiveCategoryProducts = new ArrayList<>();
-		adminController = new AdminController(admin);
+		adminController = new AdminController(admin,homePage.getDatabase());
 		this.homePage = homePage;
 		initialize();
 	}
@@ -41,6 +43,12 @@ public class Adminform {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
+		frame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent arg0) {
+				homePage.getDatabase().writeAll();
+			}
+		});
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		JLabel productlabel = new JLabel("Product");
 		productlabel.setForeground(new Color(178, 34, 34));

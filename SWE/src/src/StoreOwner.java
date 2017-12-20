@@ -41,10 +41,10 @@ public class StoreOwner extends User implements Serializable{
     public List<Store> getOwnedStores() {
         return OwnedStores;
     }
-    public void AddNewStore(String storeName) {
+    public void AddNewStore(String storeName,IDataBase dataBase) {
     	Store store=new Store(storeName, this);
     	OwnedStores.add(store);
-    	new DataBase().InsertNewStore(store);
+    	dataBase.InsertNewStore(store);
     }
 
 }

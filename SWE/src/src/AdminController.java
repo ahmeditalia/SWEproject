@@ -9,19 +9,21 @@ public class AdminController {
 
 	
 	private Administrator admin;
+	private IDataBase database;
 	
 	public AdminController() {
 	}
-	public AdminController(Administrator admin) {
+	public AdminController(Administrator admin, IDataBase dataBase) {
 		this.admin=admin;
+		this.database=dataBase;
 	}
 	public void AddProductToSystem(String productName, String category, String brand) {
 		Product newP = new Product(productName, category, brand);
-		new DataBase().InsertProductToSystem(newP);
+		database.InsertProductToSystem(newP);
 	}
 
 	public List<Product> getSuggestedProducts() {
-		return new DataBase().RetreiveSuggestedProduct();
+		return database.RetreiveSuggestedProduct();
 	}
 	public Administrator getAdmin() {
 		return admin;
@@ -32,7 +34,7 @@ public class AdminController {
 	
 	public List<String> getCategories()
 	{
-		return new DataBase().RetreiveCategoriesNames();
+		return database.RetreiveCategoriesNames();
 	}
 	
 	public String voucherGenerator()
@@ -44,13 +46,13 @@ public class AdminController {
 		{
 			voucherNo+=alphabet.charAt(random.nextInt(alphabet.length()));
 		}
-		new DataBase().provideVoucherCard(voucherNo);
+		database.provideVoucherCard(voucherNo);
 		return voucherNo;
 	}
 	public void addBrandToSystem(String bName){
-		new DataBase().InsertBrand(bName);
+		database.InsertBrand(bName);
 	}
 	public List<String> getSysBrands(){
-		return new DataBase().RetreiveBrandsNames();
+		return database.RetreiveBrandsNames();
 	}
 }

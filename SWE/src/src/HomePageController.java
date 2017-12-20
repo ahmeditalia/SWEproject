@@ -4,20 +4,23 @@ import java.util.*;
 
 public class HomePageController {
 	private User user;
+	private IDataBase dataBase;
 
 	HomePageController() {
-
+		
+	}
+	HomePageController(IDataBase data) {
+		dataBase=data;
 	}
 
 	public void LogIn(String username, String password) {
-		user = new DataBase().RetreiveUser(username, password);
+		user = dataBase.RetreiveUser(username, password);
 	}
 
 	public List<Product> DirectSearch(String SearchText) {
-		List<Product> products = new DataBase().RetreiveProduct(SearchText);
+		List<Product> products = dataBase.RetreiveProduct(SearchText);
 		for (int i = 0; i < products.size(); i++) {
 			products.get(i).updateViews();
-			new DataBase().updateProductInfo(products.get(i));
 		}
 		return (products);
 	}
@@ -32,14 +35,14 @@ public class HomePageController {
 
 		if (accountType == 1) {
 			NormalUser user = new NormalUser(username, password, email, phoneNumber, gender, address, accountType);
-			new DataBase().InsertUser(user);
+			dataBase.InsertUser(user);
 		} else if (accountType == 2) {
 			StoreOwner user = new StoreOwner(username, password, email, phoneNumber, gender, address, accountType);
-			new DataBase().InsertUser(user);
+			dataBase.InsertUser(user);
 		} else if (accountType == 3) {
 			Administrator user = new Administrator(username, password, email, phoneNumber, gender, address,
 					accountType);
-			new DataBase().InsertUser(user);
+			dataBase.InsertUser(user);
 		}
 	}
 
@@ -52,13 +55,13 @@ public class HomePageController {
 	}
 
 	public List<String> getCategoriesNames() {
-		return (new DataBase().RetreiveCategoriesNames());
+		return (dataBase.RetreiveCategoriesNames());
 	}
 	public List<String> RetreiveStoreNames() {
-		return (new DataBase().RetreiveStoreNames());
+		return (dataBase.RetreiveStoreNames());
 	}
 	public List<Product> getAllProducts() {
-		return (new DataBase().RetreiveAllProducts());
+		return (dataBase.RetreiveAllProducts());
 	}
 
 	public List<Product> getProducts(String category, String store) {
@@ -66,7 +69,7 @@ public class HomePageController {
 		if (category.equals("All"))
 			products = getAllProducts();
 		else {
-			products = new DataBase().RetreiveCategoryProducts(category);
+			products = dataBase.RetreiveCategoryProducts(category);
 		}
 		List<Product> temp = new ArrayList<Product>();
 		for (int i = 0; i < products.size(); i++) {
@@ -78,6 +81,6 @@ public class HomePageController {
 	}
 
 	public boolean checkVoucherCards(String card) {
-		return (new DataBase().CheckVoucherCard(card));
+		return (dataBase.CheckVoucherCard(card));
 	}
 }

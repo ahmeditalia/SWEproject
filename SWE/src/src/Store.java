@@ -14,16 +14,22 @@ public class Store implements Serializable{
 	}
 
 	public Store(String SName, StoreOwner owner){
+		StoreProducts = new ArrayList<>();
+		SoldProducts = new HashMap<>();
+		Owner = new StoreOwner();
 		this.StoreName = SName;
 		this.Owner = owner;
 	}
 	public Store(String SName) {
+		StoreProducts = new ArrayList<>();
+		SoldProducts = new HashMap<>();
+		Owner = new StoreOwner();
 		this.StoreName = SName;
 	}
 	private String StoreName;
-	private List<Product> StoreProducts = new ArrayList<>();
-	private StoreOwner Owner = new StoreOwner();
-	private Map<Product, User> SoldProducts = new HashMap<>();
+	private List<Product> StoreProducts;
+	private StoreOwner Owner;
+	private Map<Product, User> SoldProducts;
 	
 	public Product getMostViewedP() {
 		Product mostP = new Product();
@@ -37,13 +43,13 @@ public class Store implements Serializable{
 		return mostP;
 	}
 
-	public void AddProduct(String name,float price,int quantity,String category,String brand){
+	public void AddProduct(String name,float price,int quantity,String category,String brand,IDataBase dataBase){
 		Product newProduct=new Product(name, price, quantity, category, brand, this);
 		StoreProducts.add(newProduct);
-		new DataBase().InsertProductToStore(this, newProduct);
+		dataBase.InsertProductToStore(this, newProduct);
 	}
 
-	public float SellProduct(Product product, User user) {
+	public float SellProduct(Product product, User user,IDataBase dataBase) {
 		float balance=0;
 		for(int i=0;i<StoreProducts.size();i++)
 		{
@@ -53,13 +59,13 @@ public class Store implements Serializable{
 				{
 					Product temp=StoreProducts.get(i);
 					StoreProducts.remove(i);
-					new DataBase().deleteProduct(temp);
+					dataBase.deleteProduct(temp);
 					balance=product.getPrice();
 					break;
 				}
 				StoreProducts.get(i).setQuantity(StoreProducts.get(i).getQuantity()-1);
 				balance=product.getPrice();
-				new DataBase().updateProductInfo(StoreProducts.get(i));
+				//dataBase.updateProductInfo(StoreProducts.get(i));
 			}
 		}
 		SoldProducts.put(product, user);

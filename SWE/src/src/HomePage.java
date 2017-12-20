@@ -4,9 +4,12 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
 
 public class HomePage {
 
@@ -17,11 +20,23 @@ public class HomePage {
 	private HomePageController homepagecontroller;
 	private List<Product> viewedProducts;
 	private JTable table;
+	private IDataBase dataBase;
 
+	public HomePage() {
+		dataBase=new DataBase();
+		homepagecontroller = new HomePageController(dataBase);
+		viewedProducts = new ArrayList<>();
+		initialize();
+	}
+	
 	public HomePageController getHomepagecontroller() {
 		return homepagecontroller;
 	}
 
+	public IDataBase getDatabase()
+	{
+		return dataBase;
+	}
 	public JFrame getFrmHomepage() {
 		return frmHomepage;
 	}
@@ -45,31 +60,40 @@ public class HomePage {
 	}
 
 	public static void main(String[] args) {
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
+				HomePage homePage = null;
 				try {
-					new HomePage();
+					homePage = new HomePage();
+					
 				} catch (Exception e) {
 					e.printStackTrace();
+				} finally {
+					homePage.dataBase.writeAll();
 				}
 			}
 		});
+		
 	}
 
 	/**
 	 * Create the application.
 	 */
-	public HomePage() {
-		homepagecontroller = new HomePageController();
-		viewedProducts = new ArrayList<>();
-		initialize();
-	}
+
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		dataBase.readAll();
 		frmHomepage = new JFrame();
+		frmHomepage.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent arg0) {
+				dataBase.writeAll();
+			}
+		});
 		frmHomepage.getContentPane().setBackground(new Color(178, 34, 34));
 		frmHomepage.setTitle("HomePage");
 		frmHomepage.setExtendedState(Frame.MAXIMIZED_BOTH);
@@ -131,7 +155,7 @@ public class HomePage {
 		List<String> stores = new ArrayList<>();
 		stores = homepagecontroller.RetreiveStoreNames();
 		for (String a : stores) {
-			boxstores.addItem(a.substring(0, a.indexOf("_")));
+			boxstores.addItem(a);
 
 		}
 		// end modification
@@ -363,5 +387,6 @@ public class HomePage {
 				OpenStore.setVisible(false);
 			}
 		});
+		
 	}
 }

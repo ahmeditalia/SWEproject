@@ -3,6 +3,8 @@ package src;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.border.TitledBorder;
@@ -62,7 +64,12 @@ public class CartPage {
 		frmCartpage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmCartpage.getContentPane().setLayout(null);
 		frmCartpage.setVisible(true);
-		
+		frmCartpage.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent arg0) {
+				homePage.getDatabase().writeAll();
+			}
+		});
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Cart", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel.setBounds(304, 154, 827, 397);

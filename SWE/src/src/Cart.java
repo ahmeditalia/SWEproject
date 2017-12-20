@@ -18,20 +18,17 @@ public class Cart implements Serializable{
     }
     public void AddToCart(Product product) {
         CartProducts.add(product);
-        new DataBase().UpdateProductCart(this);
     }
     public void RemoveFromCart(Product product) {
         CartProducts.remove(product);
-        new DataBase().UpdateProductCart(this);
     }
-    public float EmptyCart() {
+    public float EmptyCart(IDataBase dataBase) {
         float balance=0;
         for(int i=0;i<CartProducts.size();i++){
             Product productTmp=CartProducts.get(i);
-            balance+=productTmp.getStore().SellProduct(productTmp,CartOwner);
+            balance+=productTmp.getStore().SellProduct(productTmp,CartOwner,dataBase);
         }
         CartProducts.clear();
-        new DataBase().UpdateProductCart(this);
         return balance;
     }
     public NormalUser getCartOwner() {

@@ -3,6 +3,8 @@ package src;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
 
 public class VisaCard extends PaymentUI {
@@ -41,6 +43,12 @@ public class VisaCard extends PaymentUI {
 		VisaCard.getContentPane().setLayout(null);
 		VisaCard.setVisible(true);
 
+		VisaCard.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent arg0) {
+				homePage.getDatabase().writeAll();
+			}
+		});
 		JPanel panel = new JPanel();
 		panel.setBounds(439, 146, 577, 369);
 		VisaCard.getContentPane().add(panel);
@@ -83,7 +91,7 @@ public class VisaCard extends PaymentUI {
 					cardnumber.setText("");
 					return;
 				}
-				JOptionPane.showMessageDialog(null, cartPage.getCartController().EmptyCart());
+				JOptionPane.showMessageDialog(null, cartPage.getCartController().EmptyCart(homePage.getDatabase()));
 				homePage.getFrmHomepage().setVisible(true);
 				VisaCard.setVisible(false);
 			}

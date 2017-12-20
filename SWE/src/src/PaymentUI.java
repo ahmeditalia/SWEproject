@@ -2,6 +2,9 @@ package src;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
@@ -37,6 +40,12 @@ public class PaymentUI {
 		Payment.getContentPane().setLayout(null);
 		Payment.setVisible(true);
 
+		Payment.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent arg0) {
+				homePage.getDatabase().writeAll();
+			}
+		});
 		JPanel panel = new JPanel();
 		panel.setBounds(384, 161, 627, 400);
 		Payment.getContentPane().add(panel);
@@ -72,7 +81,7 @@ public class PaymentUI {
 						new VoucherCard(cartPage,homePage);
 						Payment.setVisible(false);
 					} else {
-						JOptionPane.showMessageDialog(null, cartPage.getCartController().EmptyCart());
+						JOptionPane.showMessageDialog(null, cartPage.getCartController().EmptyCart(homePage.getDatabase()));
 						homePage.getFrmHomepage().setVisible(true);
 						Payment.setVisible(false);
 					}
