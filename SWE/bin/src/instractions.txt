@@ -1,0 +1,4 @@
+Hdrmi:
+need function in homepage to reture all product in system function doesn't take any parameter.
+italia to hdrmi:
+RetreiveAllProducts() return all products in the system in all stores;S

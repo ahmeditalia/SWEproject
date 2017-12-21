@@ -2,3 +2,5 @@ apple
 samsung
 apple
 new Brand
+apple
+apple
